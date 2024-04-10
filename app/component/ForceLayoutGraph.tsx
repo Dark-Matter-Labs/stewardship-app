@@ -5,19 +5,22 @@ import { GraphForceLayoutSettings, GraphLayoutType } from "@unovis/ts";
 import { data, NodeDatum, LinkDatum } from "../data";
 
 export default function ForceLayoutGraph(): JSX.Element {
-  const forceLayoutSettings: GraphForceLayoutSettings = {
-    forceXStrength: 0.1,
-    forceYStrength: 0.4,
-    charge: -700,
-  };
+  // const forceLayoutSettings: GraphForceLayoutSettings = {
+  //   forceXStrength: 0.1,
+  //   forceYStrength: 0.4,
+  //   charge: -700,
+  // };
   return (
     <VisSingleContainer data={data} height={"60vh"}>
       <VisGraph<NodeDatum, LinkDatum>
         layoutType={GraphLayoutType.Force}
-        forceLayoutSettings={useMemo(() => forceLayoutSettings, [])}
+        // forceLayoutSettings={useMemo(
+        //   () => forceLayoutSettings,
+        //   [forceLayoutSettings]
+        // )}
         linkLabel={useCallback((l: LinkDatum) => ({ text: l.chapter }), [])}
         nodeFill={useCallback((n: NodeDatum) => n.color, [])}
-        nodeLabel={useCallback((n) => n.id, [])}
+        nodeLabel={useCallback((n: { id: any }) => n.id, [])}
         nodeSize={40}
       />
     </VisSingleContainer>
