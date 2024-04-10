@@ -1,22 +1,13 @@
-"use client";
-import React from "react";
-import { useRouter } from "next/navigation";
 import Navigation from "../component/Navigation";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import Image from "next/image";
 import Report from "../component/Report";
 import Clause from "../component/Clause";
 import Actants from "../component/Actants";
+import Image from "next/image";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
 const imageSrc = "/calvin_profile.png";
 
 const UsersPage = () => {
-  const router = useRouter();
-  function handleSubmit(e: { preventDefault: () => void }) {
-    e.preventDefault();
-    console.log("handling submit");
-    router.push("/");
-  }
   return (
     <>
       <Navigation

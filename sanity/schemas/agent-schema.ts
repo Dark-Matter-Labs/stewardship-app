@@ -1,3 +1,9 @@
+import { SlugSourceFn } from "sanity";
+
+const handleSlugSource: SlugSourceFn = async (doc) => {
+  return doc.name + " " + doc.identity;
+};
+
 const agent = {
   name: "agent",
   title: "Agents",
@@ -9,10 +15,17 @@ const agent = {
       type: "string",
     },
     {
+      name: "identity",
+      title: "Identity",
+      type: "string",
+    },
+    {
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: { source: "name" },
+      options: {
+        source: handleSlugSource,
+      },
     },
     {
       name: "motto",

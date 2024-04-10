@@ -1,4 +1,3 @@
-import React from "react";
 import { getActants } from "@/sanity/sanity-utils";
 import Actant from "./Actant";
 
