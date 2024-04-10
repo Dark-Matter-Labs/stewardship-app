@@ -1,16 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
 import Navigation from "./component/Navigation";
-import Actant from "./component/Actant";
 import Report from "./component/Report";
 import { ChakraProvider } from "@chakra-ui/react";
-import Image from "next/image";
 import Clause from "./component/Clause";
-const imageSrc = "/graphnetwork.png";
 import ForceLayoutGraph from "./component/ForceLayoutGraph";
+import Actants from "./component/Actants";
 
 export default function Home() {
   const router = useRouter();
+
   function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
     console.log("handleing submit");
@@ -30,7 +29,6 @@ export default function Home() {
         myStyle={{}}
       ></Navigation>
       <div className="theme_header graph-network">
-        {/* <Image alt="graph-network" src={imageSrc} width={500} height={500} /> */}
         <ForceLayoutGraph></ForceLayoutGraph>
       </div>
       <main className="feed">
@@ -57,9 +55,7 @@ export default function Home() {
         <section>
           <h2>Actants in the network</h2>
           <div className="actants_scroller">
-            <Actant name={true}></Actant>
-            <Actant name={true}></Actant>
-            <Actant name={true}></Actant>
+            <Actants showName={true} />
           </div>
           <form onSubmit={handleSubmit}>
             <button className="button primary">View Other Actants</button>

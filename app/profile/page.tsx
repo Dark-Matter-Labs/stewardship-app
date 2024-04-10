@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import Navigation from "../component/Navigation";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import Image from "next/image";
-import Actant from "../component/Actant";
 import Report from "../component/Report";
 import Clause from "../component/Clause";
+import Actants from "../component/Actants";
 
 const imageSrc = "/calvin_profile.png";
 
@@ -59,12 +59,7 @@ const UsersPage = () => {
                 <div>
                   <p>Thank you for caring these actants</p>
                   <div className="actants_grid">
-                    <Actant name={false}></Actant>
-                    <Actant name={false}></Actant>
-                    <Actant name={false}></Actant>
-                    <Actant name={false}></Actant>
-                    <Actant name={false}></Actant>
-                    <Actant name={false}></Actant>
+                    <Actants showName={false} />
                   </div>
                   <p>Thank you for your stewardship </p>
                   <div className="actants_grid">

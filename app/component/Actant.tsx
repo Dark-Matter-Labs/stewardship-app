@@ -1,7 +1,15 @@
 import React from "react";
-const imageSrc = "/rainbow-trout.jpg";
+// const imageSrc = "/rainbow-trout.jpg";
 import Image from "next/image";
-const Actant = ({ name = true }: { name: boolean }) => {
+const Actant = ({
+  showName = true,
+  name,
+  imageSrc,
+}: {
+  showName: boolean;
+  name: string;
+  imageSrc: string;
+}) => {
   return (
     <div className="actant">
       <Image
@@ -11,7 +19,7 @@ const Actant = ({ name = true }: { name: boolean }) => {
         alt="rainbow trout"
         src={imageSrc}
       />
-      {name && <div>Name</div>}
+      {showName && <div>{name}</div>}
     </div>
   );
 };
