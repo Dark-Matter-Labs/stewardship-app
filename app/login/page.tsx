@@ -14,12 +14,14 @@ const UsersPage = () => {
     <>
       <Navigation
         title="Log In"
+        left=""
+        right=""
         myStyle={{
           color: "black",
           backgroundColor: "white",
           marginTop: "2rem",
         }}
-      ></Navigation>
+      />
       <main>
         <div className="login">
           <form onSubmit={handleSubmit}>
