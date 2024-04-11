@@ -17,13 +17,33 @@ function Login() {
   const router = useRouter();
   const [account, setAccount] = React.useState("");
   const [password, setPassword] = React.useState("");
-  // const [valid, setValid] = React.useState(true);
+  const [valid, setValid] = React.useState(false);
+
+  React.useEffect(() => {
+    async function runEffect() {
+      const response = await getAgents();
+      response.map((agent: { name: string }) => {
+        console.log(agent.name + "," + account);
+        if (agent.name && agent.name === account) {
+          setValid(true);
+          console.log("valid!");
+        }
+      });
+      return response;
+    }
+    runEffect();
+  }, [account]);
 
   function handleSubmit(e: { preventDefault: () => void }) {
     e.preventDefault();
-    console.log("handling submit");
-    if (account === "user") {
+
+    console.log("handling submit: " + valid);
+    if (valid) {
+      console.log("valid");
       router.push("/");
+    } else {
+      console.log("invalid");
+      router.push("/login");
     }
   }
   return (
