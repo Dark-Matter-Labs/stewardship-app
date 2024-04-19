@@ -1,0 +1,13 @@
+.actant {
+  text-align: center;
+  flex: 0 0 auto;
+  margin-left: 1rem;
+}
+.actant_img {
+  margin: 1rem auto 0.5rem;
+  border: 3px solid white;
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+}

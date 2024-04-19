@@ -9,7 +9,7 @@ const clause = {
       type: "string",
     },
     {
-      name: "respoinsibilityHolder",
+      name: "responsibilityHolder",
       title: "Responsibility Holder(s)",
       type: "array",
       of: [
@@ -42,8 +42,8 @@ const clause = {
       ],
     },
     {
-      name: "respoinsibilities",
-      title: "Respoinsibilities",
+      name: "responsibilities",
+      title: "Responsibilities",
       type: "array",
       of: [
         {

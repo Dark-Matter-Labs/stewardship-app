@@ -5,14 +5,18 @@ config.autoAddCss = false;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import { Report } from "@/types/Report";
 const imageSrc = "/fang_profile.png";
 const imageSrc2 = "/river-thames-evidence.jpg";
-const Report = ({
+
+const ReportEl = ({
   caption = true,
   sign = false,
+  report,
 }: {
   caption: boolean;
   sign: boolean;
+  report: Report;
 }) => {
   return (
     <div className="report">
@@ -35,7 +39,7 @@ const Report = ({
       </div>
       {caption && (
         <div className="report_caption">
-          <div>Report Name</div>
+          <div>{report?.name}</div>
           <div>
             <FontAwesomeIcon icon={faThumbsUp} /> 11
           </div>
@@ -45,4 +49,4 @@ const Report = ({
   );
 };
 
-export default Report;
+export default ReportEl;

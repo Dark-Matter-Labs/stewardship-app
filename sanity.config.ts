@@ -1,5 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { visionTool } from "@sanity/vision";
 import report from "./sanity/schemas/report-schema";
 import actant from "./sanity/schemas/actant-schema";
 import agent from "./sanity/schemas/agent-schema";
@@ -15,6 +16,13 @@ export default defineConfig({
   title: "Stewardship Studio",
   projectId,
   dataset,
-  plugins: [structureTool()],
+  plugins: [
+    structureTool(),
+    visionTool({
+      // Note: These are both optional
+      defaultApiVersion: "v2024-04-19",
+      defaultDataset: dataset,
+    }),
+  ],
   schema: { types: [report, actant, agent, clause, right, responsibility] },
 });

@@ -39,11 +39,11 @@ function Login() {
 
     console.log("handling submit: " + valid);
     if (valid) {
-      console.log("valid");
       router.push("/");
+      console.log("valid");
     } else {
-      console.log("invalid");
       router.push("/login");
+      console.log("invalid");
     }
   }
   return (

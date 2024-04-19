@@ -1,3 +1,4 @@
+import styles from "./Actant.module.css";
 import React from "react";
 // const imageSrc = "/rainbow-trout.jpg";
 import Image from "next/image";
@@ -11,12 +12,12 @@ const Actant = ({
   imageSrc: string;
 }) => {
   return (
-    <div className="actant">
+    <div className={styles.actant}>
       <Image
         width={45}
         height={45}
-        className="actant_img"
-        alt="rainbow trout"
+        className={styles.actant_img}
+        alt={`actant image of ${name}`}
         src={imageSrc}
       />
       {showName && <div>{name}</div>}
