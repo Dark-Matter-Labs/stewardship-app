@@ -37,9 +37,6 @@ export default async function Home() {
               <h2>Reports highlighted</h2>
               <div className="reports_scroller">
                 <Reports caption={true} sign={true}></Reports>
-                {/* <Report caption={true} sign={true}></Report>
-                <Report caption={true} sign={true}></Report>
-                <Report caption={true} sign={true}></Report> */}
               </div>
             </section>
             <section>

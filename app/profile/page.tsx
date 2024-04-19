@@ -1,5 +1,5 @@
 import Navigation from "../component/Navigation";
-import Report from "../component/ReportEl";
+import ReportEL from "../component/ReportEl";
 import Clause from "../component/Clause";
 import Actants from "../component/Actants";
 import Image from "next/image";
@@ -39,10 +39,10 @@ const UsersPage = () => {
               <TabPanel>
                 {/* Reports */}
                 <div className="reports_grid">
-                  <Report caption={false} sign={false}></Report>
-                  <Report caption={false} sign={false}></Report>
-                  <Report caption={false} sign={false}></Report>
-                  <Report caption={false} sign={false}></Report>
+                  {/* <ReportEL caption={false} sign={false}></ReportEL>
+                  <ReportEL caption={false} sign={false}></ReportEL>
+                  <ReportEL caption={false} sign={false}></ReportEL>
+                  <ReportEL caption={false} sign={false}></ReportEL> */}
                 </div>
               </TabPanel>
               <TabPanel>
@@ -54,13 +54,13 @@ const UsersPage = () => {
                   </div>
                   <p>Thank you for your stewardship </p>
                   <div className="actants_grid">
+                    {/* <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
-                    <Clause caption={false} sign={true}></Clause>
-                    <Clause caption={false} sign={true}></Clause>
+                    <Clause caption={false} sign={true}></Clause> */}
                   </div>
                 </div>
               </TabPanel>
