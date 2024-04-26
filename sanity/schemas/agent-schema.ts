@@ -15,6 +15,11 @@ const agent = {
       type: "string",
     },
     {
+      name: "email",
+      title: "Email",
+      type: "string",
+    },
+    {
       name: "identity",
       title: "Identity",
       type: "string",

@@ -67,7 +67,7 @@ export default async function Home() {
           </main>
         </>
       ) : (
-        <h1>you shall not pass!</h1>
+        <h1>session note found!</h1>
       )}
     </ChakraProvider>
   );

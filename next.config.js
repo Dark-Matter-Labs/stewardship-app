@@ -13,6 +13,7 @@ const nextConfig = {
                 port: '',
             },
         ],
+        domains: ['avatars.githubusercontent.com']
     },
 
 }

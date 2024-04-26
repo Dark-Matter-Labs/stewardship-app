@@ -10,6 +10,8 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 const client = createClient({
   projectId,
   dataset,
+  apiVersion: "2024-05-01",
+  useCdn: true,
 });
 
 export async function getActants(): Promise<Actant[]> {
@@ -26,6 +28,18 @@ export async function getAgents(): Promise<Agent[]> {
     groq`*[_type == "agent"]{
         name,
     }`
+  );
+}
+
+export async function getAgent(email: string): Promise<Agent> {
+  return client.fetch(
+    groq`*[_type == "agent" && email == $email][0]{
+        name,
+        email,  
+        motto,
+        "image": image.asset->url,
+    }`,
+    { email: email }
   );
 }
 
