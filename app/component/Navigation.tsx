@@ -30,7 +30,10 @@ export default function Navigation({
           <div>{title}</div>
         </li>
         <li className="">
-          <form action="http://localhost:3000/api/auth/signout" method="POST">
+          <form
+            action="https://stewardship-app.vercel.app/api/auth/signout"
+            method="POST"
+          >
             <button id="submitButton" type="submit">
               Sign out
             </button>
