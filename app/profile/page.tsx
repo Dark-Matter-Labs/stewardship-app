@@ -25,17 +25,21 @@ const UsersPage = async () => {
     // match agent data
     const agent: Agent = await getAgent(sessionEmail);
 
-    if (agent?.name != undefined) {
-      sessionName = agent.name;
-      console.log("========agent name: " + agent.name);
-    }
     if (agent?.email === sessionEmail) {
       sessionEmail = agent.email;
       console.log("========agent email: " + sessionEmail);
 
+      if (agent?.name != undefined) {
+        sessionName = agent.name;
+        console.log("========agent name: " + agent.name);
+      }
       if (agent?.motto != undefined) {
         sessionMotto = agent.motto;
         console.log("========agent motto: " + agent.motto);
+      }
+      if (agent?.image != undefined) {
+        sessionImageSrc = agent.image;
+        console.log("========agent image: " + agent.image);
       }
     }
   }

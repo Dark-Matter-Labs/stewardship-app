@@ -20,9 +20,6 @@ export default function Navigation({
   } else if (left == "Profile") {
     leftLink = "/profile";
   }
-  if (right == "Log Out") {
-    rightLink = "/login";
-  }
   return (
     <div className="navigation" style={myStyle}>
       <ul>
@@ -33,7 +30,11 @@ export default function Navigation({
           <div>{title}</div>
         </li>
         <li className="">
-          <Link href={rightLink}>{right}</Link>
+          <form action="http://localhost:3000/api/auth/signout" method="POST">
+            <button id="submitButton" type="submit">
+              Sign out
+            </button>
+          </form>
         </li>
       </ul>
     </div>
