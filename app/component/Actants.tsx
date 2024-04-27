@@ -11,7 +11,7 @@ export default async function Actants({
   let actants = null;
   if (agent) {
     actants = await getActantsByAgent(agent);
-    console.log("searching actant that " + agent + " cares.");
+    console.log("in profile:: filtering actants that " + agent + " cares.");
   } else {
     actants = await getActants();
   }
