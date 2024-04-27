@@ -21,6 +21,7 @@ export default async function Home() {
   if (session) {
     //retrieve user data through authenticated account
     sessionEmail = session.user?.email + "";
+    sessionName = session.user?.name + "";
 
     // match user data to agent data
     const agent: Agent = await getAgent(sessionEmail);

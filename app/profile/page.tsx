@@ -21,6 +21,7 @@ const UsersPage = async () => {
     //retrieve data through auth account
     sessionImageSrc = session.user?.image + "";
     sessionEmail = session.user?.email + "";
+    sessionName = session.user?.name + "";
 
     // match agent data
     const agent: Agent = await getAgent(sessionEmail);
