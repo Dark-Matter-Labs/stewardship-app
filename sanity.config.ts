@@ -20,7 +20,7 @@ export default defineConfig({
     structureTool(),
     visionTool({
       // Note: These are both optional
-      defaultApiVersion: "v2024-04-19",
+      defaultApiVersion: "2024-04-19",
       defaultDataset: dataset,
     }),
   ],

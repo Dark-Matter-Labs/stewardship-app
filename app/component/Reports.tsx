@@ -1,5 +1,5 @@
 import { getReports } from "@/sanity/sanity-utils";
-import ReportEl from "./ReportEl";
+import Report from "./Report";
 
 export default async function Reports({
   caption,
@@ -13,7 +13,7 @@ export default async function Reports({
   return (
     <>
       {reports.map((report) => (
-        <ReportEl
+        <Report
           key={report.name}
           caption={caption}
           sign={sign}

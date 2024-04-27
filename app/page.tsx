@@ -1,6 +1,6 @@
 // "use client";
 import Navigation from "./component/Navigation";
-import Report from "./component/ReportEl";
+import Report from "./component/Report";
 
 import Actants from "./component/Actants";
 import ForceLayoutGraph from "./component/ForceLayoutGraph";
@@ -31,7 +31,7 @@ export default async function Home() {
       //replace user name with coresponding agent name
       if (agent?.name != undefined) {
         sessionName = agent.name;
-        console.log("========agent name: " + agent.name);
+        // console.log("========agent name: " + agent.name);
       }
     }
   }
@@ -71,7 +71,7 @@ export default async function Home() {
             <section>
               <h2>Actants in the network</h2>
               <div className="actants_scroller">
-                {/* <Actants showName={true} /> */}
+                <Actants showName={true} agent="" />
               </div>
 
               <button className="button primary">View Other Actants</button>
