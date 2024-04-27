@@ -9,8 +9,8 @@ export default async function Actants({ showName }: { showName: boolean }) {
         <Actant
           key={actant.name}
           showName={showName}
-          name={actant.name}
-          imageSrc={actant.image}
+          name={actant.name ? actant.name : ""}
+          imageSrc={actant.image ? actant.image : ""}
         />
       ))}
     </>
