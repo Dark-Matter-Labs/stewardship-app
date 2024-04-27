@@ -5,25 +5,28 @@ config.autoAddCss = false;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import { Report } from "@/types/Report";
-const imageSrc = "/fang_profile.png";
-const imageSrc2 = "/river-thames-evidence.jpg";
+import { Report as ReportType } from "@/types/Report";
+let imageSrcProfile = "/fang_profile.png";
+let imageSrcEvidence = "/river-thames-evidence.jpg";
 
-const ReportEl = ({
+const Report = ({
   caption = true,
   sign = false,
   report,
 }: {
   caption: boolean;
   sign: boolean;
-  report: Report;
+  report: ReportType;
 }) => {
+  imageSrcProfile = report?.reporter.image;
+  imageSrcEvidence = report?.image;
+
   return (
     <div className="report">
       <div
         className="evidence"
         style={{
-          backgroundImage: `url('${imageSrc2}')`,
+          backgroundImage: `url('${imageSrcEvidence}')`,
           backgroundSize: "cover",
         }}
       >
@@ -33,7 +36,7 @@ const ReportEl = ({
             height={45}
             className="agent_img"
             alt="fang"
-            src={imageSrc}
+            src={imageSrcProfile}
           />
         )}
       </div>
@@ -49,4 +52,4 @@ const ReportEl = ({
   );
 };
 
-export default ReportEl;
+export default Report;

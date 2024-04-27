@@ -67,9 +67,10 @@ export async function getReports(): Promise<Report[]> {
     groq`*[_type == "report"]{
         name,
         "slug": slug.current,
-        "image": image.asset->url, 
-        clause[0]->{name},
-        content
+        type, 
+        clause->{name},
+        reporter->{name, "image": image.asset->url},
+        "image": image.asset->url,
     }`
   );
 }

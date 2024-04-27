@@ -1,4 +1,5 @@
 import { Clause } from "./Clause";
+import { Reporter } from "./Reporter";
 
 export type Report = {
   name: string;
@@ -6,4 +7,5 @@ export type Report = {
   image: string;
   clause: Clause;
   content: string;
+  reporter: Reporter;
 };

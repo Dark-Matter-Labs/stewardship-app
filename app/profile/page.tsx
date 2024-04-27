@@ -1,5 +1,5 @@
 import Navigation from "../component/Navigation";
-import ReportEL from "../component/ReportEl";
+import ReportEL from "../component/Report";
 import Clause from "../component/Clause";
 import Actants from "../component/Actants";
 import Image from "next/image";
