@@ -1,14 +1,21 @@
-import { getReports } from "@/sanity/sanity-utils";
+import { getReports, getReportsByAgent } from "@/sanity/sanity-utils";
 import Report from "./Report";
 
 export default async function Reports({
   caption,
   sign,
+  agent,
 }: {
   caption: boolean;
   sign: boolean;
+  agent: string;
 }) {
-  const reports = await getReports();
+  let reports = null;
+  if (agent) {
+    reports = await getReportsByAgent(agent);
+  } else {
+    reports = await getReports();
+  }
 
   return (
     <>
