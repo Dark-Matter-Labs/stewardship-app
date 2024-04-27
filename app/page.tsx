@@ -71,7 +71,7 @@ export default async function Home() {
             <section>
               <h2>Actants in the network</h2>
               <div className="actants_scroller">
-                <Actants showName={true} />
+                {/* <Actants showName={true} /> */}
               </div>
 
               <button className="button primary">View Other Actants</button>

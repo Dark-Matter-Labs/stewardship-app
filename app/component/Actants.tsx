@@ -1,8 +1,21 @@
-import { getActants } from "@/sanity/sanity-utils";
+import { getActants, getActantsByAgent } from "@/sanity/sanity-utils";
 import Actant from "./Actant";
 
-export default async function Actants({ showName }: { showName: boolean }) {
-  const actants = await getActants();
+export default async function Actants({
+  showName,
+  agent,
+}: {
+  showName: boolean;
+  agent: string;
+}) {
+  let actants = null;
+  if (agent) {
+    actants = await getActantsByAgent(agent);
+    console.log("searching actant that " + agent + " cares.");
+  } else {
+    actants = await getActants();
+  }
+
   return (
     <>
       {actants.map((actant) => (

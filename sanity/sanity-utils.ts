@@ -23,6 +23,15 @@ export async function getActants(): Promise<Actant[]> {
   );
 }
 
+export async function getActantsByAgent(agent: string): Promise<Actant[]> {
+  return client.fetch(
+    groq`*[_type == "actant" && references(*[_type == "agent" &&  name match $name]._id) ]{
+  name, "image": image.asset->url
+}`,
+    { name: agent }
+  );
+}
+
 export async function getAgents(): Promise<Agent[]> {
   return client.fetch(
     groq`*[_type == "agent"]{
