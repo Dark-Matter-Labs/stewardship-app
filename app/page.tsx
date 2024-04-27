@@ -57,13 +57,13 @@ export default async function Home() {
             <section>
               <h2>Reports highlighted</h2>
               <div className="reports_scroller">
-                <Reports caption={true} sign={true}></Reports>
+                <Reports caption={true} sign={true} agent=""></Reports>
               </div>
             </section>
             <section>
               <h2>Reports requiring some feedback</h2>
               <div className="reports_scroller">
-                <Reports caption={true} sign={true}></Reports>
+                <Reports caption={true} sign={true} agent=""></Reports>
               </div>
 
               <button className="button primary">See More Recent Events</button>

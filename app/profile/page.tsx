@@ -1,5 +1,4 @@
 import Navigation from "../component/Navigation";
-import ReportEL from "../component/Report";
 import Clause from "../component/Clause";
 import Actants from "../component/Actants";
 import Image from "next/image";
@@ -8,6 +7,7 @@ import { getServerSession } from "next-auth/next";
 import { options } from "../api/auth/[...nextauth]/options";
 import { getAgent } from "@/sanity/sanity-utils";
 import { Agent } from "@/types/Agent";
+import Reports from "../component/Reports";
 let sessionImageSrc = "/example.png";
 let sessionEmail = "email@email.com";
 let sessionName = "name";
@@ -73,10 +73,11 @@ const UsersPage = async () => {
                   <TabPanel>
                     {/* Reports */}
                     <div className="reports_grid">
-                      {/* <ReportEL caption={false} sign={false}></ReportEL>
-                  <ReportEL caption={false} sign={false}></ReportEL>
-                  <ReportEL caption={false} sign={false}></ReportEL>
-                  <ReportEL caption={false} sign={false}></ReportEL> */}
+                      <Reports
+                        caption={true}
+                        sign={false}
+                        agent={sessionName}
+                      ></Reports>
                     </div>
                   </TabPanel>
                   <TabPanel>

@@ -74,3 +74,17 @@ export async function getReports(): Promise<Report[]> {
     }`
   );
 }
+
+export async function getReportsByAgent(agent: string): Promise<Report[]> {
+  return client.fetch(
+    groq`*[_type == "report" && $agent match reporter->name]{
+        name,
+        "slug": slug.current,
+        type, 
+        clause->{name},
+        reporter->{name, "image": image.asset->url},
+        "image": image.asset->url,
+    }`,
+    { agent: agent }
+  );
+}
