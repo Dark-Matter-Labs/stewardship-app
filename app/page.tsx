@@ -10,11 +10,31 @@ import { getServerSession } from "next-auth/next";
 import { signOut } from "next-auth/react";
 import Clauses from "./component/Clauses";
 import Reports from "./component/Reports";
-
-// import User from "./component/User";
+import { Agent } from "@/types/Agent";
+import { getAgent } from "@/sanity/sanity-utils";
+let sessionName = "name";
+let sessionEmail = "email@email.com";
 
 export default async function Home() {
   const session = await getServerSession(options);
+
+  if (session) {
+    //retrieve user data through authenticated account
+    sessionEmail = session.user?.email + "";
+
+    // match user data to agent data
+    const agent: Agent = await getAgent(sessionEmail);
+
+    if (agent?.email === sessionEmail) {
+      sessionEmail = agent.email;
+
+      //replace user name with coresponding agent name
+      if (agent?.name != undefined) {
+        sessionName = agent.name;
+        console.log("========agent name: " + agent.name);
+      }
+    }
+  }
 
   return (
     <ChakraProvider>
@@ -31,7 +51,7 @@ export default async function Home() {
             {/* <ForceLayoutGraph></ForceLayoutGraph> */}
           </div>
           <main className="feed">
-            <h1>Hello {session?.user?.name}! Check what is happening today.</h1>
+            <h1>Hello {sessionName}! Check what is happening today.</h1>
 
             <section>
               <h2>Reports highlighted</h2>
