@@ -29,8 +29,11 @@ export const options: NextAuthOptions = {
         // Add logic here to look up the user from the credentials supplied
         const user = {
           id: "1",
-          name: "shu",
-          password: "nextauth",
+          name: "calvin",
+          email: "calvin@darkmatterlabs.org",
+          password: "1234",
+          image:
+            "https://cdn.sanity.io/images/zodsj17c/production/94714dca88165089697fc43ef4ef437bec6e7016-512x512.png",
         };
 
         if (
