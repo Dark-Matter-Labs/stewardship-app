@@ -62,15 +62,15 @@ export default async function Home() {
               </div>
             </section>
             <section>
-              <>
-                <h2>Reports requiring some feedback</h2>
-                <div className="reports_scroller">
-                  <Reports caption={true} sign={true} agent=""></Reports>
-                </div>
-              </>
-              <Link href="/relationship" className="button primary">
-                See More Recent Events
-              </Link>
+              <h2>Reports requiring some feedback</h2>
+              <div className="reports_scroller">
+                <Reports caption={true} sign={true} agent=""></Reports>
+              </div>
+              <form action="/relationship">
+                <button className="button primary">
+                  See More Recent Events
+                </button>
+              </form>
             </section>
             <h1>This is what makes the current network</h1>
             <section>
@@ -80,22 +80,21 @@ export default async function Home() {
                   <Actants showName={true} agent="" />
                 </div>
               </>
-              <Link href="/actant" className="button primary">
-                View Other Actants
-              </Link>
+              <form action="/actant">
+                <button className="button primary">View Other Actants</button>
+              </form>
             </section>
             <section>
               <h2>Clauses in the network</h2>
               <div className="clauses_scroller">
                 <Clauses caption={true} sign={true}></Clauses>
               </div>
-              <Link href="/relationship" className="button primary">
-                View Other Clauses
-              </Link>
-              <br></br>
-              <Link href="/relationship/new" className="button primary">
-                Create a New Clause
-              </Link>
+              <form action="/relationship">
+                <button className="button primary">View Other Clauses</button>
+              </form>
+              <form action="/relationship/new">
+                <button className="button primary">Create a New Clause</button>
+              </form>
             </section>
           </main>
         </>
