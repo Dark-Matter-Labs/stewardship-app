@@ -8,10 +8,11 @@ import { options } from "../api/auth/[...nextauth]/options";
 import { getAgent } from "@/sanity/sanity-utils";
 import { Agent } from "@/types/Agent";
 import Reports from "../component/Reports";
-let sessionImageSrc = "/example.png";
+let sessionImageSrc =
+  "https://cdn.sanity.io/images/zodsj17c/production/031ea2c9fffeafff80a13fe508fdc445c125256b-2158x1619.jpg";
 let sessionEmail = "email@email.com";
 let sessionName = "name";
-let sessionMotto = "motto";
+let sessionMotto = "";
 
 const UsersPage = async () => {
   //load session data
@@ -22,6 +23,10 @@ const UsersPage = async () => {
     sessionImageSrc = session.user?.image + "";
     sessionEmail = session.user?.email + "";
     sessionName = session.user?.name + "";
+
+    console.log("image: " + sessionImageSrc);
+    console.log("Email: " + sessionEmail);
+    console.log("name: " + sessionName);
 
     // match agent data
     const agent: Agent = await getAgent(sessionEmail);
@@ -60,7 +65,7 @@ const UsersPage = async () => {
                 height={100}
                 alt="profile image"
               />
-              <h1>{sessionName}</h1>
+              <h1>{capitalizeFirstLetter(sessionName)}</h1>
               <p>{sessionMotto}</p>
             </section>
             <section className="profile_content">
@@ -112,3 +117,7 @@ const UsersPage = async () => {
 };
 
 export default UsersPage;
+
+function capitalizeFirstLetter(str: string) {
+  return str[0].toUpperCase() + str.slice(1);
+}
