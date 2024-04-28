@@ -22,6 +22,12 @@ const UsersPage = async () => {
     //retrieve data through auth account
     sessionImageSrc = session.user?.image + "";
 
+    // retrieve larger image if coming from Google content
+    if (sessionImageSrc.includes("=s96-c")) {
+      sessionImageSrc = sessionImageSrc.replace("=s96-c", "");
+      console.log("after treatement::: " + sessionImageSrc);
+    }
+
     console.log("image from provider:: " + session.user?.image);
     console.log("image from session:: " + sessionImageSrc);
 
