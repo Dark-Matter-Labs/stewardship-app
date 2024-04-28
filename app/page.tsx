@@ -12,6 +12,7 @@ import Clauses from "./component/Clauses";
 import Reports from "./component/Reports";
 import { Agent } from "@/types/Agent";
 import { getAgent } from "@/sanity/sanity-utils";
+import Link from "next/link";
 let sessionName = "name";
 let sessionEmail = "email@email.com";
 
@@ -61,29 +62,40 @@ export default async function Home() {
               </div>
             </section>
             <section>
-              <h2>Reports requiring some feedback</h2>
-              <div className="reports_scroller">
-                <Reports caption={true} sign={true} agent=""></Reports>
-              </div>
-
-              <button className="button primary">See More Recent Events</button>
+              <>
+                <h2>Reports requiring some feedback</h2>
+                <div className="reports_scroller">
+                  <Reports caption={true} sign={true} agent=""></Reports>
+                </div>
+              </>
+              <Link href="/relationship" className="button primary">
+                See More Recent Events
+              </Link>
             </section>
             <h1>This is what makes the current network</h1>
             <section>
               <h2>Actants in the network</h2>
-              <div className="actants_scroller">
-                <Actants showName={true} agent="" />
-              </div>
-
-              <button className="button primary">View Other Actants</button>
+              <>
+                <div className="actants_scroller">
+                  <Actants showName={true} agent="" />
+                </div>
+              </>
+              <Link href="/actant" className="button primary">
+                View Other Actants
+              </Link>
             </section>
             <section>
               <h2>Clauses in the network</h2>
               <div className="clauses_scroller">
                 <Clauses caption={true} sign={true}></Clauses>
               </div>
-              <button className="button primary">View Other Clauses</button>
-              <button className="button primary">Create a New Clause</button>
+              <Link href="/relationship" className="button primary">
+                View Other Clauses
+              </Link>
+              <br></br>
+              <Link href="/relationship/new" className="button primary">
+                Create a New Clause
+              </Link>
             </section>
           </main>
         </>
