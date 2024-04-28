@@ -21,6 +21,10 @@ const UsersPage = async () => {
   if (session) {
     //retrieve data through auth account
     sessionImageSrc = session.user?.image + "";
+
+    console.log("image from provider:: " + session.user?.image);
+    console.log("image from session:: " + sessionImageSrc);
+
     sessionEmail = session.user?.email + "";
     sessionName = session.user?.name + "";
 
