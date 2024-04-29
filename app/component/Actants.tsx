@@ -1,5 +1,6 @@
 import { getActants, getActantsByAgent } from "@/sanity/sanity-utils";
 import Actant from "./Actant";
+import { Actant as ActantType } from "@/types/Actant";
 
 export default async function Actants({
   showName,
@@ -16,14 +17,16 @@ export default async function Actants({
     actants = await getActants();
   }
 
+  console.log({ actants });
+
   return (
     <>
-      {actants.map((actant) => (
+      {actants.map((actant: ActantType) => (
         <Actant
           key={actant.name}
           showName={showName}
           name={actant.name ? actant.name : ""}
-          imageSrc={actant.image ? actant.image : ""}
+          imageSrc={actant.image ? actant.image + "" : ""}
         />
       ))}
     </>

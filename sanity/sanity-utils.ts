@@ -91,7 +91,7 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
   );
 }
 
-export async function createActant(actant: Actant) {
-  const result = client.create(actant);
+export async function createActant(actant: unknown) {
+  const result = client.create(actant as unknown as any);
   return result;
 }

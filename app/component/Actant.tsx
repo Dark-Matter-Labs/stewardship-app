@@ -18,7 +18,7 @@ const Actant = ({
         height={45}
         className={styles.actant_img}
         alt={`actant image of ${name}`}
-        src={imageSrc}
+        src={imageSrc ? imageSrc : ""}
       />
       {showName && <div>{name}</div>}
     </div>
