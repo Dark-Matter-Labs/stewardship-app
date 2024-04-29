@@ -6,7 +6,7 @@ import { createClient, groq } from "next-sanity";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
-const token = process.env.SANITY_CRUD_EDITOR;
+const token = process.env.NEXT_PUBLIC_SANITY_CRUD_EDITOR;
 
 const client = createClient({
   projectId,
