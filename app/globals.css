@@ -173,11 +173,14 @@ main {
   margin: auto 0;
 }
 
-.relationship {
+.relationship,
+.actant {
+  text-align: center;
   margin: 1rem 0.5rem;
 }
 
-.relationship h1 {
+.relationship h1,
+.actant h1 {
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
   font-size: 2rem;
@@ -334,7 +337,7 @@ main {
   .reports_scroller,
   .actants_scroller,
   .clauses_scroller {
-    margin: 0 auto;
+    margin: 2.5rem auto;
     width: fit-content;
     max-width: 80%;
   }

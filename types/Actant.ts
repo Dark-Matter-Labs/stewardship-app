@@ -1,5 +1,11 @@
 export type Actant = {
+  _type: string;
   name: string;
-  slug: string;
-  image: string;
+  slug: {
+    _type: string;
+    current: string;
+  };
+  image: {
+    _type: string;
+  };
 };

@@ -6,11 +6,13 @@ import { createClient, groq } from "next-sanity";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
+const token = process.env.SANITY_CRUD_EDITOR;
 
 const client = createClient({
   projectId,
   dataset,
-  apiVersion: "2024-05-01",
+  apiVersion: "2024-04-01",
+  token: token,
   useCdn: true,
 });
 
@@ -87,4 +89,9 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
     }`,
     { agent: agent }
   );
+}
+
+export async function createActant(actant: Actant) {
+  const result = client.create(actant);
+  return result;
 }
