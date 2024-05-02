@@ -1,3 +1,5 @@
+import { SanityAssetDocument, SanityImageAssetDocument } from "next-sanity";
+
 export type ActantTypeCreation = {
   _type: string;
   name: string;
@@ -7,5 +9,9 @@ export type ActantTypeCreation = {
   };
   image: {
     _type: string;
+    asset: {
+      _type: string;
+      _ref: string;
+    };
   };
 };
