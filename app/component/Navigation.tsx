@@ -31,6 +31,7 @@ export default function Navigation({
         </li>
         <li className="">
           <form
+            className="singOutForm"
             action="https://stewardship-app.vercel.app/api/auth/signout"
             method="POST"
           >

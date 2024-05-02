@@ -17,7 +17,7 @@ export default async function Actants({
     actants = await getActants();
   }
 
-  console.log({ actants });
+  // console.log({ actants });
 
   return (
     <>
@@ -26,7 +26,7 @@ export default async function Actants({
           key={actant.name}
           showName={showName}
           name={actant.name ? actant.name : ""}
-          imageSrc={actant.image ? actant.image + "" : ""}
+          imageSrc={actant.image ? actant.image + "" : "/rainbow-trout.jpg"}
         />
       ))}
     </>

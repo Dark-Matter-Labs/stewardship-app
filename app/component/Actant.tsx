@@ -16,6 +16,7 @@ const Actant = ({
       <Image
         width={45}
         height={45}
+        priority
         className={styles.actant_img}
         alt={`actant image of ${name}`}
         src={imageSrc ? imageSrc : ""}
