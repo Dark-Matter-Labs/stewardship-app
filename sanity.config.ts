@@ -26,5 +26,5 @@ export default defineConfig({
   ],
   schema: { types: [report, actant, agent, clause, right, responsibility] },
   apiVersion: "2024-04-28",
-  useCdn: true,
+  use: true,
 });

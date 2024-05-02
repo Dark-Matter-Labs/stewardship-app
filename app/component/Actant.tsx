@@ -13,15 +13,17 @@ const Actant = ({
 }) => {
   return (
     <div className={styles.actant}>
-      <Image
-        width={45}
-        height={45}
-        priority
-        className={styles.actant_img}
-        alt={`actant image of ${name}`}
-        src={imageSrc ? imageSrc : ""}
-      />
-      {showName && <div>{name}</div>}
+      <span className="actant_wall_item">
+        <Image
+          width={45}
+          height={45}
+          priority
+          className={styles.actant_img}
+          alt={`actant image of ${name}`}
+          src={imageSrc ? imageSrc : ""}
+        />
+        {showName && <div>{name}</div>}
+      </span>
     </div>
   );
 };

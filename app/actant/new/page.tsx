@@ -1,9 +1,7 @@
 import Navigation from "@/app/component/Navigation";
-import { createActant } from "@/sanity/sanity-utils";
-import { ActantTypeCreation } from "@/types/ActantTypeCreation";
 
 import React from "react";
-import CreateForm from "../createForm";
+import CreateForm from "./createForm";
 
 const page = () => {
   return (

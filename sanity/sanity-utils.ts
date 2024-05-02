@@ -28,7 +28,7 @@ export async function getActants(): Promise<Actant[]> {
 export async function getActantsByAgent(agent: string): Promise<Actant[]> {
   return client.fetch(
     groq`*[_type == "actant" && references(*[_type == "agent" &&  name match $name]._id) ]{
-  name, "image": image.asset->url
+  name, "slug": slug.current, "image": image.asset->url
 }`,
     { name: agent }
   );
@@ -51,6 +51,18 @@ export async function getAgent(email: string): Promise<Agent> {
         "image": image.asset->url,
     }`,
     { email: email }
+  );
+}
+
+export async function getActant(slug: string): Promise<Actant> {
+  return client.fetch(
+    groq`*[_type == "actant" && slug.current == $slug][0]{
+        "id": _id,
+        name,
+        slug,  
+        "image": image.asset->url,
+    }`,
+    { slug: slug }
   );
 }
 
@@ -94,4 +106,19 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
 export async function createActant(actant: unknown) {
   const result = client.create(actant as unknown as any);
   return result;
+}
+
+export async function updateActant(id: string, name: string) {
+  return client
+    .patch(id) // Document ID to patch
+    .set({ name: name }) // Shallow merge
+    .commit(); // Perform the patch and return a promise
+}
+
+export async function getActantIdbySlug(slug: string): Promise<string> {
+  return client.fetch(
+    groq`*[_type == "actant" && slug.current match $slug][0]._id
+    `,
+    { slug: slug }
+  );
 }

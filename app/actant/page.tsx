@@ -3,7 +3,7 @@ import React from "react";
 // import { options } from "../api/auth/[...nextauth]/options";
 import Navigation from "../component/Navigation";
 import Actants from "../component/Actants";
-import CreateForm from "./createForm";
+import CreateForm from "./new/createForm";
 
 const Actant = () => {
   // const [name, setName] = React.useState("name");
@@ -19,11 +19,14 @@ const Actant = () => {
       ></Navigation>
       <main className="allactant">
         <h1>Actants in the network!</h1>
-        <div className="actants_scroller">
+        <div className="actants_wall">
           <Actants showName={true} agent="" />
         </div>
         <form action="/actant/new">
           <button className="button primary">Recognise a New Actant</button>
+        </form>
+        <form action="/actant/update">
+          <button className="button primary">Update or Remove an Actant</button>
         </form>
       </main>
     </>
