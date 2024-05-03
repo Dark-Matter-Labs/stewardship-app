@@ -18,8 +18,9 @@ const Actant = () => {
         myStyle={{}}
       ></Navigation>
       <main className="allactant">
-        <h1>Actants in the network!</h1>
-        <div className="actants_wall">
+        <h1>All Actants in the network</h1>
+        <p>These are all the actants in the network.</p>
+        <div className="actants_scroller">
           <Actants showName={true} agent="" />
         </div>
         <form action="/actant/new">

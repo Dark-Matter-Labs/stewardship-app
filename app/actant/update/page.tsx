@@ -1,4 +1,8 @@
 import Navigation from "@/app/component/Navigation";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 import { getServerSession } from "next-auth/next";
 import { options } from "../../api/auth/[...nextauth]/options";
 import React from "react";
@@ -37,10 +41,14 @@ const page = async () => {
         myStyle={{}}
       ></Navigation>
       <main className="allactant">
-        <h1>Update Actants in the network!</h1>
-        <div className="actants_everything">
+        <h1>Update Actants in the network</h1>
+        <p>Please note the you can only update the actants you care for</p>
+        <form action={`/actant`}>
+          <button className="button primary">Back to All Actants</button>
+        </form>
+        <div className="allactant">
           {actants.map((actant: ActantType) => (
-            <div className="eachActant" key={actant.name}>
+            <div className="actants_scroller" key={actant.name}>
               <Actant
                 showName={true}
                 name={actant.name ? actant.name : ""}
@@ -48,12 +56,26 @@ const page = async () => {
                   actant.image ? actant.image + "" : "/rainbow-trout.jpg"
                 }
               />
-              <form action={`/actant/update/${actant.slug}`}>
-                <button className="button primary">Update</button>
-              </form>
-              <form action={`/actant/remove/${actant.slug}`}>
-                <button className="button warning">Remove</button>
-              </form>
+              <div>
+                <form
+                  className="function_button"
+                  action={`/actant/update/${actant.slug}`}
+                >
+                  <button className="button primary function">
+                    <FontAwesomeIcon icon={faPen} />
+                    <span>Update</span>
+                  </button>
+                </form>
+                <form
+                  className="function_button"
+                  action={`/actant/remove/${actant.slug}`}
+                >
+                  <button className="button warning function">
+                    <FontAwesomeIcon icon={faTrash} />
+                    <span>Remove</span>
+                  </button>
+                </form>
+              </div>
             </div>
           ))}
         </div>

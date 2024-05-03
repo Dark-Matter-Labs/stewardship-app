@@ -36,9 +36,11 @@ h2 {
   background-color: #e8e8e8;
   border-radius: 8px;
   padding: 8px 16px;
-  /* margin: 1rem; */
+  margin: 1rem;
   margin-top: 1rem;
+  padding: 1rem;
   width: 80%;
+  max-width: 600px;
 }
 
 .button {
@@ -49,9 +51,13 @@ h2 {
   border-radius: 24px;
   border: none;
   margin-top: 1rem;
-  width: 100%;
+  width: 80%;
   transition: background-color 200ms, color 200ms;
   cursor: pointer;
+}
+
+.button span {
+  margin-left: 1rem;
 }
 
 .primary {
@@ -207,6 +213,11 @@ h2 {
   margin: 1rem 0.5rem;
 }
 
+.allactant h1 {
+  text-align: center;
+  margin: 2rem;
+}
+
 .relationship,
 .actant {
   text-align: center;
@@ -358,6 +369,15 @@ label {
   font-size: 1rem;
 }
 
+.function {
+  width: 140px;
+}
+
+.function_button {
+  margin: 1rem;
+  margin-left: 2rem;
+}
+
 /* responsive */
 /* for mobile phones */
 @media only screen and (max-width: 319px) {
@@ -399,7 +419,7 @@ label {
   }
 
   .input {
-    width: 100%;
+    width: 80%;
     border: outline 0px;
   }
 }
@@ -417,6 +437,10 @@ label {
     width: 300px;
   }
 
+  .input {
+    width: 300px;
+  }
+
   .reports_scroller,
   .actants_scroller,
   .clauses_scroller {
@@ -429,10 +453,6 @@ label {
     margin: auto;
     padding-top: 5rem;
     width: 400px;
-  }
-
-  .input {
-    width: 100%;
   }
 }
 
@@ -458,9 +478,5 @@ label {
     margin: auto;
     padding-top: 2rem;
     max-width: 650px;
-  }
-
-  .input {
-    width: 100%;
   }
 }
