@@ -43,7 +43,7 @@ const page = async () => {
             <div className="eachActant" key={actant.name}>
               <Actant
                 showName={true}
-                name={actant.name ? actant.name + " " + actant.slug : ""}
+                name={actant.name ? actant.name : ""}
                 imageSrc={
                   actant.image ? actant.image + "" : "/rainbow-trout.jpg"
                 }
@@ -51,7 +51,7 @@ const page = async () => {
               <form action={`/actant/update/${actant.slug}`}>
                 <button className="button primary">Update</button>
               </form>
-              <form action="/actant/delete/slug">
+              <form action={`/actant/remove/${actant.slug}`}>
                 <button className="button warning">Remove</button>
               </form>
             </div>

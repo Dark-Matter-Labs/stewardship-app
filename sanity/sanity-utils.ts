@@ -13,7 +13,7 @@ export const client = createClient({
   dataset,
   apiVersion: "2024-04-01",
   token: token,
-  useCdn: true,
+  useCdn: false,
 });
 
 export async function getActants(): Promise<Actant[]> {
@@ -113,6 +113,10 @@ export async function updateActant(id: string, name: string) {
     .patch(id) // Document ID to patch
     .set({ name: name }) // Shallow merge
     .commit(); // Perform the patch and return a promise
+}
+
+export async function removeActant(id: string) {
+  return client.delete(id); // Document ID to delete
 }
 
 export async function getActantIdbySlug(slug: string): Promise<string> {
