@@ -2,7 +2,7 @@ import { Actant } from "@/types/Actant";
 import { Agent } from "@/types/Agent";
 import { Clause } from "@/types/Clause";
 import { Report } from "@/types/Report";
-import { createClient, groq } from "next-sanity";
+import { createClient, groq, UploadBody } from "next-sanity";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
