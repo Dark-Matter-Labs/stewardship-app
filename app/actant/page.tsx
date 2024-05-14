@@ -19,7 +19,6 @@ const DisplayActants = async () => {
         <h1>All Actants in the network</h1>
         <p>These are all the actants in the network.</p>
         <div className="actants_scroller">
-          hello {actants.length}
           {actants.map((actant: ActantType) => (
             <Actant
               key={actant.name}
