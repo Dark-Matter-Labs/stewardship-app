@@ -1,12 +1,14 @@
 "use client";
 import { ActantTypeCreation } from "@/types/ActantTypeCreation";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { client, createActant } from "@/sanity/sanity-utils";
 
-export default function CreateForm() {
+export default function CreateForm({ id }: { id: string }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log("the id CreateForm gets is: ", id);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,6 +38,13 @@ export default function CreateForm() {
           _ref: image._id,
         },
       },
+      agents: [
+        {
+          _type: "reference",
+          _ref: id,
+          _key: genRanHex(12),
+        },
+      ],
     };
 
     // Create actant
@@ -49,6 +58,10 @@ export default function CreateForm() {
     // Redirect to root
     router.push("/");
   };
+
+  useEffect(() => {
+    console.log("useEffect, id", id);
+  }, [id]);
 
   return (
     <form
@@ -68,3 +81,8 @@ export default function CreateForm() {
     </form>
   );
 }
+
+const genRanHex = (size: number) =>
+  [...Array(size)]
+    .map(() => Math.floor(Math.random() * 16).toString(16))
+    .join("");

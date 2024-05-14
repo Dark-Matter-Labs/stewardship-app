@@ -126,3 +126,11 @@ export async function getActantIdbySlug(slug: string): Promise<string> {
     { slug: slug }
   );
 }
+
+export async function getAgentIdbyName(name: string): Promise<string> {
+  return client.fetch(
+    groq`*[_type == "agent" && name match $name][0]._id
+    `,
+    { name: name }
+  );
+}
