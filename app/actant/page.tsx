@@ -1,13 +1,11 @@
-// import { getServerSession } from "next-auth";
-import React from "react";
-// import { options } from "../api/auth/[...nextauth]/options";
 import Navigation from "../component/Navigation";
-import Actants from "../component/Actants";
-import CreateForm from "./new/createForm";
+import { getActants } from "@/sanity/sanity-utils";
+import { Actant as ActantType } from "@/types/Actant";
+import Actant from "../component/Actant";
 
-const Actant = () => {
-  // const [name, setName] = React.useState("name");
-  //   const session = await getServerSession(options);
+const DisplayActants = async () => {
+  let actants = null;
+  actants = await getActants();
 
   return (
     <>
@@ -21,7 +19,15 @@ const Actant = () => {
         <h1>All Actants in the network</h1>
         <p>These are all the actants in the network.</p>
         <div className="actants_scroller">
-          <Actants showName={true} agent="" />
+          hello {actants.length}
+          {actants.map((actant: ActantType) => (
+            <Actant
+              key={actant.name}
+              showName={true}
+              name={actant.name ? actant.name : ""}
+              imageSrc={actant.image ? actant.image + "" : "/rainbow-trout.jpg"}
+            />
+          ))}
         </div>
         <form action="/actant/new">
           <button className="button primary">Recognise a New Actant</button>
@@ -34,4 +40,4 @@ const Actant = () => {
   );
 };
 
-export default Actant;
+export default DisplayActants;
