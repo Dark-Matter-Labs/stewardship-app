@@ -1,11 +1,20 @@
+"use client";
+import React, { useState, useEffect } from "react";
 import Navigation from "../component/Navigation";
 import { getActants } from "@/sanity/sanity-utils";
 import { Actant as ActantType } from "@/types/Actant";
 import Actant from "../component/Actant";
 
-const DisplayActants = async () => {
-  let actants = null;
-  actants = await getActants();
+const DisplayActants = () => {
+  let [actants, setActants] = useState<ActantType[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      let listOfActants = await getActants();
+      setActants(listOfActants);
+    }
+    fetchData();
+  }, []);
 
   return (
     <>
