@@ -16,6 +16,7 @@ export default function CreateForm({ id }: { id: string }) {
 
     // Retrive name
     const name = e.currentTarget.actantName.value;
+    const slug = e.currentTarget.actantName.value.replace(/ /g, "-");
 
     // Upload Image
     const image = await client.assets.upload(
@@ -29,7 +30,7 @@ export default function CreateForm({ id }: { id: string }) {
       name: name,
       slug: {
         _type: "slug",
-        current: name,
+        current: slug,
       },
       image: {
         _type: "image",
@@ -72,7 +73,13 @@ export default function CreateForm({ id }: { id: string }) {
       <label>
         <span>Actant Name:</span>
         <input type="text" id="actantName" className="input" required />
-        <input type="file" id="actantImage" accept="image/png, image/jpeg" />
+
+        <input
+          type="file"
+          id="actantImage"
+          accept="image/png, image/jpeg"
+          required
+        />
       </label>
       <button className="button primary" disabled={isLoading}>
         {isLoading && <span> Adding... </span>}
