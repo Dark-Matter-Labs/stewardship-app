@@ -111,7 +111,10 @@ export async function createActant(actant: unknown) {
 export async function updateActant(id: string, name: string) {
   return client
     .patch(id) // Document ID to patch
-    .set({ name: name }) // Shallow merge
+    .set({
+      name: name,
+      slug: { _type: "slug", current: name.replace(/ /g, "-") },
+    }) // Shallow merge
     .commit(); // Perform the patch and return a promise
 }
 
@@ -124,6 +127,14 @@ export async function getActantIdbySlug(slug: string): Promise<string> {
     groq`*[_type == "actant" && slug.current match $slug][0]._id
     `,
     { slug: slug }
+  );
+}
+
+export async function getActantNamebyId(id: string): Promise<string> {
+  return client.fetch(
+    groq`*[_type == "actant" && _id match $id][0].name
+    `,
+    { id: id }
   );
 }
 

@@ -1,16 +1,30 @@
 "use client";
 import Navigation from "@/app/component/Navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getActantIdbySlug, updateActant } from "@/sanity/sanity-utils";
+import {
+  getActantIdbySlug,
+  getActantNamebyId,
+  updateActant,
+} from "@/sanity/sanity-utils";
 
-const Post = () => {
+const UpdateActant = () => {
   const router = useRouter();
   const params = useParams();
   const { slug } = params;
   const [name, setName] = useState(slug);
+
+  useEffect(() => {
+    async function fetchData() {
+      const id = await getActantIdbySlug(String(slug));
+
+      const ActantName = String(await getActantNamebyId(id));
+      setName(ActantName);
+    }
+    fetchData();
+  }, [slug]);
 
   const handleSummit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,4 +73,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default UpdateActant;
