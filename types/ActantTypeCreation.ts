@@ -14,4 +14,11 @@ export type ActantTypeCreation = {
       _ref: string;
     };
   };
+  agents: [
+    {
+      _type: string;
+      _ref: string;
+      _key: string;
+    }
+  ];
 };
