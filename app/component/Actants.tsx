@@ -14,10 +14,10 @@ export default async function Actants({
     actants = await getActantsByAgent(agent);
     console.log("in profile:: filtering actants that " + agent + " cares.");
   } else {
+    console.log("in all actants page: ");
     actants = await getActants();
+    console.log(actants);
   }
-
-  // console.log({ actants });
 
   return (
     <>
