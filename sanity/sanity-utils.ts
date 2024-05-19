@@ -2,6 +2,8 @@ import { Actant } from "@/types/Actant";
 import { Agent } from "@/types/Agent";
 import { Clause } from "@/types/Clause";
 import { Report } from "@/types/Report";
+import { Responsibility } from "@/types/Responsibility";
+import { Right } from "@/types/Right";
 import { createClient, groq, UploadBody } from "next-sanity";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
@@ -16,9 +18,10 @@ export const client = createClient({
   useCdn: false,
 });
 
-export async function getActants(): Promise<Actant[]> {
+export async function getAllActants(): Promise<Actant[]> {
   return client.fetch(
     groq`*[_type == "actant"]{
+        "id": _id,
         name,
         "image": image.asset->url
     }`
@@ -108,6 +111,11 @@ export async function createActant(actant: unknown) {
   return result;
 }
 
+export async function createClause(clause: unknown) {
+  const result = client.create(clause as unknown as any);
+  return result;
+}
+
 export async function updateActant(id: string, name: string) {
   return client
     .patch(id) // Document ID to patch
@@ -145,3 +153,33 @@ export async function getAgentIdbyName(name: string): Promise<string> {
     { name: name }
   );
 }
+
+export async function getAllAgents(): Promise<Agent[]> {
+  return client.fetch(groq`*[_type == "agent"]{
+    "id": _id,
+    name,
+  }`);
+}
+
+export async function getAllRights(): Promise<Right[]> {
+  return client.fetch(
+    groq`*[_type == "right"]{
+        "id": _id,
+        name,
+    }`
+  );
+}
+
+export async function getAllResponsibilities(): Promise<Responsibility[]> {
+  return client.fetch(
+    groq`*[_type == "responsibility"]{
+        "id": _id,
+        name,
+    }`
+  );
+}
+
+export const genRanHex = (size: number) =>
+  [...Array(size)]
+    .map(() => Math.floor(Math.random() * 16).toString(16))
+    .join("");

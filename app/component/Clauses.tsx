@@ -19,8 +19,14 @@ export default async function Clauses({
             key={clause.name}
             caption={caption}
             sign={sign}
-            resImgUrl={clause.responsibilityHolder.image}
-            rigImgUrl={clause.rightHolder.image}
+            resImgUrl={
+              clause.responsibilityHolder?.image
+                ? clause.responsibilityHolder.image
+                : ""
+            }
+            rigImgUrl={
+              clause.rightHolder?.image ? clause.rightHolder.image : ""
+            }
           >
             {`${clause.name} `}
           </Clause>

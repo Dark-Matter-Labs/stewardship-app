@@ -2,7 +2,7 @@
 import { ActantTypeCreation } from "@/types/ActantTypeCreation";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { client, createActant } from "@/sanity/sanity-utils";
+import { client, createActant, genRanHex } from "@/sanity/sanity-utils";
 
 export default function CreateForm({ id }: { id: string }) {
   const router = useRouter();
@@ -88,8 +88,3 @@ export default function CreateForm({ id }: { id: string }) {
     </form>
   );
 }
-
-const genRanHex = (size: number) =>
-  [...Array(size)]
-    .map(() => Math.floor(Math.random() * 16).toString(16))
-    .join("");

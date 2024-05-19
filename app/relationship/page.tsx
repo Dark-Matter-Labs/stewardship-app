@@ -26,8 +26,14 @@ const Relationship = async () => {
                 <Clause
                   caption={true}
                   sign={true}
-                  resImgUrl={clause.responsibilityHolder.image}
-                  rigImgUrl={clause.rightHolder.image}
+                  resImgUrl={
+                    clause.responsibilityHolder.image
+                      ? clause.responsibilityHolder.image
+                      : ""
+                  }
+                  rigImgUrl={
+                    clause.rightHolder.image ? clause.rightHolder.image : ""
+                  }
                 >
                   {`${clause.name} `}
                 </Clause>

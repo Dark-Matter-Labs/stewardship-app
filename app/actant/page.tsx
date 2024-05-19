@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Navigation from "../component/Navigation";
-import { getActants } from "@/sanity/sanity-utils";
+import { getAllActants } from "@/sanity/sanity-utils";
 import { Actant as ActantType } from "@/types/Actant";
 import Actant from "../component/Actant";
 
@@ -10,7 +10,7 @@ const DisplayActants = () => {
 
   useEffect(() => {
     async function fetchData() {
-      let listOfActants = await getActants();
+      let listOfActants = await getAllActants();
       setActants(listOfActants);
     }
     fetchData();
