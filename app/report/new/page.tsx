@@ -3,7 +3,7 @@ import React from "react";
 const UsersPage = () => {
   return (
     <div className="login">
-      <b>Create a Clause</b>
+      <b>Create a Report</b>
       <form>
         <input
           className="input"

@@ -114,6 +114,7 @@ export default function CreateForm() {
     <>
       <div className="login">
         <form onSubmit={handleSubmit}>
+          <div className="relName">Relationship Name</div>
           <input
             className="input"
             placeholder="Relationship name"

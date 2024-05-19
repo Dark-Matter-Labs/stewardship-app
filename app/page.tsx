@@ -66,10 +66,15 @@ export default async function Home() {
               <div className="reports_scroller">
                 <Reports caption={true} sign={true} agent=""></Reports>
               </div>
-              <form action="/relationship">
+              {/* <form action="/report"> */}
+              <form action="/">
                 <button className="button primary">
                   See More Recent Events
                 </button>
+              </form>
+              {/* <form action="/report/new"> */}
+              <form action="/">
+                <button className="button primary">Create a Report</button>
               </form>
             </section>
             <h1>This is what makes the current network</h1>

@@ -1,7 +1,7 @@
 const UsersPage = () => {
   return (
-    <div className="login">
-      <b>All Clauses</b>
+    <div className="">
+      <b>All Reports</b>
     </div>
   );
 };

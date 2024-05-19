@@ -40,8 +40,13 @@ h2 {
   margin: 1rem;
   margin-top: 1rem;
   padding: 1rem;
-  width: 80%;
+  width: 300px;
   max-width: 600px;
+}
+
+.relName {
+  font-weight: 600;
+  margin-top: 3.5rem;
 }
 
 .button {
@@ -231,6 +236,10 @@ h2 {
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
   font-size: 2rem;
+}
+
+.addclause h1 {
+  text-align: center;
 }
 
 .relationship h1,
@@ -459,7 +468,7 @@ label {
 
   .input {
     width: 80%;
-    border: outline 0px;
+    border: outline 1px;
   }
 }
 
