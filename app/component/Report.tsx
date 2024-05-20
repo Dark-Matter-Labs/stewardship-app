@@ -18,7 +18,7 @@ const Report = ({
   sign: boolean;
   report: ReportType;
 }) => {
-  imageSrcProfile = report?.reporter.image || "";
+  imageSrcProfile = report?.reporter?.image || "";
   imageSrcEvidence = report?.image || "";
 
   return (
