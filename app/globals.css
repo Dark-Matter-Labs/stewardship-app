@@ -422,6 +422,20 @@ label {
   font-size: 1rem;
 }
 
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border-radius: 2rem;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: #265e36;
+  color: white;
+  margin: 1rem;
+}
+
 .function {
   width: 140px;
 }

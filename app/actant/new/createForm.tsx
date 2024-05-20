@@ -73,6 +73,9 @@ export default function CreateForm({ id }: { id: string }) {
       <label>
         <span>Actant Name:</span>
         <input type="text" id="actantName" className="input" required />
+        <label htmlFor="actantImage" className="custom-file-upload">
+          Upload Photo
+        </label>
 
         <input
           type="file"

@@ -1,10 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Clause as ClauseType } from "@/types/Clause";
-import { createReport, getClause } from "@/sanity/sanity-utils";
+import {
+  client,
+  createReport,
+  genRanHex,
+  getClause,
+} from "@/sanity/sanity-utils";
 import { ReportTypeCreation } from "@/types/ReportTypeCreation";
-const Form = () => {
+export default function CreateForm({ id }: { id: string }) {
   let [clauses, setClauses] = useState<ClauseType[]>([]);
+
+  console.log("the id CreateForm gets is: ", id);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,15 +28,52 @@ const Form = () => {
     const name = e.currentTarget.reportName.value;
     console.log("report name: ", name);
 
+    // Generate slug
+    const slug = name.replace(/ /g, "-");
+
     // Retrieve report type
     const reportType = e.currentTarget.reportType.value;
     console.log("report type: ", reportType);
+
+    // Retrieve clause
+    const clauseId = e.currentTarget.clauseId.value;
+    console.log("clause id: ", clauseId);
+
+    // Retrieve content
+    const reportContent = e.currentTarget.reportContentId.value;
+    console.log("report content: ", reportContent);
+
+    // Upload Image
+    const image = await client.assets.upload(
+      "image",
+      e.currentTarget.reportImage.files[0]
+    );
 
     // Prepare report
     const report: ReportTypeCreation = {
       _type: "report",
       name: name,
+      slug: {
+        _type: "slug",
+        current: slug,
+      },
       type: reportType,
+      clause: {
+        _type: "reference",
+        _ref: clauseId,
+      },
+      image: {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: image._id,
+        },
+      },
+      content: reportContent,
+      reporter: {
+        _type: "reference",
+        _ref: id,
+      },
     };
 
     // Create report
@@ -57,18 +101,18 @@ const Form = () => {
             <label>Report Type</label>
           </div>
           <select id="reportType" name="Type">
-            <option value="Sign">Sign</option>
-            <option value="Breach">Breach</option>
-            <option value="Fulfillment">Fulfillment</option>
-            <option value="Termination">Termination</option>
-            <option value="Review">Review</option>
+            <option value="sign">Sign</option>
+            <option value="breach">Breach</option>
+            <option value="fulfillment">Fulfillment</option>
+            <option value="termination">Termination</option>
+            <option value="review">Review</option>
           </select>
         </div>
         <div className="dropdownGroup">
           <div className="dropdownHeader">
-            <label>Select clause linked to the Report</label>
+            <label>Clause</label>
           </div>
-          <select id="clause" name="Clause">
+          <select id="clauseId" name="Clause">
             {clauses.map((clause: ClauseType) => (
               <option key={clause.id} value={clause.id}>
                 {clause.name}
@@ -76,11 +120,25 @@ const Form = () => {
             ))}
           </select>
         </div>
-
+        <label>
+          <b>Report Content</b>
+        </label>
+        <textarea
+          className="input"
+          placeholder="Report content"
+          id="reportContentId"
+        ></textarea>
+        <div>
+          <label>
+            <b>Report Evidence</b>
+          </label>
+        </div>
+        <label htmlFor="reportImage" className="custom-file-upload">
+          Photo Upload
+        </label>
+        <input type="file" id="reportImage" accept="image/png, image/jpeg" />
         <button className="button primary">Create Report</button>
       </form>
     </div>
   );
-};
-
-export default Form;
+}
