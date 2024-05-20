@@ -72,6 +72,7 @@ export async function getActant(slug: string): Promise<Actant> {
 export async function getClause(): Promise<Clause[]> {
   return client.fetch(
     groq`*[_type == "clause"]{
+        "id": _id,
         name,
         responsibilityHolder[0]->{"image": image.asset->url},
         rightHolder[0]->{"image": image.asset->url}
@@ -113,6 +114,11 @@ export async function createActant(actant: unknown) {
 
 export async function createClause(clause: unknown) {
   const result = client.create(clause as unknown as any);
+  return result;
+}
+
+export async function createReport(report: unknown) {
+  const result = client.create(report as unknown as any);
   return result;
 }
 

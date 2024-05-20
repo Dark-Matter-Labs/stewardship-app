@@ -257,6 +257,9 @@ h2 {
   border-radius: 10px;
 }
 
+.in_all_report {
+  height: 300px;
+}
 .actant_wall_item {
   margin: auto 0;
   height: 100px;
@@ -268,7 +271,7 @@ h2 {
 
 .clauses_wall_item:nth-child(5n + 1),
 .clauses_wall_item:nth-child(5n + 2) {
-  height: 150px;
+  height: 200px;
 
   flex: 0 0 calc(50% - 10px);
 }
@@ -394,6 +397,12 @@ form {
   margin: 0 auto;
   /* width: clamp(120px, 50vw, 420px); */
   text-align: center;
+}
+
+/* create report */
+
+.createReport {
+  margin-top: 2rem;
 }
 
 .singOutForm {

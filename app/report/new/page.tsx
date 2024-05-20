@@ -1,44 +1,22 @@
 import React from "react";
+import CreateForm from "./createForm";
+import Navigation from "../../component/Navigation";
 
-const UsersPage = () => {
+const CreateReport = async () => {
   return (
-    <div className="login">
-      <b>Create a Report</b>
-      <form>
-        <input
-          className="input"
-          placeholder="Relationship name"
-          id="Relationship name"
-          type="text"
-        ></input>
-        <input
-          className="input"
-          placeholder="Responsibility holder(s)"
-          id="Responsibility holder"
-          type="text"
-        ></input>
-        <input
-          className="input"
-          placeholder="Right Holder(s)"
-          id="Right Holder"
-          type="text"
-        ></input>
-        <input
-          className="input"
-          placeholder="Rights"
-          id="Rights"
-          type="text"
-        ></input>
-        <input
-          className="input"
-          placeholder="Responsibilities"
-          id="Responsibilities"
-          type="text"
-        ></input>
-        <button className="button primary">Create Relationship</button>
-      </form>
-    </div>
+    <>
+      <Navigation
+        left="Back"
+        title="Report"
+        right="Log Out"
+        myStyle={{}}
+      ></Navigation>
+      <main className="addclause">
+        <h1>Create Report</h1>
+        <CreateForm></CreateForm>
+      </main>
+    </>
   );
 };
 
-export default UsersPage;
+export default CreateReport;

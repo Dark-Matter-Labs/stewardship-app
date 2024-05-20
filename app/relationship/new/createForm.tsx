@@ -44,7 +44,7 @@ export default function CreateForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Retrive name
+    // Retrieve name
     const name = e.currentTarget.relationshipName.value;
     console.log("relationship name: ", name);
 

@@ -67,13 +67,13 @@ export default async function Home() {
                 <Reports caption={true} sign={true} agent=""></Reports>
               </div>
               {/* <form action="/report"> */}
-              <form action="/">
+              <form action="/report">
                 <button className="button primary">
                   See More Recent Events
                 </button>
               </form>
               {/* <form action="/report/new"> */}
-              <form action="/">
+              <form action="/report/new">
                 <button className="button primary">Create a Report</button>
               </form>
             </section>
