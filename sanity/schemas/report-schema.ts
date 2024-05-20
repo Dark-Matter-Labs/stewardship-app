@@ -24,7 +24,7 @@ const report = {
           { title: "Sign", value: "sign" },
           { title: "Breach", value: "breach" },
           { title: "Fulfillment", value: "fulfillment" },
-          { title: "Terminaion", value: "terminaion" },
+          { title: "Terminaion", value: "termination" },
           { title: "Review", value: "review" },
         ],
       },
