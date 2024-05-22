@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Clause as ClauseType } from "@/types/Clause";
 import {
   client,
@@ -9,8 +10,10 @@ import {
   getClauses,
 } from "@/sanity/sanity-utils";
 import { ReportTypeCreation } from "@/types/ReportTypeCreation";
+import router from "next/router";
 
 export default function CreateForm({ id }: { id: string }) {
+  const router = useRouter();
   let [clauses, setClauses] = useState<ClauseType[]>([]);
   let [selectedImageSrc, setSelectedImageSrc] = useState("no file chosen");
 
@@ -90,6 +93,9 @@ export default function CreateForm({ id }: { id: string }) {
     } catch (e) {
       console.log("error: ", e);
     }
+
+    // Redirect to root
+    router.push("/");
   };
 
   function readURL(e: React.FormEvent<HTMLInputElement>) {

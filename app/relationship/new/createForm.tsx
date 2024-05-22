@@ -120,6 +120,7 @@ export default function CreateForm() {
             placeholder="Relationship name"
             id="relationshipName"
             type="text"
+            required
           ></input>
 
           <div className="dropdownGroup">

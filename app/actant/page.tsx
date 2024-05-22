@@ -25,7 +25,7 @@ const DisplayActants = () => {
         myStyle={{}}
       ></Navigation>
       <main className="allactant">
-        <h1>All Actants in the network</h1>
+        <h1>All Actants</h1>
         <p>These are all the actants in the network.</p>
         <div className="actants_scroller">
           {actants.map((actant: ActantType) => (

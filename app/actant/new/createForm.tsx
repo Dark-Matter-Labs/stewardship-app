@@ -7,6 +7,7 @@ import { client, createActant, genRanHex } from "@/sanity/sanity-utils";
 export default function CreateForm({ id }: { id: string }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  let [selectedImageSrc, setSelectedImageSrc] = useState("no file chosen");
 
   console.log("the id CreateForm gets is: ", id);
 
@@ -64,6 +65,16 @@ export default function CreateForm({ id }: { id: string }) {
     console.log("useEffect, id", id);
   }, [id]);
 
+  function readURL(e: React.FormEvent<HTMLInputElement>) {
+    // display selected image's URL
+    let filepath: string = e.currentTarget.value;
+    let filename: string = filepath.split("\\").pop()!;
+
+    if (filepath) {
+      setSelectedImageSrc(filename);
+    }
+  }
+
   return (
     <form
       className="w-1/2"
@@ -81,9 +92,11 @@ export default function CreateForm({ id }: { id: string }) {
           type="file"
           id="actantImage"
           accept="image/png, image/jpeg"
-          required
+          onChange={(e) => readURL(e)}
         />
+        <div>{selectedImageSrc}</div>
       </label>
+
       <button className="button primary" disabled={isLoading}>
         {isLoading && <span> Adding... </span>}
         {!isLoading && <span> Add Actant</span>}

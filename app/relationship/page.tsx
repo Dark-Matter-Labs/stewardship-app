@@ -13,12 +13,12 @@ const Relationship = async () => {
     <>
       <Navigation
         left="Back"
-        title="Stewardship"
+        title="Relationship"
         right="Log Out"
         myStyle={{}}
       ></Navigation>
       <main className="relationship">
-        <h1>Clauses in the network</h1>
+        <h1>All Relationships</h1>
         <div className="clauses_wall">
           {clauses.map((clause) => {
             return (

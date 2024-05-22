@@ -14,7 +14,7 @@ const DisplayReport = async () => {
         myStyle={{}}
       ></Navigation>
       <main className="relationship">
-        <h1>Reports in the network</h1>
+        <h1>All Reports</h1>
         <div className="reports_wall ">
           {reports.map((report) => {
             return (
