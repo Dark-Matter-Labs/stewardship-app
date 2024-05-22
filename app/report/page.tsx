@@ -15,13 +15,10 @@ const DisplayReport = async () => {
       ></Navigation>
       <main className="relationship">
         <h1>Reports in the network</h1>
-        <div className="clauses_wall ">
+        <div className="reports_wall ">
           {reports.map((report) => {
             return (
-              <div
-                key={report.name}
-                className="clauses_wall_item in_all_report"
-              >
+              <div key={report.name} className="in_all_report">
                 <Report
                   key={report.name}
                   caption={true}

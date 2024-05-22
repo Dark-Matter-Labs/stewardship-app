@@ -53,52 +53,63 @@ export default async function Home() {
             {/* <ForceLayoutGraph></ForceLayoutGraph> */}
           </div>
           <main className="feed">
-            <h1>Hello {sessionName}! Check what is happening today.</h1>
+            <div className="greeting">
+              <p>Hello {sessionName}! </p>
+              <p>This is a Stewardship app that facilitates care actions. </p>
+              <p>Check what is happening today.</p>
+            </div>
 
             <section>
-              <h2>Reports highlighted</h2>
-              <div className="reports_scroller">
-                <Reports caption={true} sign={true} agent=""></Reports>
-              </div>
-            </section>
-            <section>
-              <h2>Reports requiring some feedback</h2>
+              <h1>Reports</h1>
+              <p>Reports captures care actions taken each day.</p>
               <div className="reports_scroller">
                 <Reports caption={true} sign={true} agent=""></Reports>
               </div>
               {/* <form action="/report"> */}
               <form action="/report">
-                <button className="button primary">
-                  See More Recent Events
-                </button>
+                <button className="button primary">All Reports</button>
               </form>
               {/* <form action="/report/new"> */}
               <form action="/report/new">
-                <button className="button primary">Create a Report</button>
+                <button className="button primary">Make New Report</button>
               </form>
             </section>
-            <h1>This is what makes the current network</h1>
+
+            <h1>Check out what makes the current stewardship network</h1>
             <section>
-              <h2>Actants in the network</h2>
+              <h1>Actants</h1>
+              <p>
+                Actants are things or beings recognised by agents in this
+                network.
+              </p>
               <>
                 <div className="actants_scroller">
                   <Actants showName={true} agent="" />
                 </div>
               </>
               <form action="/actant">
-                <button className="button primary">View Other Actants</button>
+                <button className="button primary">All Actants</button>
+              </form>
+              <form action="/actant/new">
+                <button className="button primary">Recognise New Actant</button>
               </form>
             </section>
             <section>
-              <h2>Clauses in the network</h2>
+              <h1>Relationships</h1>
+              <p>
+                Relationships are stewardship clause or agreements made between
+                agents and actants.
+              </p>
               <div className="clauses_scroller">
                 <Clauses caption={true} sign={true} agent={""}></Clauses>
               </div>
               <form action="/relationship">
-                <button className="button primary">View Other Clauses</button>
+                <button className="button primary">All Relationships</button>
               </form>
               <form action="/relationship/new">
-                <button className="button primary">Create a New Clause</button>
+                <button className="button primary">
+                  Recognise New Relationship
+                </button>
               </form>
             </section>
           </main>
