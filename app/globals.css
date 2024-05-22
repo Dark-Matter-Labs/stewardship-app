@@ -391,7 +391,7 @@ section {
 .dropdownGroup select {
   border-radius: 0.5rem;
   /* border: 1px solid; */
-  background-color: lightgrey;
+  background-color: #e8e8e8;
   padding: 0.5rem 1rem;
   width: 300px;
   margin: 0 auto;

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { Clause as ClauseType } from "@/types/Clause";
 import {
   client,
@@ -8,8 +9,10 @@ import {
   getClauses,
 } from "@/sanity/sanity-utils";
 import { ReportTypeCreation } from "@/types/ReportTypeCreation";
+
 export default function CreateForm({ id }: { id: string }) {
   let [clauses, setClauses] = useState<ClauseType[]>([]);
+  let [selectedImageSrc, setSelectedImageSrc] = useState("no file chosen");
 
   console.log("the id CreateForm gets is: ", id);
 
@@ -23,6 +26,11 @@ export default function CreateForm({ id }: { id: string }) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (e.currentTarget.reportImage.files[0] == null) {
+      alert("please upload image");
+      return;
+    }
 
     // Retrieve name
     const name = e.currentTarget.reportName.value;
@@ -84,6 +92,16 @@ export default function CreateForm({ id }: { id: string }) {
     }
   };
 
+  function readURL(e: React.FormEvent<HTMLInputElement>) {
+    // display selected image's URL
+    let filepath: string = e.currentTarget.value;
+    let filename: string = filepath.split("\\").pop()!;
+
+    if (filepath) {
+      setSelectedImageSrc(filename);
+    }
+  }
+
   return (
     <div className="login">
       <form className="createReport" onSubmit={handleSubmit}>
@@ -95,6 +113,7 @@ export default function CreateForm({ id }: { id: string }) {
           placeholder="Report name"
           id="reportName"
           type="text"
+          required
         ></input>
         <div className="dropdownGroup">
           <div className="dropdownHeader">
@@ -127,6 +146,7 @@ export default function CreateForm({ id }: { id: string }) {
           className="input"
           placeholder="Report content"
           id="reportContentId"
+          required
         ></textarea>
         <div>
           <label>
@@ -136,7 +156,14 @@ export default function CreateForm({ id }: { id: string }) {
         <label htmlFor="reportImage" className="custom-file-upload">
           Photo Upload
         </label>
-        <input type="file" id="reportImage" accept="image/png, image/jpeg" />
+        <input
+          type="file"
+          id="reportImage"
+          accept="image/png, image/jpeg"
+          onChange={(e) => readURL(e)}
+        />
+        <div>{selectedImageSrc}</div>
+
         <button className="button primary">Create Report</button>
       </form>
     </div>
