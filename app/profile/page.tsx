@@ -8,6 +8,7 @@ import { options } from "../api/auth/[...nextauth]/options";
 import { getAgent } from "@/sanity/sanity-utils";
 import { Agent } from "@/types/Agent";
 import Reports from "../component/Reports";
+import Clauses from "../component/Clauses";
 let sessionImageSrc =
   "https://cdn.sanity.io/images/zodsj17c/production/031ea2c9fffeafff80a13fe508fdc445c125256b-2158x1619.jpg";
 let sessionEmail = "email@email.com";
@@ -76,21 +77,23 @@ const UsersPage = async () => {
                 alt="profile image"
               />
               <h1>{capitalizeFirstLetter(sessionName)}</h1>
-              <p>{sessionMotto}</p>
+              <h3>{sessionMotto}</h3>
             </section>
             <section className="profile_content">
               <Tabs variant="soft-rounded" colorScheme="brand">
                 <TabList>
                   <Tab>Reports</Tab>
-                  <Tab>Badges</Tab>
+                  <Tab>Actants</Tab>
+                  <Tab>Clauses</Tab>
                 </TabList>
                 <TabPanels>
                   <TabPanel>
                     {/* Reports */}
+                    <p>Thank you for making these reports.</p>
                     <div className="reports_grid">
                       <Reports
                         caption={true}
-                        sign={false}
+                        sign={true}
                         agent={sessionName}
                       ></Reports>
                     </div>
@@ -100,18 +103,25 @@ const UsersPage = async () => {
                     <div>
                       <p>Thank you for caring these actants</p>
                       <div className="actants_grid">
-                        <Actants showName={false} agent={sessionName} />
+                        <Actants showName={true} agent={sessionName} />
                       </div>
-                      <p>Thank you for your stewardship </p>
-                      <div className="actants_grid">
-                        {/* <Clause caption={false} sign={true}></Clause>
+                    </div>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>Thank you for your stewardship </p>
+                    <div className="actants_grid">
+                      <Clauses
+                        caption={false}
+                        sign={true}
+                        agent={sessionName}
+                      ></Clauses>
+                      {/* <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause>
                     <Clause caption={false} sign={true}></Clause> */}
-                      </div>
                     </div>
                   </TabPanel>
                 </TabPanels>

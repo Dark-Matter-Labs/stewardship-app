@@ -5,7 +5,7 @@ import {
   client,
   createReport,
   genRanHex,
-  getClause,
+  getClauses,
 } from "@/sanity/sanity-utils";
 import { ReportTypeCreation } from "@/types/ReportTypeCreation";
 export default function CreateForm({ id }: { id: string }) {
@@ -15,7 +15,7 @@ export default function CreateForm({ id }: { id: string }) {
 
   useEffect(() => {
     async function fetchData() {
-      let listOfClauses = await getClause();
+      let listOfClauses = await getClauses();
       setClauses(listOfClauses);
     }
     fetchData();

@@ -92,7 +92,7 @@ export default async function Home() {
             <section>
               <h2>Clauses in the network</h2>
               <div className="clauses_scroller">
-                <Clauses caption={true} sign={true}></Clauses>
+                <Clauses caption={true} sign={true} agent={""}></Clauses>
               </div>
               <form action="/relationship">
                 <button className="button primary">View Other Clauses</button>

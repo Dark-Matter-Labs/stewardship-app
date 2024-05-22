@@ -4,11 +4,11 @@ import React from "react";
 import Navigation from "../component/Navigation";
 
 import Clause from "../component/Clause";
-import { getClause } from "@/sanity/sanity-utils";
+import { getClauses } from "@/sanity/sanity-utils";
 
 const Relationship = async () => {
   //   const session = await getServerSession(options);
-  const clauses = await getClause();
+  const clauses = await getClauses();
   return (
     <>
       <Navigation

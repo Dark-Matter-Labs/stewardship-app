@@ -44,7 +44,8 @@ const Report = ({
         <div className="report_caption">
           <div>{report?.name}</div>
           <div>
-            <FontAwesomeIcon icon={faThumbsUp} /> 11
+            <FontAwesomeIcon icon={faThumbsUp} />{" "}
+            {Math.floor(Math.random() * 15)}
           </div>
         </div>
       )}
