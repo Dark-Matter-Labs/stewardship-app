@@ -289,14 +289,15 @@ section {
 .clauses_wall_item:nth-child(5n + 1),
 .clauses_wall_item:nth-child(5n + 2) {
   height: 200px;
-
   flex: 0 0 calc(50% - 10px);
+  flex-grow: 1;
 }
 
 .clauses_wall_item:nth-child(5n + 3),
 .clauses_wall_item:nth-child(5n + 4),
 .clauses_wall_item:nth-child(5n + 5) {
   flex: 0 0 calc(33.33% - 10px);
+  flex-grow: 1;
 }
 
 .report {
@@ -355,11 +356,22 @@ section {
 }
 .clause_agent_img {
   margin: 0 0.5rem;
-  border: 1px solid white;
+  border: 1px solid black;
   border-radius: 50%;
   object-fit: cover;
   width: 30px;
   height: 30px;
+}
+
+.clause_agent_img:last-child {
+  /* border-left: 3px solid black;
+  border-radius: none; */
+  box-shadow: -10px 0px 0px 0px #5db075;
+}
+.clause_agent_img:first-child {
+  /* border-left: 3px solid black;
+  border-radius: none; */
+  box-shadow: 10px 0px 0px 0px #5db075;
 }
 
 .clause_caption {

@@ -31,6 +31,7 @@ const Clause = ({
               alt="fang"
               src={rigImgUrl}
             />
+
             <Image
               width={45}
               height={45}
