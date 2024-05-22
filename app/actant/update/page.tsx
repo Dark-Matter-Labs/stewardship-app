@@ -55,6 +55,7 @@ const page = async () => {
                 imageSrc={
                   actant.image ? actant.image + "" : "/rainbow-trout.jpg"
                 }
+                agentImageSrc={""}
               />
               <div>
                 <form

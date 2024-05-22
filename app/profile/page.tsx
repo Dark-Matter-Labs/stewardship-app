@@ -111,7 +111,7 @@ const UsersPage = async () => {
                     <p>Thank you for your stewardship </p>
                     <div className="actants_grid">
                       <Clauses
-                        caption={false}
+                        caption={true}
                         sign={true}
                         agent={sessionName}
                       ></Clauses>

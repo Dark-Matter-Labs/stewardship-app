@@ -57,6 +57,15 @@ export async function getAgent(email: string): Promise<Agent> {
   );
 }
 
+export async function getAgentImageByName(name: string): Promise<Agent[]> {
+  return client.fetch(
+    groq`*[_type == "agent" &&  name match $name]{
+  "image": image.asset->url,
+}`,
+    { name: name }
+  );
+}
+
 export async function getActant(slug: string): Promise<Actant> {
   return client.fetch(
     groq`*[_type == "actant" && slug.current == $slug][0]{

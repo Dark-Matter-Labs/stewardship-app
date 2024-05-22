@@ -11,3 +11,12 @@
   width: 100px;
   height: 100px;
 }
+
+.agent_img {
+  margin: -2.5rem auto 2rem 4rem;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
