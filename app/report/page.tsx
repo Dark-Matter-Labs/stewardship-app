@@ -1,10 +1,21 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Navigation from "../component/Navigation";
 import Report from "../component/Report";
 import { getReports } from "@/sanity/sanity-utils";
+import { Report as ReportType } from "@/types/Report";
 
-const DisplayReport = async () => {
-  const reports = await getReports();
+const DisplayReport = () => {
+  const [reports, setListOfReports] = useState<ReportType[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const allReports = await getReports();
+      setListOfReports(allReports);
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
       <Navigation
