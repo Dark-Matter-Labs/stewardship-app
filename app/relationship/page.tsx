@@ -41,6 +41,11 @@ const Relationship = async () => {
             );
           })}
         </div>
+        <form action="/relationship/update">
+          <button className="button primary">
+            Update or Remove a relationship
+          </button>
+        </form>
       </main>
     </>
   );

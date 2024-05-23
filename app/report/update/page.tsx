@@ -39,20 +39,20 @@ const page = async () => {
   return (
     <>
       <Navigation
-        left="Back"
-        title="Actant"
+        left="Home"
+        title="Report"
         right="Log Out"
         myStyle={{}}
       ></Navigation>
       <main className="allactant">
-        <h1>Update Actants in the network</h1>
-        <p>Please note that you can only update the actants you care for</p>
-        <form action={`/actant`}>
-          <button className="button primary">Back to All Actants</button>
+        <h1>Update reports in the network</h1>
+        <p>Please note that you can only update the reports you care for</p>
+        <form action={`/report`}>
+          <button className="button primary">Back to All Reports</button>
         </form>
         <div className="allactant">
           {reports.map((report: ReportType) => (
-            <div className="actants_scroller" key={report.name}>
+            <div className="actants_scroller update" key={report.name}>
               <Report
                 key={report.name}
                 caption={true}
@@ -71,7 +71,7 @@ const page = async () => {
                 </form>
                 <form
                   className="function_button"
-                  action={`/report/remove/${report.slug}`}
+                  action={`/report/remove/${report.id}`}
                 >
                   <button className="button warning function">
                     <FontAwesomeIcon icon={faTrash} />

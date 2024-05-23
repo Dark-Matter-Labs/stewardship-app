@@ -224,7 +224,8 @@ section {
   margin: 1 rem;
 }
 
-.allactant {
+.allactant,
+.allrelationship {
   text-align: center;
   margin: 1rem 0.5rem;
 }
@@ -234,7 +235,14 @@ section {
   margin: 1rem 0.5rem;
 }
 
-.allactant h1 {
+.updateRelationship {
+  text-align: center;
+  margin: 1rem 0.5rem;
+  width: fit-content;
+}
+
+.allactant h1,
+.allrelationship h1 {
   text-align: center;
   margin: 2rem;
 }
@@ -383,6 +391,18 @@ section {
   margin-top: 0.25rem;
   /* text-align: left; */
   font-size: 0.75rem;
+}
+
+.update .clause_caption {
+  width: 100px;
+}
+
+.update .actant_caption {
+  width: 100px;
+}
+
+.update .report_caption {
+  width: 100px;
 }
 
 .dropdownGroup {

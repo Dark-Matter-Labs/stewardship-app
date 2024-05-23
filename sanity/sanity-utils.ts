@@ -102,6 +102,7 @@ export async function getClausesByAgent(agent: string): Promise<Clause[]> {
   return client.fetch(
     groq`*[_type == "clause" && references(*[_type == "agent" &&  name match $name]._id) ]{
         "id": _id,
+        "slug": slug.current,
         name,
         responsibilityHolder[0]->{"image": image.asset->url},
         rightHolder[0]->{"image": image.asset->url}
@@ -174,11 +175,25 @@ export async function updateReport(id: string, name: string, content: string) {
     .commit(); // Perform the patch and return a promise
 }
 
+export async function updateRelationship(id: string, name: string) {
+  return client
+    .patch(id) // Document ID to patch
+    .set({
+      name: name,
+      slug: { _type: "slug", current: name.replace(/ /g, "-") },
+    }) // Shallow merge
+    .commit(); // Perform the patch and return a promise
+}
+
 export async function removeActant(id: string) {
   return client.delete(id); // Document ID to delete
 }
 
 export async function removeReport(id: string) {
+  return client.delete(id); // Document ID to delete
+}
+
+export async function removeRelationship(id: string) {
   return client.delete(id); // Document ID to delete
 }
 
@@ -198,6 +213,14 @@ export async function getReportIdbySlug(slug: string): Promise<string> {
   );
 }
 
+export async function getRelationshipIdbySlug(slug: string): Promise<string> {
+  return client.fetch(
+    groq`*[_type == "clause" && slug.current match $slug][0]._id
+    `,
+    { slug: slug }
+  );
+}
+
 export async function getActantNamebyId(id: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "actant" && _id match $id][0].name
@@ -209,6 +232,14 @@ export async function getActantNamebyId(id: string): Promise<string> {
 export async function getReportbyId(id: string): Promise<Report> {
   return client.fetch(
     groq`*[_type == "report" && _id match $id][0]
+    `,
+    { id: id }
+  );
+}
+
+export async function getRelatinoshipbyId(id: string): Promise<Clause> {
+  return client.fetch(
+    groq`*[_type == "clause" && _id match $id][0]
     `,
     { id: id }
   );

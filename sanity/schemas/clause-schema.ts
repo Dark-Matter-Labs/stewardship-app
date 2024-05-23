@@ -9,6 +9,12 @@ const clause = {
       type: "string",
     },
     {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "name" },
+    },
+    {
       name: "responsibilityHolder",
       title: "Responsibility Holder(s)",
       type: "array",

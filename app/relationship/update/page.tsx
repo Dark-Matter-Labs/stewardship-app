@@ -6,10 +6,11 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { getServerSession } from "next-auth/next";
 import { options } from "../../api/auth/[...nextauth]/options";
 import React from "react";
-import { getActantsByAgent, getAgent } from "@/sanity/sanity-utils";
-import Actant from "@/app/component/Actant";
-import { Actant as ActantType } from "@/types/Actant";
+import { getAgent, getClausesByAgent } from "@/sanity/sanity-utils";
+import Report from "@/app/component/Report";
+import { Clause as ClauseType } from "@/types/Clause";
 import { Agent } from "@/types/Agent";
+import Clause from "@/app/component/Clause";
 let sessionEmail = "email@email.com";
 let sessionName = "name";
 
@@ -30,52 +31,63 @@ const page = async () => {
     console.log("session name: ", sessionName);
   }
 
-  const actants = await getActantsByAgent(sessionName);
+  const relationships = await getClausesByAgent(sessionName);
 
   return (
     <>
       <Navigation
         left="Back"
-        title="Actant"
+        title="Relationship"
         right="Log Out"
         myStyle={{}}
       ></Navigation>
-      <main className="allactant">
-        <h1>Update Actants in the network</h1>
-        <p>Please note that you can only update the actants you care for</p>
-        <form action={`/actant`}>
-          <button className="button primary">Back to All Actants</button>
+      <main className="allrelationship">
+        <h1>Update relationships in the network</h1>
+        <p>
+          Please note that you can only update the relationships you created
+        </p>
+        <form action={`/relationship`}>
+          <button className="button primary">Back to All Relationships</button>
         </form>
-        <div className="allactant">
-          {actants.map((actant: ActantType) => (
-            <div className="actants_scroller update" key={actant.name}>
-              <Actant
-                showName={true}
-                name={actant.name ? actant.name : ""}
-                imageSrc={
-                  actant.image ? actant.image + "" : "/rainbow-trout.jpg"
+        <div className="allrelationship">
+          {relationships.map((relationship: ClauseType) => (
+            <div className="clauses_scroller update" key={relationship.name}>
+              <Clause
+                key={relationship.name}
+                caption={true}
+                sign={true}
+                resImgUrl={
+                  relationship.responsibilityHolder?.image
+                    ? relationship.responsibilityHolder.image
+                    : ""
                 }
-                agentImageSrc={""}
-              />
+                rigImgUrl={
+                  relationship.rightHolder?.image
+                    ? relationship.rightHolder.image
+                    : ""
+                }
+              >
+                {`${relationship.name}`}
+              </Clause>
               <div>
                 <form
                   className="function_button"
-                  action={`/actant/update/${actant.slug}`}
+                  action={`/relationship/update/${relationship.id}`}
                 >
                   <button className="button primary function">
                     <FontAwesomeIcon icon={faPen} />
                     <span>Update</span>
                   </button>
                 </form>
-                <form
+                {/* <form
                   className="function_button"
-                  action={`/actant/remove/${actant.slug}`}
+                  action={`/relationship/remove/${relationship.slug}`}
                 >
                   <button className="button warning function">
                     <FontAwesomeIcon icon={faTrash} />
                     <span>Remove</span>
                   </button>
-                </form>
+                </form> */}
               </div>
             </div>
           ))}
