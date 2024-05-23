@@ -71,7 +71,7 @@ const page = async () => {
                 </form>
                 <form
                   className="function_button"
-                  action={`/report/remove/${report.id}`}
+                  action={`/report/remove/${report.slug}`}
                 >
                   <button className="button warning function">
                     <FontAwesomeIcon icon={faTrash} />

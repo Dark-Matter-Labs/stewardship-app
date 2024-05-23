@@ -227,17 +227,22 @@ section {
 .allactant,
 .allrelationship {
   text-align: center;
-  margin: 1rem 0.5rem;
+  /* margin: 1rem 0.5rem; */
 }
 
 .updateReport {
   text-align: center;
-  margin: 1rem 0.5rem;
+  margin: 1rem auto;
+  margin-top: 4rem;
+}
+
+.updateReport:first-child {
+  margin-top: 6rem;
 }
 
 .updateRelationship {
   text-align: center;
-  margin: 1rem 0.5rem;
+  /* margin: 1rem 0.5rem; */
   width: fit-content;
 }
 
@@ -478,6 +483,11 @@ input {
 
 label {
   font-size: 1rem;
+}
+
+label:first-child {
+  font-size: 1rem;
+  margin-top: 2rem;
 }
 
 input[type="file"] {

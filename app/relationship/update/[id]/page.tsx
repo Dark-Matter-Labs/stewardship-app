@@ -36,7 +36,7 @@ const UpdateRelationship = () => {
         right="Log Out"
         myStyle={{}}
       ></Navigation>
-      <main className="updateRelationship">
+      <main className="updateRelationship login">
         <h1>Update Relationship</h1>
         <form className="w-1/2" onSubmit={handleSummit}>
           <label>

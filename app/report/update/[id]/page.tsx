@@ -38,7 +38,7 @@ const UpdateReport = () => {
         right="Log Out"
         myStyle={{}}
       ></Navigation>
-      <main className="updateReport">
+      <main className="updateReport login ">
         <h1>Update Report</h1>
         <form className="w-1/2" onSubmit={handleSummit}>
           <label>

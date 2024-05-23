@@ -51,7 +51,7 @@ const UpdateActant = () => {
         right="Log Out"
         myStyle={{}}
       ></Navigation>
-      <main className="allactant">
+      <main className="allactant ">
         <h1>Update Actant {slug}</h1>
         <form className="w-1/2" onSubmit={handleSummit}>
           <label>
