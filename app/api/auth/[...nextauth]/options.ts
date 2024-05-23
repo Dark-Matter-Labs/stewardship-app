@@ -2,6 +2,8 @@ import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { Agent } from "@/types/Agent";
+import { getAgent } from "@/sanity/sanity-utils";
 
 export const options: NextAuthOptions = {
   providers: [

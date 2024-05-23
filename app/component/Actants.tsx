@@ -17,13 +17,13 @@ export default async function Actants({
   let agentImg = null;
   if (agent) {
     actants = await getActantsByAgent(agent);
-    console.log("in profile:: filtering actants that " + agent + " cares.");
+    // console.log("in profile:: filtering actants that " + agent + " cares.");
 
     agentImg = await getAgentImageByName(agent);
   } else {
-    console.log("in all actants page: ");
+    // console.log("in all actants page: ");
     actants = await getAllActants();
-    console.log(actants);
+    // console.log(actants);
   }
 
   return (

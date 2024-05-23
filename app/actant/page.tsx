@@ -38,9 +38,6 @@ const DisplayActants = () => {
             />
           ))}
         </div>
-        {/* <form action="/actant/new">
-          <button className="button primary">Recognise a New Actant</button>
-        </form> */}
         <form action="/actant/update">
           <button className="button primary">Update or Remove an Actant</button>
         </form>

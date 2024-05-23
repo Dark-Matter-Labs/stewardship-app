@@ -57,6 +57,7 @@ export async function getAgents(): Promise<Agent[]> {
 export async function getAgent(email: string): Promise<Agent> {
   return client.fetch(
     groq`*[_type == "agent" && email == $email][0]{
+       "id": _id,
         name,
         email,  
         motto,

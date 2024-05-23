@@ -1,9 +1,8 @@
-// app/providers.tsx
 "use client";
 
 import { ChakraProvider } from "@chakra-ui/react";
-
 import { extendTheme } from "@chakra-ui/react";
+
 export const theme = extendTheme({
   colors: {
     brand: {
@@ -14,6 +13,6 @@ export const theme = extendTheme({
   },
 });
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
 }

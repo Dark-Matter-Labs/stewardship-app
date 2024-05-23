@@ -1,23 +1,22 @@
 // "use client";
 import Navigation from "./component/Navigation";
-import Report from "./component/Report";
-
 import Actants from "./component/Actants";
 import ForceLayoutGraph from "./component/ForceLayoutGraph";
-import { ChakraProvider } from "@chakra-ui/react";
 import { options } from "./api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth/next";
-import { signOut } from "next-auth/react";
 import Clauses from "./component/Clauses";
 import Reports from "./component/Reports";
 import { Agent } from "@/types/Agent";
 import { getAgent } from "@/sanity/sanity-utils";
-import Link from "next/link";
+
 let sessionName = "name";
 let sessionEmail = "email@email.com";
 
 export default async function Home() {
   const session = await getServerSession(options);
+
+  let agent: Agent | null = null;
+  console.log("session:::::::::::::::::", session);
 
   if (session) {
     //retrieve user data through authenticated account
@@ -25,7 +24,7 @@ export default async function Home() {
     sessionName = session.user?.name + "";
 
     // match user data to agent data
-    const agent: Agent = await getAgent(sessionEmail);
+    agent = await getAgent(sessionEmail);
 
     if (agent?.email === sessionEmail) {
       sessionEmail = agent.email;
@@ -33,14 +32,12 @@ export default async function Home() {
       //replace user name with coresponding agent name
       if (agent?.name != undefined) {
         sessionName = agent.name;
-        // console.log("========agent name: " + agent.name);
       }
     }
   }
 
   return (
-    <ChakraProvider>
-      {" "}
+    <>
       {session ? (
         <>
           <Navigation
@@ -65,11 +62,11 @@ export default async function Home() {
               <div className="reports_scroller">
                 <Reports caption={true} sign={true} agent=""></Reports>
               </div>
-              {/* <form action="/report"> */}
+
               <form action="/report">
                 <button className="button primary">All Reports</button>
               </form>
-              {/* <form action="/report/new"> */}
+
               <form action="/report/new">
                 <button className="button primary">Make New Report</button>
               </form>
@@ -117,6 +114,6 @@ export default async function Home() {
       ) : (
         <h1>session note found!</h1>
       )}
-    </ChakraProvider>
+    </>
   );
 }
