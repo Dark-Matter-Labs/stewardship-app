@@ -37,6 +37,15 @@ export async function getActantsByAgent(agent: string): Promise<Actant[]> {
   );
 }
 
+// export async function getReportsByAgent(agent: string): Promise<Report[]> {
+//   return client.fetch(
+//     groq`*[_type == "report" && references(*[_type == "agent" &&  name match $name]._id) ]{
+//   name, "slug": slug.current, "image": image.asset->url
+// }`,
+//     { name: agent }
+//   );
+// }
+
 export async function getAgents(): Promise<Agent[]> {
   return client.fetch(
     groq`*[_type == "agent"]{
@@ -157,9 +166,21 @@ export async function removeActant(id: string) {
   return client.delete(id); // Document ID to delete
 }
 
+export async function removeReport(id: string) {
+  return client.delete(id); // Document ID to delete
+}
+
 export async function getActantIdbySlug(slug: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "actant" && slug.current match $slug][0]._id
+    `,
+    { slug: slug }
+  );
+}
+
+export async function getReportIdbySlug(slug: string): Promise<string> {
+  return client.fetch(
+    groq`*[_type == "report" && slug.current match $slug][0]._id
     `,
     { slug: slug }
   );

@@ -6,9 +6,13 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { getServerSession } from "next-auth/next";
 import { options } from "../../api/auth/[...nextauth]/options";
 import React from "react";
-import { getActantsByAgent, getAgent } from "@/sanity/sanity-utils";
-import Actant from "@/app/component/Actant";
-import { Actant as ActantType } from "@/types/Actant";
+import {
+  getActantsByAgent,
+  getAgent,
+  getReportsByAgent,
+} from "@/sanity/sanity-utils";
+import Report from "@/app/component/Report";
+import { Report as ReportType } from "@/types/Report";
 import { Agent } from "@/types/Agent";
 let sessionEmail = "email@email.com";
 let sessionName = "name";
@@ -30,7 +34,7 @@ const page = async () => {
     console.log("session name: ", sessionName);
   }
 
-  const actants = await getActantsByAgent(sessionName);
+  const reports = await getReportsByAgent(sessionName);
 
   return (
     <>
@@ -47,20 +51,18 @@ const page = async () => {
           <button className="button primary">Back to All Actants</button>
         </form>
         <div className="allactant">
-          {actants.map((actant: ActantType) => (
-            <div className="actants_scroller" key={actant.name}>
-              <Actant
-                showName={true}
-                name={actant.name ? actant.name : ""}
-                imageSrc={
-                  actant.image ? actant.image + "" : "/rainbow-trout.jpg"
-                }
-                agentImageSrc={""}
+          {reports.map((report: ReportType) => (
+            <div className="actants_scroller" key={report.name}>
+              <Report
+                key={report.name}
+                caption={true}
+                sign={false}
+                report={report}
               />
               <div>
                 <form
                   className="function_button"
-                  action={`/actant/update/${actant.slug}`}
+                  action={`/report/update/${report.slug}`}
                 >
                   <button className="button primary function">
                     <FontAwesomeIcon icon={faPen} />
@@ -69,7 +71,7 @@ const page = async () => {
                 </form>
                 <form
                   className="function_button"
-                  action={`/actant/remove/${actant.slug}`}
+                  action={`/report/remove/${report.slug}`}
                 >
                   <button className="button warning function">
                     <FontAwesomeIcon icon={faTrash} />

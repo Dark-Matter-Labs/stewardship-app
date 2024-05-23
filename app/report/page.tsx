@@ -29,6 +29,9 @@ const DisplayReport = async () => {
             );
           })}
         </div>
+        <form action="/report/update">
+          <button className="button primary">Update or Remove a report</button>
+        </form>
       </main>
     </>
   );

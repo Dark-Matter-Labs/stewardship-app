@@ -470,12 +470,12 @@ input[type="file"] {
 }
 
 .function {
-  width: 140px;
+  width: fit-content;
 }
 
 .function_button {
-  margin: 1rem;
-  margin-left: 2rem;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
 }
 
 /* responsive */
