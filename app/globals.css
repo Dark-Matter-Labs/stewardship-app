@@ -229,6 +229,11 @@ section {
   margin: 1rem 0.5rem;
 }
 
+.updateReport {
+  text-align: center;
+  margin: 1rem 0.5rem;
+}
+
 .allactant h1 {
   text-align: center;
   margin: 2rem;

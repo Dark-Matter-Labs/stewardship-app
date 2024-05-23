@@ -62,7 +62,7 @@ const page = async () => {
               <div>
                 <form
                   className="function_button"
-                  action={`/report/update/${report.slug}`}
+                  action={`/report/update/${report.id}`}
                 >
                   <button className="button primary function">
                     <FontAwesomeIcon icon={faPen} />

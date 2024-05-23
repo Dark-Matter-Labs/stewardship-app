@@ -126,6 +126,7 @@ export async function getReports(): Promise<Report[]> {
 export async function getReportsByAgent(agent: string): Promise<Report[]> {
   return client.fetch(
     groq`*[_type == "report" && $agent match reporter->name]{
+        "id": _id,
         name,
         "slug": slug.current,
         type, 
@@ -162,6 +163,17 @@ export async function updateActant(id: string, name: string) {
     .commit(); // Perform the patch and return a promise
 }
 
+export async function updateReport(id: string, name: string, content: string) {
+  return client
+    .patch(id) // Document ID to patch
+    .set({
+      name: name,
+      content: content,
+      slug: { _type: "slug", current: name.replace(/ /g, "-") },
+    }) // Shallow merge
+    .commit(); // Perform the patch and return a promise
+}
+
 export async function removeActant(id: string) {
   return client.delete(id); // Document ID to delete
 }
@@ -189,6 +201,14 @@ export async function getReportIdbySlug(slug: string): Promise<string> {
 export async function getActantNamebyId(id: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "actant" && _id match $id][0].name
+    `,
+    { id: id }
+  );
+}
+
+export async function getReportbyId(id: string): Promise<Report> {
+  return client.fetch(
+    groq`*[_type == "report" && _id match $id][0]
     `,
     { id: id }
   );
