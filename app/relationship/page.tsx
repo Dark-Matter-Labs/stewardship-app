@@ -9,6 +9,7 @@ import { getClauses } from "@/sanity/sanity-utils";
 const Relationship = async () => {
   //   const session = await getServerSession(options);
   const clauses = await getClauses();
+  console.log(clauses);
   return (
     <>
       <Navigation
@@ -22,22 +23,30 @@ const Relationship = async () => {
         <div className="clauses_wall">
           {clauses.map((clause) => {
             return (
-              <div key={clause.name} className="clauses_wall_item">
-                <Clause
-                  caption={true}
-                  sign={true}
-                  resImgUrl={
-                    clause.responsibilityHolder.image
-                      ? clause.responsibilityHolder.image
-                      : ""
-                  }
-                  rigImgUrl={
-                    clause.rightHolder.image ? clause.rightHolder.image : ""
-                  }
-                >
-                  {`${clause.name} `}
-                </Clause>
-              </div>
+              <form
+                key={clause.id}
+                action={`/relationship/display/${clause.id}`}
+                className="clauses_wall_item"
+              >
+                <button>
+                  <div>
+                    <Clause
+                      caption={true}
+                      sign={true}
+                      resImgUrl={
+                        clause.responsibilityHolder.image
+                          ? clause.responsibilityHolder.image
+                          : ""
+                      }
+                      rigImgUrl={
+                        clause.rightHolder.image ? clause.rightHolder.image : ""
+                      }
+                    >
+                      {`${clause.name} `}
+                    </Clause>
+                  </div>
+                </button>
+              </form>
             );
           })}
         </div>

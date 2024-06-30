@@ -1,10 +1,11 @@
 import { Actant } from "@/types/Actant";
 import { Agent } from "@/types/Agent";
-import { Clause } from "@/types/Clause";
 import { Report } from "@/types/Report";
+import { Relationship } from "@/types/Relationship";
 import { Responsibility } from "@/types/Responsibility";
 import { Right } from "@/types/Right";
 import { createClient, groq, UploadBody } from "next-sanity";
+import { Clause } from "@/types/Clause";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
@@ -109,6 +110,20 @@ export async function getClausesByAgent(agent: string): Promise<Clause[]> {
         rightHolder[0]->{"image": image.asset->url}
     }`,
     { name: agent }
+  );
+}
+
+export async function getRelatinoshipbyId(id: string): Promise<Relationship> {
+  return client.fetch(
+    groq`*[_type == "clause" && _id match $id][0]{
+        "id": _id,
+        "slug": slug.current,
+        name,
+        responsibilityHolder[]->{"image": image.asset->url, name},
+        rightHolder[]->{"image": image.asset->url, name}
+    }
+    `,
+    { id: id }
   );
 }
 
@@ -233,14 +248,6 @@ export async function getActantNamebyId(id: string): Promise<string> {
 export async function getReportbyId(id: string): Promise<Report> {
   return client.fetch(
     groq`*[_type == "report" && _id match $id][0]
-    `,
-    { id: id }
-  );
-}
-
-export async function getRelatinoshipbyId(id: string): Promise<Clause> {
-  return client.fetch(
-    groq`*[_type == "clause" && _id match $id][0]
     `,
     { id: id }
   );
