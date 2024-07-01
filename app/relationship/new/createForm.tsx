@@ -19,10 +19,10 @@ export default function CreateForm() {
   const router = useRouter();
   let [agents, setAgents] = useState<AgentType[]>([]);
   let [actants, setActants] = useState<ActantType[]>([]);
-  let [rights, setRights] = useState<RightType[]>([]);
-  let [responsibilities, setResponsibilities] = useState<ResponsibilityType[]>(
-    []
-  );
+  // let [rights, setRights] = useState<RightType[]>([]);
+  // let [responsibilities, setResponsibilities] = useState<ResponsibilityType[]>(
+  //   []
+  // );
 
   useEffect(() => {
     async function fetchData() {
@@ -32,11 +32,11 @@ export default function CreateForm() {
       let listOfActants = await getAllActants();
       setActants(listOfActants);
 
-      let listOfRights = await getAllRights();
-      setRights(listOfRights);
+      // let listOfRights = await getAllRights();
+      // setRights(listOfRights);
 
-      let listOfResponsibilities = await getAllResponsibilities();
-      setResponsibilities(listOfResponsibilities);
+      // let listOfResponsibilities = await getAllResponsibilities();
+      // setResponsibilities(listOfResponsibilities);
     }
     fetchData();
   }, []);
@@ -56,13 +56,21 @@ export default function CreateForm() {
     const rigHolderId = e.currentTarget.rightHolder.value;
     console.log("right holder: ", resHolderId);
 
-    // Retrieve right
-    const rightId = e.currentTarget.right.value;
-    console.log("right: ", rightId);
+    // // Retrieve right
+    // const rightId = e.currentTarget.right.value;
+    // console.log("right: ", rightId);
 
-    // Retrieve right
-    const responsibilityId = e.currentTarget.responsibility.value;
-    console.log("responsibility: ", responsibilityId);
+    // // Retrieve responsibility
+    // const responsibilityId = e.currentTarget.responsibility.value;
+    // console.log("responsibility: ", responsibilityId);
+
+    // Retrieve  right
+    const rights = e.currentTarget.rights.value;
+    console.log("rights: ", rights);
+
+    // Retrieve  responsibility
+    const responsibilities = e.currentTarget.responsibilities.value;
+    console.log("responsibilities: ", responsibilities);
 
     // Prepare clause
     const clause: ClauseTypeCreation = {
@@ -82,20 +90,22 @@ export default function CreateForm() {
           _key: genRanHex(12),
         },
       ],
-      rights: [
-        {
-          _type: "reference",
-          _ref: rightId,
-          _key: genRanHex(12),
-        },
-      ],
-      responsibilities: [
-        {
-          _type: "reference",
-          _ref: responsibilityId,
-          _key: genRanHex(12),
-        },
-      ],
+      rights: rights,
+      responsibilities: responsibilities,
+      // rights: [
+      //   {
+      //     _type: "reference",
+      //     _ref: rightId,
+      //     _key: genRanHex(12),
+      //   },
+      // ],
+      // responsibilities: [
+      //   {
+      //     _type: "reference",
+      //     _ref: responsibilityId,
+      //     _key: genRanHex(12),
+      //   },
+      // ],
     };
 
     console.log({ clause });
@@ -150,7 +160,25 @@ export default function CreateForm() {
             </select>
           </div>
 
-          <div className="dropdownGroup">
+          <div className="relName">Rights</div>
+          <input
+            className="input"
+            placeholder="Rights"
+            id="rights"
+            type="text"
+            required
+          ></input>
+
+          <div className="relName">Responsibilities</div>
+          <input
+            className="input"
+            placeholder="Responsibilities"
+            id="responsibilities"
+            type="text"
+            required
+          ></input>
+
+          {/* <div className="dropdownGroup">
             <div className="dropdownHeader">
               <label>Right</label>
             </div>
@@ -176,7 +204,7 @@ export default function CreateForm() {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           <button className="button primary">Create Relationship</button>
         </form>

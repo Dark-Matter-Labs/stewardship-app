@@ -39,25 +39,35 @@ const clause = {
     {
       name: "rights",
       title: "Rights",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "right" }],
-        },
-      ],
+      type: "string",
     },
     {
       name: "responsibilities",
       title: "Responsibilities",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "responsibility" }],
-        },
-      ],
+      type: "string",
     },
+    // {
+    //   name: "rights",
+    //   title: "Rights",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       type: "reference",
+    //       to: [{ type: "right" }],
+    //     },
+    //   ],
+    // },
+    // {
+    //   name: "responsibilities",
+    //   title: "Responsibilities",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       type: "reference",
+    //       to: [{ type: "responsibility" }],
+    //     },
+    //   ],
+    // },
   ],
 };
 

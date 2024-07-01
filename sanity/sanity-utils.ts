@@ -120,7 +120,9 @@ export async function getRelatinoshipbyId(id: string): Promise<Relationship> {
         "slug": slug.current,
         name,
         responsibilityHolder[]->{"image": image.asset->url, name},
-        rightHolder[]->{"image": image.asset->url, name}
+        rightHolder[]->{"image": image.asset->url, name},
+        rights, 
+        responsibilities,
     }
     `,
     { id: id }

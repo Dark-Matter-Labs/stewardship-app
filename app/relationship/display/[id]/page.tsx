@@ -1,5 +1,6 @@
 "use client";
 import styles from "../../../component/Actant.module.css";
+import styles_r from "../../relationship.module.css";
 import Image from "next/image";
 import Navigation from "@/app/component/Navigation";
 import React, { useEffect } from "react";
@@ -19,6 +20,8 @@ const DisplayRelationship = () => {
   const [resbonsibilityHolders, setResbonsibilityHolders] = useState<Agent[]>(
     []
   );
+  const [rights, setRights] = useState("");
+  const [responsibilities, setResponsibilities] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -28,6 +31,8 @@ const DisplayRelationship = () => {
       setRelName(relationship.name);
       setRightHolders(relationship.rightHolder);
       setResbonsibilityHolders(relationship.responsibilityHolder);
+      setRights(relationship.rights);
+      setResponsibilities(relationship.responsibilities);
     }
     fetchData();
   }, [id]);
@@ -41,38 +46,52 @@ const DisplayRelationship = () => {
         myStyle={{}}
       ></Navigation>
       <main className="updateRelationship login">
-        <div>Relationship Name </div>
-        <h1>{relName}</h1>
+        <div className={styles_r.block}>
+          <strong className={styles_r.label}>Relationship Name </strong>
+          <h1>{relName}</h1>
+        </div>
 
-        <div>Rights Holder </div>
-        {rightHolders.map((holder) => (
-          <div key={holder.id}>
-            <div>{holder.name}</div>
-            <Image
-              width={45}
-              height={45}
-              priority
-              className={styles.actant_img}
-              alt={`actant image of ${holder.name}`}
-              src={holder.image}
-            />
-          </div>
-        ))}
+        <div className={styles_r.block}>
+          <strong className={styles_r.label}>Rights Holder </strong>
+          {rightHolders.map((holder) => (
+            <div key={holder.id}>
+              <div>{holder.name}</div>
+              <Image
+                width={45}
+                height={45}
+                priority
+                className={styles.actant_img}
+                alt={`actant image of ${holder.name}`}
+                src={holder.image}
+              />
+            </div>
+          ))}
+        </div>
 
-        <div>Resbonsibility Holder </div>
-        {resbonsibilityHolders.map((holder) => (
-          <div key={holder.id}>
-            <div>{holder.name}</div>
-            <Image
-              width={45}
-              height={45}
-              priority
-              className={styles.actant_img}
-              alt={`actant image of ${holder.name}`}
-              src={holder.image}
-            />
-          </div>
-        ))}
+        <div className={styles_r.block}>
+          <strong className={styles_r.label}>Resbonsibility Holder </strong>
+          {resbonsibilityHolders.map((holder) => (
+            <div key={holder.id}>
+              <div>{holder.name}</div>
+              <Image
+                width={45}
+                height={45}
+                priority
+                className={styles.actant_img}
+                alt={`actant image of ${holder.name}`}
+                src={holder.image}
+              />
+            </div>
+          ))}
+        </div>
+        <div className={styles_r.block}>
+          <strong className={styles_r.label}>Rights</strong>
+          <div>{rights}</div>
+        </div>
+        <div className={styles_r.block}>
+          <strong>Responsibilities</strong>
+          <div>{responsibilities}</div>
+        </div>
       </main>
     </>
   );

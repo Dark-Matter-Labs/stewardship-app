@@ -4,4 +4,6 @@ export type Relationship = {
   name: string;
   responsibilityHolder: any;
   rightHolder: any;
+  rights: string;
+  responsibilities: string;
 };

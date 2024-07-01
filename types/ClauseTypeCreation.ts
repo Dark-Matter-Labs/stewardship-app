@@ -17,18 +17,6 @@ export type ClauseTypeCreation = {
       _key: string;
     }
   ];
-  rights: [
-    {
-      _type: string;
-      _ref: string;
-      _key: string;
-    }
-  ];
-  responsibilities: [
-    {
-      _type: string;
-      _ref: string;
-      _key: string;
-    }
-  ];
+  rights: string;
+  responsibilities: string;
 };
