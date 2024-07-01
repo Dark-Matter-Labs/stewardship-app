@@ -7,7 +7,6 @@ import { getServerSession } from "next-auth/next";
 import { options } from "../../api/auth/[...nextauth]/options";
 import React from "react";
 import { getAgent, getClausesByAgent } from "@/sanity/sanity-utils";
-import Report from "@/app/component/Report";
 import { Clause as ClauseType } from "@/types/Clause";
 import { Agent } from "@/types/Agent";
 import Clause from "@/app/component/Clause";

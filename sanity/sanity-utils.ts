@@ -193,12 +193,19 @@ export async function updateReport(id: string, name: string, content: string) {
     .commit(); // Perform the patch and return a promise
 }
 
-export async function updateRelationship(id: string, name: string) {
+export async function updateRelationship(
+  id: string,
+  name: string,
+  rights: string,
+  responsibilities: string
+) {
   return client
     .patch(id) // Document ID to patch
     .set({
       name: name,
       slug: { _type: "slug", current: name.replace(/ /g, "-") },
+      rights,
+      responsibilities,
     }) // Shallow merge
     .commit(); // Perform the patch and return a promise
 }

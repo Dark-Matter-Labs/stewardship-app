@@ -11,11 +11,15 @@ const UpdateRelationship = () => {
   const params = useParams();
   const { id } = params;
   const [relName, setRelName] = useState("");
+  const [rights, setRights] = useState("");
+  const [responsibilities, setResponsibilities] = useState("");
 
   useEffect(() => {
     async function fetchData() {
       const relationship = await getRelatinoshipbyId(String(id));
       setRelName(relationship.name);
+      setRights(relationship.rights);
+      setResponsibilities(relationship.responsibilities);
     }
     fetchData();
   }, [id]);
@@ -23,7 +27,7 @@ const UpdateRelationship = () => {
   async function handleSummit(e: React.FormEvent) {
     e.preventDefault();
 
-    updateRelationship(String(id), relName);
+    updateRelationship(String(id), relName, rights, responsibilities);
     // call redirect
     router.push("/");
   }
@@ -49,6 +53,32 @@ const UpdateRelationship = () => {
             type="text"
             value={relName}
             onChange={(e) => setRelName(e.target.value)}
+            required
+          ></input>
+
+          <label>
+            <b>Rights</b>
+          </label>
+          <input
+            className="input"
+            placeholder="Rights"
+            id="rights"
+            type="text"
+            value={rights}
+            onChange={(e) => setRights(e.target.value)}
+            required
+          ></input>
+
+          <label>
+            <b>Responsibilities</b>
+          </label>
+          <input
+            className="input"
+            placeholder="Responsibilities"
+            id="responsibilities"
+            type="text"
+            value={responsibilities}
+            onChange={(e) => setResponsibilities(e.target.value)}
             required
           ></input>
 

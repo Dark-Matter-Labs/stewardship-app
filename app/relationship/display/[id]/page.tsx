@@ -25,9 +25,8 @@ const DisplayRelationship = () => {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("hello!!");
       const relationship = await getRelatinoshipbyId(String(id));
-      console.log("relationship: ", relationship);
+      // console.log("relationship: ", relationship);
       setRelName(relationship.name);
       setRightHolders(relationship.rightHolder);
       setResbonsibilityHolders(relationship.responsibilityHolder);
@@ -36,7 +35,7 @@ const DisplayRelationship = () => {
     }
     fetchData();
   }, [id]);
-  console.log("rightHolders: ", rightHolders);
+  // console.log("rightHolders: ", rightHolders);
   return (
     <>
       <Navigation
