@@ -5,7 +5,7 @@ config.autoAddCss = false;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-const imageSrc_actant = "/rainbow-trout.jpg";
+
 const Clause = ({
   caption = true,
   sign = false,

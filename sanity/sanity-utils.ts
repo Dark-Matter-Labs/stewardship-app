@@ -132,6 +132,7 @@ export async function getRelatinoshipbyId(id: string): Promise<Relationship> {
 export async function getReports(): Promise<Report[]> {
   return client.fetch(
     groq`*[_type == "report"]{
+        "id": _id,
         name,
         "slug": slug.current,
         type, 
@@ -139,6 +140,17 @@ export async function getReports(): Promise<Report[]> {
         reporter->{name, "image": image.asset->url},
         "image": image.asset->url,
     }`
+  );
+}
+
+export async function getReportbyId(id: string): Promise<Report> {
+  return client.fetch(
+    groq`*[_type == "report" && _id match $id][0]{
+    name, 
+    content, 
+    reporter->{name, "image": image.asset->url},"image": image.asset->url,}
+    `,
+    { id: id }
   );
 }
 
@@ -249,14 +261,6 @@ export async function getRelationshipIdbySlug(slug: string): Promise<string> {
 export async function getActantNamebyId(id: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "actant" && _id match $id][0].name
-    `,
-    { id: id }
-  );
-}
-
-export async function getReportbyId(id: string): Promise<Report> {
-  return client.fetch(
-    groq`*[_type == "report" && _id match $id][0]
     `,
     { id: id }
   );

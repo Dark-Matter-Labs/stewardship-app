@@ -29,14 +29,22 @@ const DisplayReport = () => {
         <div className="reports_wall ">
           {reports.map((report) => {
             return (
-              <div key={report.name} className="in_all_report">
-                <Report
-                  key={report.name}
-                  caption={true}
-                  sign={true}
-                  report={report}
-                />
-              </div>
+              <form
+                className="in_all_report"
+                key={report.id}
+                action={`/report/display/${report.id}`}
+              >
+                <button>
+                  <div key={report.name}>
+                    <Report
+                      key={report.name}
+                      caption={true}
+                      sign={true}
+                      report={report}
+                    />
+                  </div>
+                </button>
+              </form>
             );
           })}
         </div>

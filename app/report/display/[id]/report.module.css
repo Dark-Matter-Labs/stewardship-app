@@ -1,0 +1,14 @@
+.block {
+  margin-top: 2rem;
+}
+
+.reporter {
+  text-align: center;
+  padding: 1rem;
+}
+
+.reporter img {
+  border: 1px black solid;
+  margin: auto;
+  border-radius: 2rem;
+}
