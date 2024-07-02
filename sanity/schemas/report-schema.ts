@@ -60,8 +60,8 @@ const report = {
       to: [{ type: "agent" }],
     },
     {
-      name: "endorsor",
-      title: "Endorsor(s)",
+      name: "endorsers",
+      title: "Endorsers",
       type: "array",
       of: [
         {

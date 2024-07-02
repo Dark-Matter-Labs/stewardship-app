@@ -148,7 +148,10 @@ export async function getReportbyId(id: string): Promise<Report> {
     groq`*[_type == "report" && _id match $id][0]{
     name, 
     content, 
-    reporter->{name, "image": image.asset->url},"image": image.asset->url,}
+    "image": image.asset->url,
+    reporter->{name, "image": image.asset->url},
+    endorsers[]->{name, "image": image.asset->url},
+    }
     `,
     { id: id }
   );

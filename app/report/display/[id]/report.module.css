@@ -12,3 +12,10 @@
   margin: auto;
   border-radius: 2rem;
 }
+
+.endorser img {
+  border: 1px black solid;
+  margin: auto;
+  border-radius: 2rem;
+  margin-top: 1rem;
+}

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getReportbyId, updateReport } from "@/sanity/sanity-utils";
 import Image from "next/image";
+import { Endorser } from "@/types/Endorser";
 
 const DisplayReport = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const DisplayReport = () => {
   const [reportImage, setReportImage] = useState("/bg-placeholder.jpg");
   const [reporterImage, setReporterImage] = useState("/bg-placeholder.jpg");
   const [reporterName, setReporterName] = useState("");
+  const [endorsers, setEndorsers] = useState<Endorser[]>();
 
   useEffect(() => {
     async function fetchData() {
@@ -26,6 +28,7 @@ const DisplayReport = () => {
       setReportImage(report.image);
       setReporterImage(report.reporter.image);
       setReporterName(report.reporter.name);
+      setEndorsers(report.endorsers);
       console.log("report: ", report);
     }
     fetchData();
@@ -54,18 +57,34 @@ const DisplayReport = () => {
         </div>
 
         <div className={styles.reporter}>
-          <strong> Reporter</strong>
+          <strong>Reporter</strong>
           <Image
             src={reporterImage}
             width={65}
             height={65}
-            className={styles.reporterImage}
             alt="reporter image"
           />
           <div>{reporterName}</div>
         </div>
+
+        <div className={styles.endorser}>
+          <strong>Endorsers</strong>
+          {endorsers?.map((endorser) => {
+            return (
+              <>
+                <Image
+                  key={endorser.name}
+                  src={endorser.image}
+                  width={65}
+                  height={65}
+                  alt="endorser image"
+                />
+              </>
+            );
+          })}
+        </div>
         <button className="button primary">
-          <span> Update Report </span>
+          <span>Endorse</span>
         </button>
       </main>
     </>

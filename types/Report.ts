@@ -1,4 +1,5 @@
 import { Clause } from "./Clause";
+import { Endorser } from "./Endorser";
 import { Reporter } from "./Reporter";
 
 export type Report = {
@@ -9,4 +10,5 @@ export type Report = {
   clause: Clause;
   content: string;
   reporter: Reporter;
+  endorsers: Endorser[];
 };
