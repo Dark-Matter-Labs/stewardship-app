@@ -5,11 +5,7 @@ import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  endorseReport,
-  getReportbyId,
-  isReporterMatching,
-} from "@/sanity/sanity-utils";
+import { endorseReport, getReportbyId } from "@/sanity/sanity-utils";
 import Image from "next/image";
 import { Endorser } from "@/types/Endorser";
 
@@ -43,19 +39,15 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
     fetchData();
   }, [id, sessionId, isReporterMatching]);
 
+  useEffect(() => {
+    const endorserExists = endorsers?.some(
+      (endorser) => endorser.id === sessionId
+    );
+    setIsEndorserMatching(endorserExists ? true : false);
+  }, [endorsers, sessionId]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // if (!endorsers) {
-    //   // Be first endorser
-    //   try {
-    //     await endorseReport(String(id), sessionId);
-    //   } catch (e) {
-    //     alert(e);
-    //   }
-    // } else {
-    //   // Insert your profile to the endorser's list
-    // }
 
     try {
       await endorseReport(String(id), sessionId);
@@ -94,7 +86,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
         {endorsers?.map((endorser) => {
           return (
             <Image
-              key={endorser.name}
+              key={endorser.id}
               src={endorser.image}
               width={65}
               height={65}
@@ -103,7 +95,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
           );
         })}
       </div>
-      {!isReporterMatching && (
+      {!isReporterMatching && !isEndorserMatching && (
         <form onSubmit={handleSubmit}>
           <button className="button primary">
             <span>Endorse</span>

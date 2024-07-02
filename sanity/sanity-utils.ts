@@ -150,7 +150,7 @@ export async function getReportbyId(id: string): Promise<Report> {
     content, 
     "image": image.asset->url,
     reporter->{"id": _id, name, "image": image.asset->url},
-    endorsers[]->{name, "image": image.asset->url},
+    endorsers[]->{"id": _id, name, "image": image.asset->url},
     }
     `,
     { id: id }
@@ -169,18 +169,6 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
         "image": image.asset->url,
     }`,
     { agent: agent }
-  );
-}
-
-export async function isReporterMatching(
-  report_id: string,
-  reporterRef: string
-) {
-  return client.fetch(
-    groq`*[_id == $report_id && reporter._ref == $reporterRef] {
-      reporter._ref
-    }`,
-    { report_id, reporterRef }
   );
 }
 
