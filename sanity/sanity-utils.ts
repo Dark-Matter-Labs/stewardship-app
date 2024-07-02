@@ -149,7 +149,7 @@ export async function getReportbyId(id: string): Promise<Report> {
     name, 
     content, 
     "image": image.asset->url,
-    reporter->{name, "image": image.asset->url},
+    reporter->{"id": _id, name, "image": image.asset->url},
     endorsers[]->{name, "image": image.asset->url},
     }
     `,
@@ -169,6 +169,18 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
         "image": image.asset->url,
     }`,
     { agent: agent }
+  );
+}
+
+export async function isReporterMatching(
+  report_id: string,
+  reporterRef: string
+) {
+  return client.fetch(
+    groq`*[_id == $report_id && reporter._ref == $reporterRef] {
+      reporter._ref
+    }`,
+    { report_id, reporterRef }
   );
 }
 
@@ -206,6 +218,32 @@ export async function updateReport(id: string, name: string, content: string) {
       slug: { _type: "slug", current: name.replace(/ /g, "-") },
     }) // Shallow merge
     .commit(); // Perform the patch and return a promise
+}
+
+export async function _endorseReport(report_id: string, endorser_id: string) {
+  return client
+    .patch(report_id) // Document ID to patch
+    .setIfMissing({
+      endorsers: [
+        { _type: "reference", _ref: endorser_id, _key: genRanHex(12) },
+      ],
+    })
+    .commit();
+}
+export async function endorseReport(report_id: string, endorser_id: string) {
+  const newEndorser = {
+    _type: "reference",
+    _ref: endorser_id,
+    _key: genRanHex(12),
+  };
+  return client
+    .transaction()
+    .patch(report_id, (patch) =>
+      patch
+        .setIfMissing({ endorsers: [] })
+        .insert("after", " endorsers[-1]", [newEndorser])
+    )
+    .commit();
 }
 
 export async function updateRelationship(

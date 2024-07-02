@@ -4,6 +4,8 @@ import Navigation from "../component/Navigation";
 import Report from "../component/Report";
 import { getReports } from "@/sanity/sanity-utils";
 import { Report as ReportType } from "@/types/Report";
+import { getServerSession } from "next-auth/next";
+import { options } from "../api/auth/[...nextauth]/options";
 
 const DisplayReport = () => {
   const [reports, setListOfReports] = useState<ReportType[]>([]);
