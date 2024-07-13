@@ -29,13 +29,17 @@ export default async function Actants({
   return (
     <>
       {actants.map((actant: ActantType) => (
-        <Actant
-          key={actant.name}
-          showName={showName}
-          name={actant.name ? actant.name : ""}
-          imageSrc={actant.image ? actant.image + "" : "/rainbow-trout.jpg"}
-          agentImageSrc={agentImg ? agentImg[0].image : ""}
-        />
+        <form key={actant.id} action={`/actant/display/${actant.id}`}>
+          <button key={actant.id}>
+            <Actant
+              key={actant.name}
+              showName={showName}
+              name={actant.name ? actant.name : ""}
+              imageSrc={actant.image ? actant.image + "" : "/rainbow-trout.jpg"}
+              agentImageSrc={agentImg ? agentImg[0].image : ""}
+            />
+          </button>{" "}
+        </form>
       ))}
     </>
   );

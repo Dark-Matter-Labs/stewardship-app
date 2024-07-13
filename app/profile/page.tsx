@@ -82,22 +82,11 @@ const UsersPage = async () => {
             <section className="profile_content">
               <Tabs variant="soft-rounded" colorScheme="brand">
                 <TabList>
-                  <Tab>Reports</Tab>
                   <Tab>Actants</Tab>
-                  <Tab>Clauses</Tab>
+                  <Tab>Relatinoship</Tab>
+                  <Tab>Reports</Tab>
                 </TabList>
                 <TabPanels>
-                  <TabPanel>
-                    {/* Reports */}
-                    <p>Thank you for making these reports.</p>
-                    <div className="reports_grid">
-                      <Reports
-                        caption={true}
-                        sign={true}
-                        agent={sessionName}
-                      ></Reports>
-                    </div>
-                  </TabPanel>
                   <TabPanel>
                     {/* Badges */}
                     <div>
@@ -115,13 +104,17 @@ const UsersPage = async () => {
                         sign={true}
                         agent={sessionName}
                       ></Clauses>
-                      {/* <Clause caption={false} sign={true}></Clause>
-                    <Clause caption={false} sign={true}></Clause>
-                    <Clause caption={false} sign={true}></Clause>
-                    <Clause caption={false} sign={true}></Clause>
-                    <Clause caption={false} sign={true}></Clause>
-                    <Clause caption={false} sign={true}></Clause>
-                    <Clause caption={false} sign={true}></Clause> */}
+                    </div>
+                  </TabPanel>
+                  <TabPanel>
+                    {/* Reports */}
+                    <p>Thank you for making these reports.</p>
+                    <div className="reports_grid">
+                      <Reports
+                        caption={true}
+                        sign={true}
+                        agent={sessionName}
+                      ></Reports>
                     </div>
                   </TabPanel>
                 </TabPanels>

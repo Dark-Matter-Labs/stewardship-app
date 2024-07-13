@@ -22,21 +22,25 @@ export default async function Clauses({
     <>
       {clauses.map((clause) => {
         return (
-          <Clause
-            key={clause.name}
-            caption={caption}
-            sign={sign}
-            resImgUrl={
-              clause.responsibilityHolder?.image
-                ? clause.responsibilityHolder.image
-                : ""
-            }
-            rigImgUrl={
-              clause.rightHolder?.image ? clause.rightHolder.image : ""
-            }
-          >
-            {`${clause.name} `}
-          </Clause>
+          <form key={clause.id} action={`/relationship/display/${clause.id}`}>
+            <button>
+              <Clause
+                key={clause.name}
+                caption={caption}
+                sign={sign}
+                resImgUrl={
+                  clause.responsibilityHolder?.image
+                    ? clause.responsibilityHolder.image
+                    : ""
+                }
+                rigImgUrl={
+                  clause.rightHolder?.image ? clause.rightHolder.image : ""
+                }
+              >
+                {`${clause.name} `}
+              </Clause>
+            </button>
+          </form>
         );
       })}
     </>

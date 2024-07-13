@@ -20,12 +20,18 @@ export default async function Reports({
   return (
     <>
       {reports.map((report) => (
-        <Report
-          key={report.name}
-          caption={caption}
-          sign={sign}
-          report={report}
-        />
+        <>
+          <form key={report.id} action={`/report/display/${report.id}`}>
+            <button>
+              <Report
+                key={report.name}
+                caption={caption}
+                sign={sign}
+                report={report}
+              />
+            </button>
+          </form>
+        </>
       ))}
     </>
   );
