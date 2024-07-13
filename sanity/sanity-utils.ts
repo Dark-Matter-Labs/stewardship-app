@@ -295,6 +295,18 @@ export async function getActantNamebyId(id: string): Promise<string> {
   );
 }
 
+export async function getActantbyId(id: string): Promise<Actant> {
+  return client.fetch(
+    groq`*[_type == "actant" && _id match $id][0]{
+     "id": _id,
+        name,
+        slug,  
+        "image": image.asset->url,}
+    `,
+    { id: id }
+  );
+}
+
 export async function getAgentIdbyName(name: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "agent" && name match $name][0]._id

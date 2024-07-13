@@ -29,13 +29,18 @@ const DisplayActants = () => {
         <p>These are all the actants in the network.</p>
         <div className="actants_scroller update">
           {actants.map((actant: ActantType) => (
-            <Actant
-              key={actant.name}
-              showName={true}
-              name={actant.name ? actant.name : ""}
-              imageSrc={actant.image ? actant.image + "" : "/rainbow-trout.jpg"}
-              agentImageSrc={""}
-            />
+            <form key={actant.id} action={`/actant/display/${actant.id}`}>
+              <button key={actant.id}>
+                <Actant
+                  showName={true}
+                  name={actant.name ? actant.name : ""}
+                  imageSrc={
+                    actant.image ? actant.image + "" : "/rainbow-trout.jpg"
+                  }
+                  agentImageSrc={""}
+                />
+              </button>
+            </form>
           ))}
         </div>
         <form action="/actant/update">
