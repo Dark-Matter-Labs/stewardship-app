@@ -9,6 +9,7 @@ export type Report = {
   image: string;
   clause: Clause;
   content: string;
+  type: string;
   reporter: Reporter;
   endorsers: Endorser[];
 };

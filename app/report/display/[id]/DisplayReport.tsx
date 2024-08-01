@@ -15,6 +15,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
   const { id } = params;
   const [reportName, setReportName] = useState("");
   const [reportContent, setReportContent] = useState("");
+  const [reportType, setReportType] = useState("");
   const [reportImage, setReportImage] = useState("/bg-placeholder.jpg");
   const [reporterImage, setReporterImage] = useState("/bg-placeholder.jpg");
   const [reporterName, setReporterName] = useState("");
@@ -28,6 +29,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
       setReportName(report.name);
       setReportContent(report.content);
       setReportImage(report.image);
+      setReportType(report.type);
       setReporterImage(report.reporter.image);
       setReporterName(report.reporter.name);
 
@@ -67,6 +69,10 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
         <div>{reportName}</div>
       </div>
       <Image src={reportImage} width={450} height={145} alt="report image" />
+      <div className={styles.block}>
+        <strong>Report Type</strong>
+        <div>{reportType}</div>
+      </div>
       <div className={styles.block}>
         <strong>Report Content</strong>
         <div>{reportContent}</div>
