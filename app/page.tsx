@@ -79,11 +79,9 @@ export default async function Home() {
                 Actants are things or beings recognised by agents in this
                 network.
               </p>
-              <>
-                <div className="actants_scroller">
-                  <Actants showName={true} agent="" />
-                </div>
-              </>
+              <div className="actants_scroller update">
+                <Actants showName={true} agent="" />
+              </div>
               <form action="/actant">
                 <button className="button primary">All Actants</button>
               </form>

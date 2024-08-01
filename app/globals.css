@@ -199,6 +199,7 @@ section {
   flex-wrap: nowrap;
   overflow-x: auto;
   background-color: white;
+  /* border: #c34034 solid 1px; */
 }
 
 .actants_everything {
@@ -596,6 +597,7 @@ input[type="file"] {
     margin: 2.5rem auto;
     width: fit-content;
     max-width: 80%;
+    /* border: 1px solid black; */
   }
 
   .theme_header img {
