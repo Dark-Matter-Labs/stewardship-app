@@ -78,7 +78,7 @@ const page = async () => {
                     <span>Update</span>
                   </button>
                 </form>
-                {/* <form
+                <form
                   className="function_button"
                   action={`/relationship/remove/${relationship.slug}`}
                 >
@@ -86,7 +86,7 @@ const page = async () => {
                     <FontAwesomeIcon icon={faTrash} />
                     <span>Remove</span>
                   </button>
-                </form> */}
+                </form>
               </div>
             </div>
           ))}
