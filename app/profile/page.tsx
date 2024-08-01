@@ -83,7 +83,7 @@ const UsersPage = async () => {
               <Tabs variant="soft-rounded" colorScheme="brand">
                 <TabList>
                   <Tab>Actants</Tab>
-                  <Tab>Relatinoship</Tab>
+                  <Tab>Relationship</Tab>
                   <Tab>Reports</Tab>
                 </TabList>
                 <TabPanels>

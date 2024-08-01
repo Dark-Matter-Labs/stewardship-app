@@ -42,7 +42,7 @@ export default async function Home() {
         <>
           <Navigation
             left="Profile"
-            title="Stewardship"
+            title="Stewardship App"
             right="Log Out"
             myStyle={{}}
           ></Navigation>
