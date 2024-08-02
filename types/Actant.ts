@@ -3,4 +3,7 @@ export type Actant = {
   name: string;
   slug: string;
   image: string;
+  agents: Array<{
+    _ref: string
+  }>;
 };
