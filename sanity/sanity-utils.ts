@@ -24,7 +24,8 @@ export async function getAllActants(): Promise<Actant[]> {
     groq`*[_type == "actant"]{
         "id": _id,
         name,
-        "image": image.asset->url
+        "image": image.asset->url,
+        agents
     }`
   );
 }
