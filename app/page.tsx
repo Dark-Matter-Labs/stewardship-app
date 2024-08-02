@@ -1,4 +1,3 @@
-// "use client";
 import Navigation from "./component/Navigation";
 import Actants from "./component/Actants";
 import ForceLayoutGraph from "./component/ForceLayoutGraph";
@@ -47,7 +46,7 @@ export default async function Home() {
             myStyle={{}}
           ></Navigation>
           <div className="theme_header graph-network">
-            {/* <ForceLayoutGraph></ForceLayoutGraph> */}
+            <ForceLayoutGraph></ForceLayoutGraph>
           </div>
           <main className="feed">
             <div className="greeting">
