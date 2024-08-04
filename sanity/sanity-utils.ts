@@ -78,11 +78,11 @@ export async function getAgentImageByName(name: string): Promise<Agent[]> {
   );
 }
 
-export async function getAgentIdByName(name: string): Promise<Agent> {
+export async function getAgentIdByName(name: string): Promise<String> {
   return client.fetch(
     groq`*[_type == "agent" &&  name match $name][0]{
   "id": _id,
-}`,
+}.id`,
     { name: name }
   );
 }

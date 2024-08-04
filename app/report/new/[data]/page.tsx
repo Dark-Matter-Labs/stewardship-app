@@ -7,8 +7,6 @@ import { options } from "../../../api/auth/[...nextauth]/options";
 import { getAgent, getAgentIdbyName } from "@/sanity/sanity-utils";
 import { useParams } from "next/navigation";
 import { Agent } from "@/types/Agent";
-let sessionName = "name";
-let sessionEmail = "email@email.com";
 
 const CreateReport: React.FC = () => {
   const params = useParams();
@@ -29,7 +27,7 @@ const CreateReport: React.FC = () => {
       ></Navigation>
       <main className="addclause">
         <h1>Create Report</h1>
-        <CreateForm relId={id} sessionName={sessionName}></CreateForm>
+        <CreateForm relId={id} sessionName={name}></CreateForm>
       </main>
     </>
   );

@@ -22,12 +22,16 @@ export default function CreateForm({
   sessionName: string;
 }) {
   const router = useRouter();
+  console.log("hello");
   let [clauses, setClauses] = useState<ClauseType[]>([]);
-  let [id, setId] = useState<Agent>();
+  let [id, setId] = useState<String>();
   let [selectedImageSrc, setSelectedImageSrc] = useState("no file chosen");
   const [selectedClauseId, setSelectedClauseId] = useState<string | undefined>(
     relId
   );
+
+  console.log("the relId CreateForm' gets is: ", relId);
+  console.log("the sessionName CreateForm' gets is: ", sessionName);
 
   useEffect(() => {
     async function fetchData() {
@@ -38,10 +42,14 @@ export default function CreateForm({
       setSelectedClauseId(relId);
     }
     fetchData();
-  }, [sessionName, relId]);
+    console.log("updated");
+  }, [relId, sessionName]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    console.log("the clause selcted is: ", selectedClauseId);
+    console.log("the sessionId before submitting is: ", id);
 
     if (e.currentTarget.reportImage.files[0] == null) {
       alert("please upload image");
@@ -59,9 +67,9 @@ export default function CreateForm({
     const reportType = e.currentTarget.reportType.value;
     console.log("report type: ", reportType);
 
-    // Retrieve clause
-    const clauseId = e.currentTarget.clauseId.value;
-    console.log("clause id: ", clauseId);
+    // // Retrieve clause
+    // const clauseId = e.currentTarget.clauseId.value;
+    // console.log("clause id: ", clauseId);
 
     // Retrieve content
     const reportContent = e.currentTarget.reportContentId.value;
@@ -102,8 +110,6 @@ export default function CreateForm({
 
     // Create report
     try {
-      console.log("creating report...", report);
-
       await createReport(report);
     } catch (e) {
       console.log("error: ", e);
