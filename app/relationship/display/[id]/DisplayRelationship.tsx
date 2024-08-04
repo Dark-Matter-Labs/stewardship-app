@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { getRelatinoshipbyId } from "@/sanity/sanity-utils";
 import { Actant } from "@/types/Actant";
 import { Agent } from "@/types/Agent";
+import Link from "next/link";
 
 type DisplayRelationshipProps = {
   name: string;
@@ -85,7 +86,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
                 src={holder.image}
               />
               {name == holder.name && (
-                <form action="">
+                <form action={`/report/new/${id}-${name}`}>
                   <button className="button primary">Create Report</button>
                 </form>
               )}
