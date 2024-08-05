@@ -50,15 +50,15 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
         myStyle={{}}
       ></Navigation>
       <main className="updateRelationship login">
-        <div className={styles_r.block}>
+        <div key="name" className={styles_r.block}>
           <strong className={styles_r.label}>Relationship Name </strong>
           <h1>{relName}</h1>
         </div>
 
-        <div className={styles_r.block}>
+        <div key="rholder" className={styles_r.block}>
           <strong className={styles_r.label}>Rights Holder </strong>
-          {rightHolders.map((holder) => (
-            <div key={holder.id}>
+          {rightHolders.map((holder, index) => (
+            <div key={index}>
               <div>{holder.name}</div>
               <Image
                 width={45}
@@ -74,8 +74,8 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
 
         <div className={styles_r.block}>
           <strong className={styles_r.label}>Resbonsibility Holder </strong>
-          {resbonsibilityHolders.map((holder) => (
-            <div key={holder.id}>
+          {resbonsibilityHolders.map((holder, index) => (
+            <div key={index}>
               <div>{holder.name}</div>
               <Image
                 width={45}

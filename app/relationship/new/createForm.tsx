@@ -52,18 +52,30 @@ export default function CreateForm() {
     const resHolderId = e.currentTarget.responsibilityHolder.value;
     console.log("responsibility holder: ", resHolderId);
 
+    // Retrieve responsibility holder (multiple selection)
+    const resHolderOptions =
+      e.currentTarget.responsibilityHolder.selectedOptions;
+
+    console.log(">>>resHolderOptions: ", resHolderOptions);
+    alert(resHolderOptions);
+    const resHolderIds = Array.from(resHolderOptions).map(
+      (option: any) => option.value
+    );
+    console.log("responsibility holders: ", resHolderIds);
+
     // Retrieve right holder
     const rigHolderId = e.currentTarget.rightHolder.value;
     console.log("right holder: ", resHolderId);
 
-    // // Retrieve right
-    // const rightId = e.currentTarget.right.value;
-    // console.log("right: ", rightId);
+    // Retrieve responsibility holder (multiple selection)
+    const rigHolderOptions = e.currentTarget.rightHolder.selectedOptions;
 
-    // // Retrieve responsibility
-    // const responsibilityId = e.currentTarget.responsibility.value;
-    // console.log("responsibility: ", responsibilityId);
+    console.log(">>>rigHolderOptions: ", rigHolderOptions);
 
+    const rigHolderIds = Array.from(rigHolderOptions).map(
+      (option: any) => option.value
+    );
+    console.log("right holders: ", rigHolderIds);
     // Retrieve  right
     const rights = e.currentTarget.rights.value;
     console.log("rights: ", rights);
@@ -76,20 +88,32 @@ export default function CreateForm() {
     const clause: ClauseTypeCreation = {
       _type: "clause",
       name: name,
-      responsibilityHolder: [
-        {
-          _type: "reference",
-          _ref: resHolderId,
-          _key: genRanHex(12),
-        },
-      ],
-      rightHolder: [
-        {
-          _type: "reference",
-          _ref: rigHolderId,
-          _key: genRanHex(12),
-        },
-      ],
+      // responsibilityHolder: [
+      //   {
+      //     _type: "reference",
+      //     _ref: resHolderId,
+      //     _key: genRanHex(12),
+      //   },
+      // ],
+      responsibilityHolder: resHolderIds.map((resId) => ({
+        _type: "reference",
+        _ref: resId,
+        _key: genRanHex(12),
+      })),
+
+      // rightHolder: [
+      //   {
+      //     _type: "reference",
+      //     _ref: rigHolderId,
+      //     _key: genRanHex(12),
+      //   },
+      // ],
+      rightHolder: rigHolderIds.map((rigId) => ({
+        _type: "reference",
+        _ref: rigId,
+        _key: genRanHex(12),
+      })),
+
       rights: rights,
       responsibilities: responsibilities,
       // rights: [
@@ -138,7 +162,11 @@ export default function CreateForm() {
               <label>Responsibility Holder</label>
             </div>
 
-            <select id="responsibilityHolder" name="Responsibility holder">
+            <select
+              id="responsibilityHolder"
+              name="Responsibility holder"
+              multiple={true}
+            >
               {agents.map((agent: AgentType) => (
                 <option key={agent.id} value={agent.id}>
                   {agent.name}
@@ -151,7 +179,7 @@ export default function CreateForm() {
               <label>Right Holder</label>
             </div>
 
-            <select id="rightHolder" name="Right holder">
+            <select id="rightHolder" name="Right holder" multiple={true}>
               {actants.map((actant: ActantType) => (
                 <option key={actant.id} value={actant.id}>
                   {actant.name}
