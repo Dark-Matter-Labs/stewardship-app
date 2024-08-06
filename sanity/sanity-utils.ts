@@ -245,6 +245,26 @@ export async function endorseReport(report_id: string, endorser_id: string) {
     .commit();
 }
 
+export async function unendorseReport(report_id: string, endorser_id: string) {
+  // const jsonPath = `endorsers["_key"=="${endorser_id}"]`;
+  const jsonPath = `endorsers[_ref=="${endorser_id}"]`;
+  // console.log("Constructed JSON Path:", jsonPath);
+  return client
+    .transaction()
+    .patch(report_id, (patch) => patch.unset([jsonPath]))
+    .commit()
+    .then((updatedDocument) => {
+      console.log("Endorser removed:", updatedDocument);
+
+      return updatedDocument;
+    })
+    .catch((error) => {
+      console.error("Failed to remove endorser:", error);
+    });
+}
+
+// unset: ["person.id == 13"];
+
 export async function updateRelationship(
   id: string,
   name: string,

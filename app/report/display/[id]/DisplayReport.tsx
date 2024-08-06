@@ -5,7 +5,11 @@ import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { endorseReport, getReportbyId } from "@/sanity/sanity-utils";
+import {
+  endorseReport,
+  getReportbyId,
+  unendorseReport,
+} from "@/sanity/sanity-utils";
 import Image from "next/image";
 import { Endorser } from "@/types/Endorser";
 
@@ -48,7 +52,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
     setIsEndorserMatching(endorserExists ? true : false);
   }, [endorsers, sessionId]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEndorseSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -59,6 +63,20 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
 
     // Refresh
     window.location.reload();
+  };
+
+  const handleUnendorseSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      alert(`${id}, ${sessionId}`);
+      await unendorseReport(String(id), sessionId);
+    } catch (e) {
+      alert(e);
+    }
+
+    // Refresh
+    // window.location.reload();
   };
 
   return (
@@ -102,9 +120,16 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
         })}
       </div>
       {!isReporterMatching && !isEndorserMatching && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleEndorseSubmit}>
           <button className="button primary">
             <span>Endorse</span>
+          </button>
+        </form>
+      )}
+      {isEndorserMatching && (
+        <form onSubmit={handleUnendorseSubmit}>
+          <button className="button warning">
+            <span>Unendorse</span>
           </button>
         </form>
       )}
