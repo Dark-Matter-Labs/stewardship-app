@@ -31,6 +31,3 @@ const Page = async () => {
 
 export default Page;
 
-type DisplayRelationshipProps = {
-  name: string;
-};

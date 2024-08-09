@@ -69,14 +69,14 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
     e.preventDefault();
 
     try {
-      alert(`${id}, ${sessionId}`);
+      // alert(`${id}, ${sessionId}`);
       await unendorseReport(String(id), sessionId);
     } catch (e) {
       alert(e);
     }
 
     // Refresh
-    // window.location.reload();
+    window.location.reload();
   };
 
   return (
