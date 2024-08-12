@@ -28,6 +28,7 @@ export default function ForceLayoutGraph(): JSX.Element {
       setAgents(listOfAgents);
 
       let listOfClauses = await getAllClauses();
+      // @ts-ignore 
       setClauses(listOfClauses);
     }
     fetchData();
@@ -94,15 +95,16 @@ export default function ForceLayoutGraph(): JSX.Element {
       });
 
       clauses.map((clause) => {
-        console.log(clause.name)
         nodesCopy.push(
           {
+            // @ts-ignore 
             id: clause.name,
             color: "#000000",
           });
         });
 
       clauses.map((clause) => {
+        // @ts-ignore 
         clause.responsibilityHolder.map((respHold) => {
             resultAgent = agents.find(({ id }) => id === respHold._ref)!;
             // resultActant = actants.find(({ id }) => id === rightHold._ref)!;
@@ -111,6 +113,7 @@ export default function ForceLayoutGraph(): JSX.Element {
               linksCopy.push(
                 {
                   source: resultAgent.name,
+                  // @ts-ignore 
                   target: clause.name,
                   chapter: ""
                 }
@@ -122,6 +125,7 @@ export default function ForceLayoutGraph(): JSX.Element {
       });
 
       clauses.map((clause) => {
+        // @ts-ignore 
         clause.rightHolder.map((rightHold) => {
            // resultAgent = agents.find(({ id }) => id === respHold._ref)!;
              resultActant = actants.find(({ id }) => id === rightHold._ref)!;
@@ -130,6 +134,7 @@ export default function ForceLayoutGraph(): JSX.Element {
               linksCopy.push(
                 {
                   source: resultActant.name,
+                  // @ts-ignore 
                   target: clause.name,
                   chapter: ""
                 }
@@ -149,7 +154,7 @@ export default function ForceLayoutGraph(): JSX.Element {
       //     }
       //   )
       // })
-
+      // @ts-ignore 
        eventsCopy = {
         [Graph.selectors.link]: {
             click: (d: GraphLink) => {
@@ -182,6 +187,7 @@ export default function ForceLayoutGraph(): JSX.Element {
         nodeFill={useCallback((n: NodeDatum) => n.color, [])}
         nodeLabel={useCallback((n: { id: any }) => n.id, [])}
         nodeSize={40}
+        // @ts-ignore 
         events={events}
       />
     </VisSingleContainer>
