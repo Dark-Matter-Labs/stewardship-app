@@ -1,14 +1,25 @@
+"use client";
 // import { getServerSession } from "next-auth";
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { options } from "../api/auth/[...nextauth]/options";
 import Navigation from "../component/Navigation";
 
 import Clause from "../component/Clause";
 import { getClauses } from "@/sanity/sanity-utils";
+import { Clause as ClauseType } from "@/types/Clause";
 
-const Relationship = async () => {
+const Relationship = () => {
   //   const session = await getServerSession(options);
-  const clauses = await getClauses();
+  const [clauses, setClauses] = useState<ClauseType[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const allRelationships = await getClauses();
+      setClauses(allRelationships);
+    }
+    fetchData();
+  }, []);
+  // const clauses = await getClauses();
   console.log(clauses);
   return (
     <>
