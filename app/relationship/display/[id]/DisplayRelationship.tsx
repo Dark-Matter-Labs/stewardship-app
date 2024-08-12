@@ -71,7 +71,10 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
             </div>
           ))}
         </div>
-
+        <div className={styles_r.block}>
+          <strong className={styles_r.label}>Rights</strong>
+          <div>{rights}</div>
+        </div>
         <div className={styles_r.block}>
           <strong className={styles_r.label}>Resbonsibility Holder </strong>
           {resbonsibilityHolders.map((holder, index) => (
@@ -93,10 +96,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
             </div>
           ))}
         </div>
-        <div className={styles_r.block}>
-          <strong className={styles_r.label}>Rights</strong>
-          <div>{rights}</div>
-        </div>
+
         <div className={styles_r.block}>
           <strong>Responsibilities</strong>
           <div>{responsibilities}</div>
