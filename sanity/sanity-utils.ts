@@ -110,6 +110,17 @@ export async function getClauses(): Promise<Clause[]> {
   );
 }
 
+export async function getAllClauses(): Promise<Clause[]> {
+  return client.fetch(
+    groq`*[_type == "clause"]{
+        "id": _id,
+        name,
+        responsibilityHolder,
+        rightHolder,
+    }`
+  );
+}
+
 export async function getClausesByAgent(agent: string): Promise<Clause[]> {
   return client.fetch(
     groq`*[_type == "clause" && references(*[_type == "agent" &&  name match $name]._id) ]{
