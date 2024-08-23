@@ -63,45 +63,55 @@ export default function ForceLayoutGraph(): JSX.Element {
       agents: []
     };
 
+    clauses.map((clause) => {
+      nodesCopy.push(
+        {
+          // @ts-ignore 
+          id: clause.name,
+          color: "#000000",
+          group: 3
+        });
+      });
+
+      actants.map((actant) => {
+        nodesCopy.push(
+          {
+            id: actant.name,
+            color: "#277da1",
+               group: 2
+          });
+        });
+
     agents.map((agent) => {
       nodesCopy.push(
         {
           id: agent.name,
           color: "#DA8383",
+          group: 1
         });
       });
 
     actants.map((actant) => {
-      nodesCopy.push(
-        {
-          id: actant.name,
-          color: "#277da1",
-        });
 
         
 
-      //   if(actant.agents && agents.length > 0){
-      //     actant.agents.map((link) => {
-      //       result = agents.find(({ id }) => id === link._ref)!;
-      //       linksCopy.push(
-      //       {
-      //         source: actant.name,
-      //         target: result.name,
-      //         chapter: ""
-      //       }
-      //       )
-      //     })
-      //   }
+        if(actant.agents && agents.length > 0){
+          actant.agents.map((link) => {
+            result = agents.find(({ id }) => id === link._ref)!;
+            linksCopy.push(
+            {
+              source: result.name,
+              target: actant.name,
+              chapter: "",
+              color: '#a2bbb7',
+              style: 'dashed'
+            }
+            )
+          })
+        }
       });
 
-      clauses.map((clause) => {
-        nodesCopy.push(
-          {
-            // @ts-ignore 
-            id: clause.name,
-            color: "#000000",
-          });
-        });
+     
 
       clauses.map((clause) => {
         // @ts-ignore 
@@ -115,7 +125,9 @@ export default function ForceLayoutGraph(): JSX.Element {
                   source: resultAgent.name,
                   // @ts-ignore 
                   target: clause.name,
-                  chapter: ""
+                  chapter: "",
+                  color: '#a2bbb7',
+                   style: 'solid'
                 }
               );
             }
@@ -133,10 +145,13 @@ export default function ForceLayoutGraph(): JSX.Element {
             if(resultActant){
               linksCopy.push(
                 {
-                  source: resultActant.name,
+                   // @ts-ignore 
+                  source: clause.name,
                   // @ts-ignore 
-                  target: clause.name,
-                  chapter: ""
+                  target: resultActant.name,
+                  chapter: "",
+                  color: '#e4adad',
+                   style: 'solid'
                 }
               );
             }
@@ -147,21 +162,25 @@ export default function ForceLayoutGraph(): JSX.Element {
 
 
 
-      // clauses.map((clause) => {
-      //   eventsCopy.push(
-      //     {
-      //       cla
-      //     }
-      //   )
-      // })
+      clauses.map((clause) => {
+        eventsCopy.push(
+           // @ts-ignore 
+          {
+            [Graph.selectors.node]: {
+               // @ts-ignore 
+                click: (d: NodeDatum) => {
+                    // @ts-ignore 
+                    if(d.id == clause.name) {
+                      // @ts-ignore 
+                      router.push('/relationship/display/'+clause.id)
+                    }
+                    }
+                    
+            },
+          }
+        )
+      })
       // @ts-ignore 
-       eventsCopy = {
-        [Graph.selectors.link]: {
-            click: (d: GraphLink) => {
-              router.push('/relationship/display/6c3cde57-824f-4d68-8001-3bb0631f673b')
-             }
-        },
-      }
 
       
 
@@ -170,25 +189,30 @@ export default function ForceLayoutGraph(): JSX.Element {
     setEvents(eventsCopy)
   },[actants, agents, clauses]);
   
-  const forceLayoutSettings: GraphForceLayoutSettings = {
-    forceXStrength: 0.1,
-    forceYStrength: 0.4,
-    charge: -700,
-  };
+  // const forceLayoutSettings: GraphForceLayoutSettings = {
+  //   forceXStrength: 0.1,
+  //   forceYStrength: 0.4,
+  //   charge: -700,
+  // };
+
+  const layoutNodeGroup = (d: NodeDatum) => d.group;
+
   return (
     <VisSingleContainer data={{ nodes, links }} height={"60vh"}>
       <VisGraph<NodeDatum, LinkDatum>
-        layoutType={GraphLayoutType.Force}
-        forceLayoutSettings={useMemo(
-          () => forceLayoutSettings,
-          [forceLayoutSettings]
-        )}
+        layoutType="concentric"
+         // @ts-ignore 
+        layoutNodeGroup={layoutNodeGroup}
         linkLabel={useCallback((l: LinkDatum) => ({ text: l.chapter }), [])}
         nodeFill={useCallback((n: NodeDatum) => n.color, [])}
         nodeLabel={useCallback((n: { id: any }) => n.id, [])}
         nodeSize={40}
         // @ts-ignore 
         events={events}
+        linkStroke={useCallback((l: LinkDatum) => l.color, [])}
+         // @ts-ignore 
+        linkStyle={useCallback((l: LinkDatum) => l.style, [])}
+        linkArrow={true}
       />
     </VisSingleContainer>
   );
