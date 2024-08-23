@@ -1,7 +1,7 @@
 export type NodeDatum = {
   id: string;
   color?: string;
-  group: string;
+  group: number;
 };
 
 export type LinkDatum = {
