@@ -21,6 +21,7 @@ const Report = ({
   imageSrcProfile = report?.reporter?.image || "";
   imageSrcEvidence = report?.image || "";
 
+
   return (
     <div className="report">
       <div
@@ -45,7 +46,7 @@ const Report = ({
           <div>{report?.name}</div>
           <div>
             <FontAwesomeIcon icon={faThumbsUp} />{" "}
-            {Math.floor(Math.random() * 15)}
+            {report?.endorsers?.length > 0 ? report?.endorsers?.length : 0}
           </div>
         </div>
       )}

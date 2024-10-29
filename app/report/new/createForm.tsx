@@ -111,19 +111,20 @@ export default function CreateForm({ id }: { id: string }) {
   return (
     <div className="login">
       <form className="createReport" onSubmit={handleSubmit}>
+        {/* add relationship link here */}
         <label>
-          <b>Report Name</b>
+          <b>Feedback Name</b>
         </label>
         <input
           className="input"
-          placeholder="Report name"
+          placeholder="Feedback name"
           id="reportName"
           type="text"
           required
         ></input>
         <div className="dropdownGroup">
           <div className="dropdownHeader">
-            <label>Report Type</label>
+            <label>Feedback Type</label>
           </div>
           <select id="reportType" name="Type">
             <option value="sign">Sign</option>
@@ -135,7 +136,7 @@ export default function CreateForm({ id }: { id: string }) {
         </div>
         <div className="dropdownGroup">
           <div className="dropdownHeader">
-            <label>Clause</label>
+            <label>Relationship</label>
           </div>
           <select id="clauseId" name="Clause">
             {clauses.map((clause: ClauseType) => (
@@ -146,17 +147,17 @@ export default function CreateForm({ id }: { id: string }) {
           </select>
         </div>
         <label>
-          <b>Report Content</b>
+          <b>Feedback Content</b>
         </label>
         <textarea
           className="input"
-          placeholder="Report content"
+          placeholder="Feedback content"
           id="reportContentId"
           required
         ></textarea>
         <div>
           <label>
-            <b>Report Evidence</b>
+            <b>Feedback Evidence</b>
           </label>
         </div>
         <label htmlFor="reportImage" className="custom-file-upload">
@@ -170,7 +171,7 @@ export default function CreateForm({ id }: { id: string }) {
         />
         <div>{selectedImageSrc}</div>
 
-        <button className="button primary">Create Report</button>
+        <button className="button primary">Create Feedback</button>
       </form>
     </div>
   );

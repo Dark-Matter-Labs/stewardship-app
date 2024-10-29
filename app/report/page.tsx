@@ -22,12 +22,12 @@ const DisplayReport = () => {
     <>
       <Navigation
         left="Back"
-        title="Reports"
+        title="Feedback"
         right="Log Out"
         myStyle={{}}
       ></Navigation>
       <main className="relationship">
-        <h1>All Reports</h1>
+        <h1>All Feedbacks</h1>
         <div className="reports_wall ">
           {reports.map((report) => {
             return (
@@ -51,7 +51,7 @@ const DisplayReport = () => {
           })}
         </div>
         <form action="/report/update">
-          <button className="button primary">Update or Remove a report</button>
+          <button className="button primary">Update or Remove a feedback</button>
         </form>
       </main>
     </>

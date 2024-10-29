@@ -81,22 +81,21 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
 
   return (
     <main className="updateReport login">
-      <h1>Display Report</h1>
+      <h1>Feedback: {reportName}</h1>
       <div className={styles.block}>
-        <strong>Report Name</strong>
-        <div>{reportName}</div>
+
       </div>
       <Image src={reportImage} width={450} height={145} alt="report image" />
       <div className={styles.block}>
-        <strong>Report Type</strong>
+        <strong>Feedback Type</strong>
         <div>{reportType}</div>
       </div>
       <div className={styles.block}>
-        <strong>Report Content</strong>
+        <strong>Feedback Content</strong>
         <div>{reportContent}</div>
       </div>
       <div className={styles.reporter}>
-        <strong>Reporter</strong>
+        <strong>Feedback Provider</strong>
         <Image
           src={reporterImage}
           width={65}
@@ -106,7 +105,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
         <div>{reporterName}</div>
       </div>
       <div className={styles.endorser}>
-        <strong>Endorsers</strong>
+        <strong>This has been vouched for by:</strong>
         {endorsers?.map((endorser) => {
           return (
             <Image
@@ -122,14 +121,14 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
       {!isReporterMatching && !isEndorserMatching && (
         <form onSubmit={handleEndorseSubmit}>
           <button className="button primary">
-            <span>Endorse</span>
+            <span>Vouch</span>
           </button>
         </form>
       )}
       {isEndorserMatching && (
         <form onSubmit={handleUnendorseSubmit}>
           <button className="button warning">
-            <span>Unendorse</span>
+            <span>Unvouch</span>
           </button>
         </form>
       )}

@@ -16,6 +16,8 @@ const DisplayActants = () => {
     fetchData();
   }, []);
 
+  console.log(actants)
+
   return (
     <>
       <Navigation

@@ -37,7 +37,7 @@ const Page = async () => {
     <>
       <Navigation
         left="Back"
-        title="Report Name"
+        title="Feedback for <>"
         right="Log Out"
         myStyle={{}}
       ></Navigation>
