@@ -73,6 +73,12 @@ h2 {
   color: white;
 }
 
+.secondary {
+  border: solid #5db075;
+  border-radius: 9999px;
+  color: #5db075;
+}
+
 .warning {
   background-color: #c34034;
   color: white;

@@ -25,7 +25,8 @@ export async function getAllActants(): Promise<Actant[]> {
         "id": _id,
         name,
         "image": image.asset->url,
-        agents
+        agents,
+        "agent_details": agents[]->
     }`
   );
 }
@@ -160,6 +161,7 @@ export async function getReports(): Promise<Report[]> {
         clause->{name},
         reporter->{name, "image": image.asset->url},
         "image": image.asset->url,
+        endorsers,
     }`
   );
 }
@@ -189,6 +191,7 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
         clause->{name},
         reporter->{name, "image": image.asset->url},
         "image": image.asset->url,
+        endorsers,
     }`,
     { agent: agent }
   );

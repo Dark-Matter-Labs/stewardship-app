@@ -41,7 +41,7 @@ export default async function Home() {
         <>
           <Navigation
             left="Profile"
-            title="Stewardship App"
+            title="River Don Living Stewardship Agreement"
             right="Log Out"
             myStyle={{}}
           ></Navigation>
@@ -51,58 +51,56 @@ export default async function Home() {
           <main className="feed">
             <div className="greeting">
               <p>Hello {sessionName}! </p>
-              <p>This is a Stewardship app that facilitates care actions. </p>
-              <p>Check what is happening today.</p>
+              <p>This living stewardship agreement represents the relationships that create the conditions to thrive for all.</p>
+              <p>Here’s what has been happening today:</p>
             </div>
 
             <section>
-              <h1>Reports</h1>
-              <p>Reports captures care actions taken each day.</p>
+              <h1>Feedback</h1>
+              <p>Feedback captures how  relationships in this ecosystem are being practiced. Here are the most recent ones:</p>
               <div className="reports_scroller">
                 <Reports caption={true} sign={true} agent=""></Reports>
               </div>
 
               <form action="/report">
-                <button className="button primary">All Reports</button>
+                <button className="button secondary">See All Feedback</button>
               </form>
 
               <form action="/report/new">
-                <button className="button primary">Make New Report</button>
+                <button className="button primary">Provide Feedback</button>
               </form>
             </section>
 
-            <h1>Check out what makes the current stewardship network</h1>
+            <h1>Here is what makes up this living stewardship agreement:</h1>
             <section>
               <h1>Actants</h1>
               <p>
-                Actants are things or beings recognised by agents in this
-                network.
+              These are humans and more-than-humans who play a role in this ecosystem.
               </p>
               <div className="actants_scroller update">
                 <Actants showName={true} agent="" />
               </div>
               <form action="/actant">
-                <button className="button primary">All Actants</button>
+                <button className="button primary">See All Actants</button>
               </form>
               <form action="/actant/new">
-                <button className="button primary">Recognise New Actant</button>
+                <button className="button primary">Recognise a New Actant</button>
               </form>
             </section>
             <section>
               <h1>Relationships</h1>
               <p>
-                Relationships are stewardship clause or agreements made between
-                agents and actants.
+              These are promises made between actants to provide the each other with conditions to thrive.
               </p>
               <div className="clauses_scroller">
                 <Clauses caption={true} sign={true} agent={""}></Clauses>
               </div>
               <form action="/relationship">
-                <button className="button primary">All Relationships</button>
+                <button className="button primary">See All Relationships</button>
               </form>
               <form action="/relationship/new">
                 <button className="button primary">
-                  Recognise New Relationship
+                  Recognise a New Relationship
                 </button>
               </form>
             </section>

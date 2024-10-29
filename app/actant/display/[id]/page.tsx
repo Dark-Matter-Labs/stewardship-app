@@ -18,6 +18,7 @@ const DisplayActant = () => {
   const { id } = params;
   const [actantName, setActantName] = useState("");
   const [actantImage, setActantImage] = useState("");
+  const [agents, setAgents] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -39,8 +40,9 @@ const DisplayActant = () => {
       ></Navigation>
       <main className="allactant">
         <h1>Display Actant</h1>
+        <p>An actant is either a human or more-than-human who plays a role in this ecosystem.</p>
         <div className={styles.block}>
-          <strong>Actant Name</strong>
+          <strong>Actant: </strong>
           <div>{actantName}</div>
         </div>
 
@@ -54,6 +56,8 @@ const DisplayActant = () => {
             src={actantImage}
           />
         </div>
+
+        {/* show list of agents*/}
       </main>
     </>
   );

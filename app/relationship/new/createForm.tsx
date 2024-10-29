@@ -159,7 +159,35 @@ export default function CreateForm() {
 
           <div className="dropdownGroup">
             <div className="dropdownHeader">
-              <label>Responsibility Holder</label>
+              <label>These agents:</label>
+            </div>
+
+            <select id="rightHolder" name="Right holder" multiple={true}>
+              {actants.map((actant: ActantType) => (
+                <option key={actant.id} value={actant.id}>
+                  {actant.name}
+                </option>
+              ))}
+              {agents.map((agent: AgentType) => (
+                <option key={agent.id} value={agent.id}>
+                  {agent.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="relName">...need this condition to thrive:</div>
+          <input
+            className="input"
+            placeholder="Rights"
+            id="rights"
+            type="text"
+            required
+          ></input>
+
+<div className="dropdownGroup">
+            <div className="dropdownHeader">
+              <label>These agents:</label>
             </div>
 
             <select
@@ -174,30 +202,8 @@ export default function CreateForm() {
               ))}
             </select>
           </div>
-          <div className="dropdownGroup">
-            <div className="dropdownHeader">
-              <label>Right Holder</label>
-            </div>
 
-            <select id="rightHolder" name="Right holder" multiple={true}>
-              {actants.map((actant: ActantType) => (
-                <option key={actant.id} value={actant.id}>
-                  {actant.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="relName">Rights</div>
-          <input
-            className="input"
-            placeholder="Rights"
-            id="rights"
-            type="text"
-            required
-          ></input>
-
-          <div className="relName">Responsibilities</div>
+          <div className="relName">...promise to care in these ways:</div>
           <input
             className="input"
             placeholder="Responsibilities"

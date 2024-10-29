@@ -21,12 +21,12 @@ const CreateReport: React.FC = () => {
     <>
       <Navigation
         left="Back"
-        title="Report"
+        title="Feedback"
         right="Log Out"
         myStyle={{}}
       ></Navigation>
       <main className="addclause">
-        <h1>Create Report</h1>
+        <h1>Provide Feedback</h1>
         <CreateForm relId={id} sessionName={name}></CreateForm>
       </main>
     </>

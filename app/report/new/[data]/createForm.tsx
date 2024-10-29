@@ -133,25 +133,25 @@ export default function CreateForm({
     <div className="login">
       <form className="createReport" onSubmit={handleSubmit}>
         <label>
-          <b>Report Name</b>
+          <b>Feedback Name</b>
         </label>
         <input
           className="input"
-          placeholder="Report name"
+          placeholder="Feedback name"
           id="reportName"
           type="text"
           required
         ></input>
         <div className="dropdownGroup">
           <div className="dropdownHeader">
-            <label>Report Type</label>
+            <label>Feedback Type</label>
           </div>
           <select id="reportType" name="Type">
             <option value="sign">Sign</option>
-            <option value="breach">Breach</option>
-            <option value="fulfillment">Fulfillment</option>
-            <option value="termination">Termination</option>
-            <option value="review">Review</option>
+            <option value="breach">Promise broken</option>
+            <option value="fulfillment">Promise fulfilled</option>
+            <option value="termination">Promise Termination</option>
+            <option value="review">Amendment</option>
           </select>
         </div>
         <div className="dropdownGroup">

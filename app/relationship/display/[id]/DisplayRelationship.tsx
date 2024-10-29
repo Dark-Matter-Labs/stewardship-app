@@ -56,7 +56,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
         </div>
 
         <div key="rholder" className={styles_r.block}>
-          <strong className={styles_r.label}>Rights Holder </strong>
+          <strong className={styles_r.label}>These actant: </strong>
           {rightHolders.map((holder, index) => (
             <div key={index}>
               <div>{holder.name}</div>
@@ -72,11 +72,11 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           ))}
         </div>
         <div className={styles_r.block}>
-          <strong className={styles_r.label}>Rights</strong>
+          <strong className={styles_r.label}>...need this condition to thrive:</strong>
           <div>{rights}</div>
         </div>
         <div className={styles_r.block}>
-          <strong className={styles_r.label}>Resbonsibility Holder </strong>
+          <strong className={styles_r.label}>These actant: </strong>
           {resbonsibilityHolders.map((holder, index) => (
             <div key={index}>
               <div>{holder.name}</div>
@@ -98,7 +98,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
         </div>
 
         <div className={styles_r.block}>
-          <strong>Responsibilities</strong>
+          <strong>promise to care in these ways:</strong>
           <div>{responsibilities}</div>
         </div>
       </main>
