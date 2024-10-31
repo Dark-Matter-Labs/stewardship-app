@@ -81,7 +81,7 @@ export default async function Home() {
                 <Actants showName={true} agent="" />
               </div>
               <form action="/actant">
-                <button className="button primary">See All Actants</button>
+                <button className="button secondary">See All Actants</button>
               </form>
               <form action="/actant/new">
                 <button className="button primary">Recognise a New Actant</button>
@@ -96,7 +96,7 @@ export default async function Home() {
                 <Clauses caption={true} sign={true} agent={""}></Clauses>
               </div>
               <form action="/relationship">
-                <button className="button primary">See All Relationships</button>
+                <button className="button secondary">See All Relationships</button>
               </form>
               <form action="/relationship/new">
                 <button className="button primary">

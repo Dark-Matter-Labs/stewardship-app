@@ -208,6 +208,22 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
   );
 }
 
+export async function getReportsByClause(clause: string): Promise<Report[]> {
+  return client.fetch(
+    groq`*[_type == "report" && $clause match clause->name]{
+        "id": _id,
+        name,
+        "slug": slug.current,
+        type, 
+        clause->{name},
+        reporter->{name, "image": image.asset->url},
+        "image": image.asset->url,
+        endorsers,
+    }`,
+    { clause: clause }
+  );
+}
+
 export async function createActant(actant: unknown) {
   const result = client.create(actant as unknown as any);
   return result;

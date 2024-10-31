@@ -7,9 +7,10 @@ import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getRelatinoshipbyId } from "@/sanity/sanity-utils";
+import { getRelatinoshipbyId, getReportsByClause } from "@/sanity/sanity-utils";
 import { Actant } from "@/types/Actant";
 import { Agent } from "@/types/Agent";
+import Report from "../../../component/Report";
 import Link from "next/link";
 
 type DisplayRelationshipProps = {
@@ -17,7 +18,6 @@ type DisplayRelationshipProps = {
 };
 
 const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
-  const router = useRouter();
   const params = useParams();
   const { id } = params;
   const [relName, setRelName] = useState("");
@@ -27,6 +27,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
   );
   const [rights, setRights] = useState("");
   const [responsibilities, setResponsibilities] = useState("");
+  const [reports, setReports] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -37,9 +38,12 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
       setResbonsibilityHolders(relationship.responsibilityHolder);
       setRights(relationship.rights);
       setResponsibilities(relationship.responsibilities);
+
+      const reports = await getReportsByClause(relName)
+      setReports(reports);
     }
     fetchData();
-  }, [id]);
+  }, [id, relName]);
   // console.log("rightHolders: ", rightHolders);
   return (
     <>
@@ -101,6 +105,25 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           <strong>promise to care in these ways:</strong>
           <div>{responsibilities}</div>
         </div>
+
+        {/* pre select the clause*/}
+        <form action="/report/new">
+                <button className="button primary">Make Feedback</button>
+              </form>
+
+
+              {reports.map((report) => (
+        <>
+          <form key={report.id} action={`/report/display/${report.id}`}>
+            <button>
+              <Report
+                key={report.name}
+                report={report}
+              />
+            </button>
+          </form>
+        </>
+      ))}
       </main>
     </>
   );
