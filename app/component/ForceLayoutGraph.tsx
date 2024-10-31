@@ -5,7 +5,7 @@ import { VisSingleContainer, VisGraph } from "@unovis/react";
 import { GraphForceLayoutSettings, GraphLayoutType, Graph, GraphLink} from "@unovis/ts";
 import { useRouter } from 'next/navigation'
 
-import { getAllActants, getAllAgents, getAllClauses } from "@/sanity/sanity-utils";
+import { getAllActants, getAllAgents, getAllClauses, getClauseID} from "@/sanity/sanity-utils";
 import { Actant as ActantType } from "@/types/Actant";
 import { Agent as AgentType } from "@/types/Agent";
 import { NodeDatum, LinkDatum } from "../data";
@@ -17,7 +17,6 @@ export default function ForceLayoutGraph(): JSX.Element {
   let [nodes, setNodes] = useState<NodeDatum[]>([]);
   let [links, setLinks] = useState<LinkDatum[]>([]);
   let [clauses, setClauses] = useState<[]>([]);
-  let [events, setEvents] = useState<[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -37,7 +36,6 @@ export default function ForceLayoutGraph(): JSX.Element {
   useEffect(() => {
     let nodesCopy: NodeDatum[] = [];
     let linksCopy: LinkDatum[] = [];
-    let eventsCopy:[] = [];
     
     let result: AgentType = {
       id:'',
@@ -93,8 +91,6 @@ export default function ForceLayoutGraph(): JSX.Element {
 
     actants.map((actant) => {
 
-        
-
         if(actant.agents && agents.length > 0){
           actant.agents.map((link) => {
             result = agents.find(({ id }) => id === link._ref)!;
@@ -111,36 +107,12 @@ export default function ForceLayoutGraph(): JSX.Element {
         }
       });
 
-     
-
-      clauses.map((clause) => {
-        // @ts-ignore 
-        clause.responsibilityHolder.map((respHold) => {
-            resultAgent = agents.find(({ id }) => id === respHold._ref)!;
-            // resultActant = actants.find(({ id }) => id === rightHold._ref)!;
-
-            if(resultAgent){
-              linksCopy.push(
-                {
-                  source: resultAgent.name,
-                  // @ts-ignore 
-                  target: clause.name,
-                  chapter: "",
-                  color: '#a2bbb7',
-                   style: 'solid'
-                }
-              );
-            }
-            
-          
-        });
-      });
 
       clauses.map((clause) => {
         // @ts-ignore 
         clause.rightHolder.map((rightHold) => {
            // resultAgent = agents.find(({ id }) => id === respHold._ref)!;
-             resultActant = actants.find(({ id }) => id === rightHold._ref)!;
+            resultActant = actants.find(({ id }) => id === rightHold._ref)!;
 
             if(resultActant){
               linksCopy.push(
@@ -151,7 +123,7 @@ export default function ForceLayoutGraph(): JSX.Element {
                   target: resultActant.name,
                   chapter: "",
                   color: '#e4adad',
-                   style: 'solid'
+                  style: 'solid'
                 }
               );
             }
@@ -160,33 +132,11 @@ export default function ForceLayoutGraph(): JSX.Element {
         });
       });
 
-
-
-      clauses.map((clause) => {
-        eventsCopy.push(
-           // @ts-ignore 
-          {
-            [Graph.selectors.node]: {
-               // @ts-ignore 
-                click: (d: NodeDatum) => {
-                    // @ts-ignore 
-                    if(d.id == clause.name) {
-                      // @ts-ignore 
-                      router.push('/relationship/display/'+clause.id)
-                    }
-                    }
-                    
-            },
-          }
-        )
-      })
       // @ts-ignore 
 
-      
 
     setNodes(nodesCopy);
     setLinks(linksCopy);
-    setEvents(eventsCopy)
   },[actants, agents, clauses]);
   
   // const forceLayoutSettings: GraphForceLayoutSettings = {
@@ -196,6 +146,18 @@ export default function ForceLayoutGraph(): JSX.Element {
   // };
 
   const layoutNodeGroup = (d: NodeDatum) => d.group;
+
+  const events = {
+    [Graph.selectors.node]: {
+        click: async (d: NodeDatum) => {
+
+            if (d.group == 3) {
+              const id = await getClauseID(d.id);
+              router.push('/relationship/display/'+id[0].id)
+            }
+         }
+    },
+  }
 
   return (
     <VisSingleContainer data={{ nodes, links }} height={"60vh"}>
