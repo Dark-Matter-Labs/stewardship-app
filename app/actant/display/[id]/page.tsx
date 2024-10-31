@@ -18,14 +18,17 @@ const DisplayActant = () => {
   const { id } = params;
   const [actantName, setActantName] = useState("");
   const [actantImage, setActantImage] = useState("");
-  const [agents, setAgents] = useState("");
+  const [agents, setAgents] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const actant = await getActantbyId(String(id));
-      console.log("actant: ", actant);
+      // console.log("actant: ", actant);
       setActantName(actant.name);
       setActantImage(actant.image);
+      // @ts-ignore 
+      setAgents(actant.agents);
+    
     }
     fetchData();
   }, [id]);
@@ -48,16 +51,30 @@ const DisplayActant = () => {
 
         <div className={styles.block}>
           <strong>Actant Image</strong>
+          {actantImage &&
           <Image
-            className={styles.image}
-            width={125}
-            height={45}
-            alt={`actant image`}
-            src={actantImage}
-          />
+          className={styles.image}
+          width={125}
+          height={45}
+          alt={`actant image`}
+          src={actantImage}
+        />
+          }
+          
         </div>
 
         {/* show list of agents*/}
+        <br />
+        <br />
+        <br />
+        <p>This actant is stewarded by these agents:</p>
+        {agents.map((holder, index) => (
+            <div key={index}>
+               {/* @ts-ignore */}
+              <div>{holder.name}</div>
+              
+            </div>
+          ))}
       </main>
     </>
   );

@@ -370,6 +370,7 @@ export async function getActantbyId(id: string): Promise<Actant> {
      "id": _id,
         name,
         slug,  
+        agents[]->,
         "image": image.asset->url,}
     `,
     { id: id }
