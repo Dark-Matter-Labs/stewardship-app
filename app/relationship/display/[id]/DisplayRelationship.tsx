@@ -6,12 +6,10 @@ import Navigation from "@/app/component/Navigation";
 import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { getRelatinoshipbyId, getReportsByClause } from "@/sanity/sanity-utils";
 import { Actant } from "@/types/Actant";
 import { Agent } from "@/types/Agent";
 import Report from "../../../component/Report";
-import Link from "next/link";
 
 type DisplayRelationshipProps = {
   name: string;
@@ -39,7 +37,8 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
       setRights(relationship.rights);
       setResponsibilities(relationship.responsibilities);
 
-      const reports = await getReportsByClause(relName)
+      const reports = await getReportsByClause(relName);
+       // @ts-ignore 
       setReports(reports);
     }
     fetchData();
@@ -114,9 +113,11 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
 
               {reports.map((report) => (
         <>
+        {/* @ts-ignore */}
           <form key={report.id} action={`/report/display/${report.id}`}>
             <button>
-              <Report
+               {/* @ts-ignore */ }
+              <Report  // @ts-ignore
                 key={report.name}
                 report={report}
               />
