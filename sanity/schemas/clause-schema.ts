@@ -21,7 +21,7 @@ const clause = {
       of: [
         {
           type: "reference",
-          to: [{ type: "agent" }, { type: "actant" }],
+          to: [{ type: "actant" }],
         },
       ],
     },
@@ -32,7 +32,7 @@ const clause = {
       of: [
         {
           type: "reference",
-          to: [{ type: "actant" }, { type: "agent" }],
+          to: [{ type: "actant" }],
         },
       ],
     },

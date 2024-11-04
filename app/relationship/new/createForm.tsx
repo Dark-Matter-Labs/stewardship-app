@@ -22,7 +22,7 @@ export default function CreateForm() {
   const [selectedRightHolders, setSelectedRightHolders] = useState<
     ActantType[]
   >([]);
-  const [selectedRespHolders, setSelectedRespHolders] = useState<AgentType[]>(
+  const [selectedRespHolders, setSelectedRespHolders] = useState<ActantType[]>(
     [],
   );
   // let [rights, setRights] = useState<RightType[]>([]);
@@ -56,7 +56,7 @@ export default function CreateForm() {
     );
   };
 
-  const handleRespSelect = (option: AgentType) => {
+  const handleRespSelect = (option: ActantType) => {
     setSelectedRespHolders(
       (prev) =>
         prev.includes(option)
@@ -77,8 +77,7 @@ export default function CreateForm() {
     console.log("responsibility holder: ", resHolderId);
 
     // Retrieve responsibility holder (multiple selection)
-    const resHolderOptions =
-    selectedRespHolders;
+    const resHolderOptions = selectedRespHolders;
 
     console.log(">>>resHolderOptions: ", resHolderOptions);
 
@@ -197,22 +196,6 @@ export default function CreateForm() {
                   </label>
                 </div>
               ))}
-              {agents.map((agent: AgentType) => (
-                <div key={agent.id}>
-                  <label className="dropdown-item">
-                    <input
-                      type="checkbox"
-                      id="rightHolder"
-                      value={agent.name}
-                      // @ts-ignore
-                      checked={selectedRightHolders.includes(agent)}
-                      // @ts-ignore
-                      onChange={() => handleSelect(agent)}
-                    />
-                    {agent.name}
-                  </label>
-                </div>
-              ))}
             </div>
           </div>
 
@@ -231,7 +214,7 @@ export default function CreateForm() {
             </div>
 
             <div className="dropdown-menu" id="responsibilityHolder">
-              {agents.map((agent: AgentType) => (
+              {actants.map((agent: ActantType) => (
                 <div key={agent.id}>
                   <label className="dropdown-item">
                     <input

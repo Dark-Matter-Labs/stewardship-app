@@ -107,21 +107,28 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           <div>{responsibilities}</div>
         </div>
 
-        {/* sort by date and redesign as table */}
-        {reports.map((report) => (
-          <>
-            {/* @ts-ignore */}
-            <form key={report.id} action={`/report/display/${report.id}`}>
-              <button>
-                {/* @ts-ignore */}
-                <Report // @ts-ignore
-                  key={report.name}
-                  report={report}
-                />
-              </button>
-            </form>
-          </>
-        ))}
+        {reports.length > 0 && (
+          <div className={styles_r.block}>
+            <strong>Current reports:</strong>
+          </div>
+        )}
+
+        <div className="flex-reports">
+          {reports.map((report) => (
+            <>
+              {/* @ts-ignore */}
+              <form key={report.id} action={`/report/display/${report.id}`}>
+                <button>
+                  {/* @ts-ignore */}
+                  <Report // @ts-ignore
+                    key={report.name}
+                    report={report}
+                  />
+                </button>
+              </form>
+            </>
+          ))}
+        </div>
 
         {/* pre select the clause*/}
         <form action="/report/new">
