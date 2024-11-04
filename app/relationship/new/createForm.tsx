@@ -17,7 +17,7 @@ import { Responsibility as ResponsibilityType } from "@/types/Responsibility";
 
 export default function CreateForm() {
   const router = useRouter();
-  let [agents, setAgents] = useState<AgentType[]>([]);
+  //let [agents, setAgents] = useState<AgentType[]>([]);
   let [actants, setActants] = useState<ActantType[]>([]);
   const [selectedRightHolders, setSelectedRightHolders] = useState<
     ActantType[]
@@ -32,8 +32,8 @@ export default function CreateForm() {
 
   useEffect(() => {
     async function fetchData() {
-      let listOfAgents = await getAllAgents();
-      setAgents(listOfAgents);
+      //let listOfAgents = await getAllAgents();
+      //setAgents(listOfAgents);
 
       let listOfActants = await getAllActants();
       setActants(listOfActants);

@@ -2,11 +2,19 @@
 import { ActantTypeCreation } from "@/types/ActantTypeCreation";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { client, createActant, genRanHex } from "@/sanity/sanity-utils";
+import { Agent as AgentType } from "@/types/Agent";
+import {
+  client,
+  createActant,
+  genRanHex,
+  getAllAgents,
+} from "@/sanity/sanity-utils";
 
 export default function CreateForm({ id }: { id: string }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  let [agents, setAgents] = useState<AgentType[]>([]);
+  const [selectedAgents, setSelectedAgents] = useState<AgentType[]>([]);
   let [selectedImageSrc, setSelectedImageSrc] = useState("no file chosen");
 
   console.log("the id CreateForm gets is: ", id);
@@ -14,6 +22,18 @@ export default function CreateForm({ id }: { id: string }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+
+    // @ts-ignore
+    const agentRefs = [];
+
+    selectedAgents.map((agent) => {
+      // @ts-ignore
+      agentRefs.push({
+        _type: "reference",
+        _ref: agent.id,
+        _key: genRanHex(12),
+      });
+    });
 
     // Retrive name
     const name = e.currentTarget.actantName.value;
@@ -40,16 +60,11 @@ export default function CreateForm({ id }: { id: string }) {
           _ref: image._id,
         },
       },
-      agents: [
-        {
-          _type: "reference",
-          _ref: id,
-          _key: genRanHex(12),
-        },
-      ],
+      // @ts-ignore
+      agents: agentRefs,
     };
 
-    // Create actant
+    // // Create actant
     try {
       await createActant(actant);
       setIsLoading(false);
@@ -59,6 +74,23 @@ export default function CreateForm({ id }: { id: string }) {
 
     // Redirect to root
     router.push("/");
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      let listOfAgents = await getAllAgents();
+      setAgents(listOfAgents);
+    }
+    fetchData();
+  }, []);
+
+  const handleSelect = (option: AgentType) => {
+    setSelectedAgents(
+      (prev) =>
+        prev.includes(option)
+          ? prev.filter((item) => item !== option) // Remove if selected again
+          : [...prev, option], // Add if not already selected
+    );
   };
 
   useEffect(() => {
@@ -96,6 +128,28 @@ export default function CreateForm({ id }: { id: string }) {
         />
         <div>{selectedImageSrc}</div>
       </label>
+
+      <div className="dropdownGroup">
+        <div className="dropdownHeader">
+          <label>Select agents as stewards:</label>
+        </div>
+
+        <div className="dropdown-menu">
+          {agents.map((actant: AgentType) => (
+            <div key={actant.id}>
+              <label className="dropdown-item">
+                <input
+                  type="checkbox"
+                  value={actant.name}
+                  checked={selectedAgents.includes(actant)}
+                  onChange={() => handleSelect(actant)}
+                />
+                {actant.name}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <button className="button primary" disabled={isLoading}>
         {isLoading && <span> Adding... </span>}
