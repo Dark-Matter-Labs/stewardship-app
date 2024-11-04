@@ -22,7 +22,7 @@ export default function CreateForm({ id }: { id: string }) {
     // Upload Image
     const image = await client.assets.upload(
       "image",
-      e.currentTarget.actantImage.files[0]
+      e.currentTarget.actantImage.files[0],
     );
 
     // Prepare actant

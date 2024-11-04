@@ -19,6 +19,6 @@ export type ActantTypeCreation = {
       _type: string;
       _ref: string;
       _key: string;
-    }
+    },
   ];
 };

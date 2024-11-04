@@ -19,6 +19,12 @@ export default function CreateForm() {
   const router = useRouter();
   let [agents, setAgents] = useState<AgentType[]>([]);
   let [actants, setActants] = useState<ActantType[]>([]);
+  const [selectedRightHolders, setSelectedRightHolders] = useState<
+    ActantType[]
+  >([]);
+  const [selectedRespHolders, setSelectedRespHolders] = useState<AgentType[]>(
+    [],
+  );
   // let [rights, setRights] = useState<RightType[]>([]);
   // let [responsibilities, setResponsibilities] = useState<ResponsibilityType[]>(
   //   []
@@ -41,6 +47,24 @@ export default function CreateForm() {
     fetchData();
   }, []);
 
+  const handleSelect = (option: ActantType) => {
+    setSelectedRightHolders(
+      (prev) =>
+        prev.includes(option)
+          ? prev.filter((item) => item !== option) // Remove if selected again
+          : [...prev, option], // Add if not already selected
+    );
+  };
+
+  const handleRespSelect = (option: AgentType) => {
+    setSelectedRespHolders(
+      (prev) =>
+        prev.includes(option)
+          ? prev.filter((item) => item !== option) // Remove if selected again
+          : [...prev, option], // Add if not already selected
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -54,26 +78,22 @@ export default function CreateForm() {
 
     // Retrieve responsibility holder (multiple selection)
     const resHolderOptions =
-      e.currentTarget.responsibilityHolder.selectedOptions;
+    selectedRespHolders;
 
     console.log(">>>resHolderOptions: ", resHolderOptions);
-    alert(resHolderOptions);
+
     const resHolderIds = Array.from(resHolderOptions).map(
-      (option: any) => option.value
+      (option: any) => option.id,
     );
     console.log("responsibility holders: ", resHolderIds);
 
-    // Retrieve right holder
-    const rigHolderId = e.currentTarget.rightHolder.value;
-    console.log("right holder: ", resHolderId);
-
     // Retrieve responsibility holder (multiple selection)
-    const rigHolderOptions = e.currentTarget.rightHolder.selectedOptions;
+    const rigHolderOptions = selectedRightHolders;
 
     console.log(">>>rigHolderOptions: ", rigHolderOptions);
 
     const rigHolderIds = Array.from(rigHolderOptions).map(
-      (option: any) => option.value
+      (option: any) => option.id,
     );
     console.log("right holders: ", rigHolderIds);
     // Retrieve  right
@@ -162,21 +182,41 @@ export default function CreateForm() {
               <label>These agents:</label>
             </div>
 
-            <select id="rightHolder" name="Right holder" multiple={true}>
+            <div className="dropdown-menu" id="rightHolder">
               {actants.map((actant: ActantType) => (
-                <option key={actant.id} value={actant.id}>
-                  {actant.name}
-                </option>
+                <div key={actant.id}>
+                  <label className="dropdown-item">
+                    <input
+                      type="checkbox"
+                      id="rightHolder"
+                      value={actant.name}
+                      checked={selectedRightHolders.includes(actant)}
+                      onChange={() => handleSelect(actant)}
+                    />
+                    {actant.name}
+                  </label>
+                </div>
               ))}
               {agents.map((agent: AgentType) => (
-                <option key={agent.id} value={agent.id}>
-                  {agent.name}
-                </option>
+                <div key={agent.id}>
+                  <label className="dropdown-item">
+                    <input
+                      type="checkbox"
+                      id="rightHolder"
+                      value={agent.name}
+                      // @ts-ignore
+                      checked={selectedRightHolders.includes(agent)}
+                      // @ts-ignore
+                      onChange={() => handleSelect(agent)}
+                    />
+                    {agent.name}
+                  </label>
+                </div>
               ))}
-            </select>
+            </div>
           </div>
 
-          <div className="relName">...need this condition to thrive:</div>
+          <div className="relName">need these condition to thrive:</div>
           <input
             className="input"
             placeholder="Rights"
@@ -185,25 +225,30 @@ export default function CreateForm() {
             required
           ></input>
 
-<div className="dropdownGroup">
+          <div className="dropdownGroup">
             <div className="dropdownHeader">
-              <label>These agents:</label>
+              <label>And these agents:</label>
             </div>
 
-            <select
-              id="responsibilityHolder"
-              name="Responsibility holder"
-              multiple={true}
-            >
+            <div className="dropdown-menu" id="responsibilityHolder">
               {agents.map((agent: AgentType) => (
-                <option key={agent.id} value={agent.id}>
-                  {agent.name}
-                </option>
+                <div key={agent.id}>
+                  <label className="dropdown-item">
+                    <input
+                      type="checkbox"
+                      id="responsibilityHolder"
+                      value={agent.name}
+                      checked={selectedRespHolders.includes(agent)}
+                      onChange={() => handleRespSelect(agent)}
+                    />
+                    {agent.name}
+                  </label>
+                </div>
               ))}
-            </select>
+            </div>
           </div>
 
-          <div className="relName">...promise to care in these ways:</div>
+          <div className="relName">promise to care in these ways:</div>
           <input
             className="input"
             placeholder="Responsibilities"

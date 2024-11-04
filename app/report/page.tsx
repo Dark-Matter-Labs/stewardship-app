@@ -51,7 +51,9 @@ const DisplayReport = () => {
           })}
         </div>
         <form action="/report/update">
-          <button className="button primary">Update or Remove a feedback</button>
+          <button className="button primary">
+            Update or Remove a feedback
+          </button>
         </form>
       </main>
     </>

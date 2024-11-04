@@ -21,7 +21,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
   const [relName, setRelName] = useState("");
   const [rightHolders, setRightHolders] = useState<Actant[]>([]);
   const [resbonsibilityHolders, setResbonsibilityHolders] = useState<Agent[]>(
-    []
+    [],
   );
   const [rights, setRights] = useState("");
   const [responsibilities, setResponsibilities] = useState("");
@@ -38,7 +38,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
       setResponsibilities(relationship.responsibilities);
 
       const reports = await getReportsByClause(relName);
-       // @ts-ignore 
+      // @ts-ignore
       setReports(reports);
     }
     fetchData();
@@ -59,7 +59,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
         </div>
 
         <div key="rholder" className={styles_r.block}>
-          <strong className={styles_r.label}>These actant: </strong>
+          <strong className={styles_r.label}>These actant(s): </strong>
           {rightHolders.map((holder, index) => (
             <div key={index}>
               <div>{holder.name}</div>
@@ -75,11 +75,13 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           ))}
         </div>
         <div className={styles_r.block}>
-          <strong className={styles_r.label}>...need this condition to thrive:</strong>
+          <strong className={styles_r.label}>
+            need this condition to thrive:
+          </strong>
           <div>{rights}</div>
         </div>
         <div className={styles_r.block}>
-          <strong className={styles_r.label}>These actant: </strong>
+          <strong className={styles_r.label}>These actant(s): </strong>
           {resbonsibilityHolders.map((holder, index) => (
             <div key={index}>
               <div>{holder.name}</div>
@@ -105,26 +107,26 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           <div>{responsibilities}</div>
         </div>
 
+        {/* sort by date and redesign as table */}
+        {reports.map((report) => (
+          <>
+            {/* @ts-ignore */}
+            <form key={report.id} action={`/report/display/${report.id}`}>
+              <button>
+                {/* @ts-ignore */}
+                <Report // @ts-ignore
+                  key={report.name}
+                  report={report}
+                />
+              </button>
+            </form>
+          </>
+        ))}
+
         {/* pre select the clause*/}
         <form action="/report/new">
-                <button className="button primary">Make Feedback</button>
-              </form>
-
-
-              {reports.map((report) => (
-        <>
-        {/* @ts-ignore */}
-          <form key={report.id} action={`/report/display/${report.id}`}>
-            <button>
-               {/* @ts-ignore */ }
-              <Report  // @ts-ignore
-                key={report.name}
-                report={report}
-              />
-            </button>
-          </form>
-        </>
-      ))}
+          <button className="button primary">Provide Feedback</button>
+        </form>
       </main>
     </>
   );

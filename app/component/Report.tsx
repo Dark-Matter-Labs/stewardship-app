@@ -21,7 +21,6 @@ const Report = ({
   imageSrcProfile = report?.reporter?.image || "";
   imageSrcEvidence = report?.image || "";
 
-
   return (
     <div className="report">
       <div

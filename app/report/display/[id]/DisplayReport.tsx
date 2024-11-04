@@ -47,7 +47,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
 
   useEffect(() => {
     const endorserExists = endorsers?.some(
-      (endorser) => endorser.id === sessionId
+      (endorser) => endorser.id === sessionId,
     );
     setIsEndorserMatching(endorserExists ? true : false);
   }, [endorsers, sessionId]);
@@ -82,9 +82,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
   return (
     <main className="updateReport login">
       <h1>Feedback: {reportName}</h1>
-      <div className={styles.block}>
-
-      </div>
+      <div className={styles.block}></div>
       <Image src={reportImage} width={450} height={145} alt="report image" />
       <div className={styles.block}>
         <strong>Feedback Type</strong>

@@ -51,13 +51,19 @@ export default async function Home() {
           <main className="feed">
             <div className="greeting">
               <p>Hello {sessionName}! </p>
-              <p>This living stewardship agreement represents the relationships that create the conditions to thrive for all.</p>
+              <p>
+                This living stewardship agreement represents the relationships
+                that create the conditions to thrive for all.
+              </p>
               <p>Here’s what has been happening today:</p>
             </div>
 
             <section>
               <h1>Feedback</h1>
-              <p>Feedback captures how  relationships in this ecosystem are being practiced. Here are the most recent ones:</p>
+              <p>
+                Feedback captures how relationships in this ecosystem are being
+                practiced. Here are the most recent ones:
+              </p>
               <div className="reports_scroller">
                 <Reports caption={true} sign={true} agent=""></Reports>
               </div>
@@ -75,7 +81,8 @@ export default async function Home() {
             <section>
               <h1>Actants</h1>
               <p>
-              These are humans and more-than-humans who play a role in this ecosystem.
+                These are humans and more-than-humans who play a role in this
+                ecosystem.
               </p>
               <div className="actants_scroller update">
                 <Actants showName={true} agent="" />
@@ -84,19 +91,24 @@ export default async function Home() {
                 <button className="button secondary">See All Actants</button>
               </form>
               <form action="/actant/new">
-                <button className="button primary">Recognise a New Actant</button>
+                <button className="button primary">
+                  Recognise a New Actant
+                </button>
               </form>
             </section>
             <section>
               <h1>Relationships</h1>
               <p>
-              These are promises made between actants to provide the each other with conditions to thrive.
+                These are promises made between actants to provide the each
+                other with conditions to thrive.
               </p>
               <div className="clauses_scroller">
                 <Clauses caption={true} sign={true} agent={""}></Clauses>
               </div>
               <form action="/relationship">
-                <button className="button secondary">See All Relationships</button>
+                <button className="button secondary">
+                  See All Relationships
+                </button>
               </form>
               <form action="/relationship/new">
                 <button className="button primary">

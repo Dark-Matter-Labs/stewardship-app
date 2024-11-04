@@ -26,9 +26,8 @@ const DisplayActant = () => {
       // console.log("actant: ", actant);
       setActantName(actant.name);
       setActantImage(actant.image);
-      // @ts-ignore 
+      // @ts-ignore
       setAgents(actant.agents);
-    
     }
     fetchData();
   }, [id]);
@@ -43,7 +42,10 @@ const DisplayActant = () => {
       ></Navigation>
       <main className="allactant">
         <h1>Display Actant</h1>
-        <p>An actant is either a human or more-than-human who plays a role in this ecosystem.</p>
+        <p>
+          An actant is either a human or more-than-human who plays a role in
+          this ecosystem.
+        </p>
         <div className={styles.block}>
           <strong>Actant: </strong>
           <div>{actantName}</div>
@@ -51,16 +53,15 @@ const DisplayActant = () => {
 
         <div className={styles.block}>
           <strong>Actant Image</strong>
-          {actantImage &&
-          <Image
-          className={styles.image}
-          width={125}
-          height={45}
-          alt={`actant image`}
-          src={actantImage}
-        />
-          }
-          
+          {actantImage && (
+            <Image
+              className={styles.image}
+              width={125}
+              height={45}
+              alt={`actant image`}
+              src={actantImage}
+            />
+          )}
         </div>
 
         {/* show list of agents*/}
@@ -69,12 +70,11 @@ const DisplayActant = () => {
         <br />
         <p>This actant is stewarded by these agents:</p>
         {agents.map((holder, index) => (
-            <div key={index}>
-               {/* @ts-ignore */}
-              <div>{holder.name}</div>
-              
-            </div>
-          ))}
+          <div key={index}>
+            {/* @ts-ignore */}
+            <div>{holder.name}</div>
+          </div>
+        ))}
       </main>
     </>
   );

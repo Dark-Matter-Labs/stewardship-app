@@ -16,7 +16,7 @@ const DisplayActants = () => {
     fetchData();
   }, []);
 
-  console.log(actants)
+  console.log(actants);
 
   return (
     <>

@@ -57,7 +57,7 @@ export default function CreateForm({ id }: { id: string }) {
     // Upload Image
     const image = await client.assets.upload(
       "image",
-      e.currentTarget.reportImage.files[0]
+      e.currentTarget.reportImage.files[0],
     );
 
     // Prepare report

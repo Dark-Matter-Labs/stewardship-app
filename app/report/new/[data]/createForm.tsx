@@ -27,7 +27,7 @@ export default function CreateForm({
   let [id, setId] = useState<String>();
   let [selectedImageSrc, setSelectedImageSrc] = useState("no file chosen");
   const [selectedClauseId, setSelectedClauseId] = useState<string | undefined>(
-    relId
+    relId,
   );
 
   console.log("the relId CreateForm' gets is: ", relId);
@@ -78,7 +78,7 @@ export default function CreateForm({
     // Upload Image
     const image = await client.assets.upload(
       "image",
-      e.currentTarget.reportImage.files[0]
+      e.currentTarget.reportImage.files[0],
     );
 
     // Prepare report

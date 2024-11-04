@@ -4,6 +4,6 @@ export type Actant = {
   slug: string;
   image: string;
   agents: Array<{
-    _ref: string
+    _ref: string;
   }>;
 };

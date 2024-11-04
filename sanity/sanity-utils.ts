@@ -27,7 +27,7 @@ export async function getAllActants(): Promise<Actant[]> {
         "image": image.asset->url,
         agents,
         "agent_details": agents[]->
-    }`
+    }`,
   );
 }
 
@@ -36,7 +36,7 @@ export async function getActantsByAgent(agent: string): Promise<Actant[]> {
     groq`*[_type == "actant" && references(*[_type == "agent" &&  name match $name]._id) ]{
   name, "slug": slug.current, "image": image.asset->url
 }`,
-    { name: agent }
+    { name: agent },
   );
 }
 
@@ -53,7 +53,7 @@ export async function getAgents(): Promise<Agent[]> {
   return client.fetch(
     groq`*[_type == "agent"]{
         name,
-    }`
+    }`,
   );
 }
 
@@ -66,7 +66,7 @@ export async function getAgent(email: string): Promise<Agent> {
         motto,
         "image": image.asset->url,
     }`,
-    { email: email }
+    { email: email },
   );
 }
 
@@ -75,7 +75,7 @@ export async function getAgentImageByName(name: string): Promise<Agent[]> {
     groq`*[_type == "agent" &&  name match $name]{
   "image": image.asset->url,
 }`,
-    { name: name }
+    { name: name },
   );
 }
 
@@ -84,7 +84,7 @@ export async function getAgentIdByName(name: string): Promise<String> {
     groq`*[_type == "agent" &&  name match $name][0]{
   "id": _id,
 }.id`,
-    { name: name }
+    { name: name },
   );
 }
 
@@ -96,7 +96,7 @@ export async function getActant(slug: string): Promise<Actant> {
         slug,  
         "image": image.asset->url,
     }`,
-    { slug: slug }
+    { slug: slug },
   );
 }
 
@@ -108,7 +108,7 @@ export async function getClauses(): Promise<Clause[]> {
         responsibilityHolder[0]->{"image": image.asset->url},
         rightHolder[0]->{"image": image.asset->url},
         "slug": slug.current,
-    }`
+    }`,
   );
 }
 
@@ -120,7 +120,7 @@ export async function getAllClauses(): Promise<Clause[]> {
         responsibilityHolder,
         rightHolder,
         "slug": slug.current,
-    }`
+    }`,
   );
 }
 
@@ -129,7 +129,7 @@ export async function getClauseID(name: string): Promise<Clause[]> {
     groq`*[_type == "clause" && name == $name ]{
         "id": _id,
     }`,
-    { name: name }
+    { name: name },
   );
 }
 
@@ -142,7 +142,7 @@ export async function getClausesByAgent(agent: string): Promise<Clause[]> {
         responsibilityHolder[0]->{"image": image.asset->url},
         rightHolder[0]->{"image": image.asset->url},
     }`,
-    { name: agent }
+    { name: agent },
   );
 }
 
@@ -158,7 +158,7 @@ export async function getRelatinoshipbyId(id: string): Promise<Relationship> {
         responsibilities,
     }
     `,
-    { id: id }
+    { id: id },
   );
 }
 
@@ -173,7 +173,7 @@ export async function getReports(): Promise<Report[]> {
         reporter->{name, "image": image.asset->url},
         "image": image.asset->url,
         endorsers,
-    }`
+    }`,
   );
 }
 
@@ -188,7 +188,7 @@ export async function getReportbyId(id: string): Promise<Report> {
     endorsers[]->{"id": _id, name, "image": image.asset->url},
     }
     `,
-    { id: id }
+    { id: id },
   );
 }
 
@@ -204,7 +204,7 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
         "image": image.asset->url,
         endorsers,
     }`,
-    { agent: agent }
+    { agent: agent },
   );
 }
 
@@ -220,7 +220,7 @@ export async function getReportsByClause(clause: string): Promise<Report[]> {
         "image": image.asset->url,
         endorsers,
     }`,
-    { clause: clause }
+    { clause: clause },
   );
 }
 
@@ -281,7 +281,7 @@ export async function endorseReport(report_id: string, endorser_id: string) {
     .patch(report_id, (patch) =>
       patch
         .setIfMissing({ endorsers: [] })
-        .insert("after", " endorsers[-1]", [newEndorser])
+        .insert("after", " endorsers[-1]", [newEndorser]),
     )
     .commit();
 }
@@ -307,7 +307,7 @@ export async function updateRelationship(
   id: string,
   name: string,
   rights: string,
-  responsibilities: string
+  responsibilities: string,
 ) {
   return client
     .patch(id) // Document ID to patch
@@ -336,7 +336,7 @@ export async function getActantIdbySlug(slug: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "actant" && slug.current match $slug][0]._id
     `,
-    { slug: slug }
+    { slug: slug },
   );
 }
 
@@ -344,7 +344,7 @@ export async function getReportIdbySlug(slug: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "report" && slug.current match $slug][0]._id
     `,
-    { slug: slug }
+    { slug: slug },
   );
 }
 
@@ -352,7 +352,7 @@ export async function getRelationshipIdbySlug(slug: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "clause" && slug.current match $slug][0]._id
     `,
-    { slug: slug }
+    { slug: slug },
   );
 }
 
@@ -360,7 +360,7 @@ export async function getActantNamebyId(id: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "actant" && _id match $id][0].name
     `,
-    { id: id }
+    { id: id },
   );
 }
 
@@ -373,7 +373,7 @@ export async function getActantbyId(id: string): Promise<Actant> {
         agents[]->,
         "image": image.asset->url,}
     `,
-    { id: id }
+    { id: id },
   );
 }
 
@@ -381,7 +381,7 @@ export async function getAgentIdbyName(name: string): Promise<string> {
   return client.fetch(
     groq`*[_type == "agent" && name match $name][0]._id
     `,
-    { name: name }
+    { name: name },
   );
 }
 
@@ -397,7 +397,7 @@ export async function getAllRights(): Promise<Right[]> {
     groq`*[_type == "right"]{
         "id": _id,
         name,
-    }`
+    }`,
   );
 }
 
@@ -406,7 +406,7 @@ export async function getAllResponsibilities(): Promise<Responsibility[]> {
     groq`*[_type == "responsibility"]{
         "id": _id,
         name,
-    }`
+    }`,
   );
 }
 

@@ -60,7 +60,9 @@ h2 {
   border: none;
   margin-top: 1rem;
   width: 80%;
-  transition: background-color 200ms, color 200ms;
+  transition:
+    background-color 200ms,
+    color 200ms;
   cursor: pointer;
 }
 
@@ -479,7 +481,7 @@ form {
 .singOutForm {
   width: auto;
 }
-input {
+/* input {
   width: clamp(120px, 50vw, 420px);
   height: 2.5rem;
   padding: 0 1.25rem;
@@ -487,16 +489,16 @@ input {
   border-radius: 2px;
   margin: 0.625rem auto;
   transition: all 250ms;
-}
+} */
 
 label {
   font-size: 1rem;
 }
 
-label:first-child {
+/* label:first-child {
   font-size: 1rem;
   margin-top: 2rem;
-}
+} */
 
 input[type="file"] {
   display: none;
@@ -640,4 +642,51 @@ input[type="file"] {
     max-width: 650px;
     width: fit-content;
   }
+}
+
+/* Dropdown header */
+.dropdown-header {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Arrow rotation */
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #e8e8e8;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+/* Dropdown item */
+.dropdown-item {
+  padding: 2px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-item input {
+  margin-right: 8px;
 }
