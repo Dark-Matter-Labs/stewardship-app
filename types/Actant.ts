@@ -3,7 +3,6 @@ export type Actant = {
   name: string;
   slug: string;
   image: string;
-  imgLink: string;
   agents: Array<{
     _ref: string;
   }>;
