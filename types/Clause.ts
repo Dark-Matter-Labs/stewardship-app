@@ -5,6 +5,6 @@ export type Clause = {
   id: string;
   slug: string;
   name: string;
-  responsibilityHolder: Agent;
-  rightHolder: Actant;
+  responsibilityHolder: Array<Agent>;
+  rightHolder: Array<Actant>;
 };

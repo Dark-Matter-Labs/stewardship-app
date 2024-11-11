@@ -178,7 +178,7 @@ export default function CreateForm() {
 
           <div className="dropdownGroup">
             <div className="dropdownHeader">
-              <label>These agents:</label>
+              <label>These actant(s):</label>
             </div>
 
             <div className="dropdown-menu" id="rightHolder">
@@ -210,7 +210,7 @@ export default function CreateForm() {
 
           <div className="dropdownGroup">
             <div className="dropdownHeader">
-              <label>And these agents:</label>
+              <label>And these actant(s):</label>
             </div>
 
             <div className="dropdown-menu" id="responsibilityHolder">

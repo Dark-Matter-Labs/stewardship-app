@@ -20,7 +20,7 @@ const Relationship = () => {
     fetchData();
   }, []);
   // const clauses = await getClauses();
-  console.log(clauses);
+
   return (
     <>
       <Navigation
@@ -44,14 +44,8 @@ const Relationship = () => {
                     <Clause
                       caption={true}
                       sign={true}
-                      resImgUrl={
-                        clause.responsibilityHolder.image
-                          ? clause.responsibilityHolder.image
-                          : ""
-                      }
-                      rigImgUrl={
-                        clause.rightHolder.image ? clause.rightHolder.image : ""
-                      }
+                      respHolders={clause.responsibilityHolder}
+                      rightHolders={clause.rightHolder}
                     >
                       {`${clause.name} `}
                     </Clause>

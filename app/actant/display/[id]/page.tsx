@@ -68,13 +68,16 @@ const DisplayActant = () => {
         <br />
         <br />
         <br />
+        {agents?.length > 0 &&
         <p>This actant is stewarded by these agents:</p>
-        {agents.map((holder, index) => (
+}
+        {agents?.map((holder, index) => (
           <div key={index}>
             {/* @ts-ignore */}
             <div>{holder.name}</div>
           </div>
         ))}
+        
       </main>
     </>
   );

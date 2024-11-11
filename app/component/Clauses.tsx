@@ -17,8 +17,9 @@ export default async function Clauses({
     clauses = await getClauses();
   }
 
-  // console.log(clauses[0].respoinsibilityHolder[0].name);
+
   return (
+  
     <>
       {clauses.map((clause) => {
         return (
@@ -28,14 +29,8 @@ export default async function Clauses({
                 key={clause.name}
                 caption={caption}
                 sign={sign}
-                resImgUrl={
-                  clause.responsibilityHolder?.image
-                    ? clause.responsibilityHolder.image
-                    : ""
-                }
-                rigImgUrl={
-                  clause.rightHolder?.image ? clause.rightHolder.image : ""
-                }
+                respHolders={clause.responsibilityHolder}
+                rightHolders={clause.rightHolder}
               >
                 {`${clause.name} `}
               </Clause>

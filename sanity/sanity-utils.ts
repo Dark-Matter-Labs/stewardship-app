@@ -106,8 +106,8 @@ export async function getClauses(): Promise<Clause[]> {
     groq`*[_type == "clause"]{
         "id": _id,
         name,
-        responsibilityHolder[0]->{"image": image.asset->url},
-        rightHolder[0]->{"image": image.asset->url},
+        responsibilityHolder[]->{"image": image.asset->url},
+        rightHolder[]->{"image": image.asset->url},
         "slug": slug.current,
     }`,
   );
@@ -142,6 +142,8 @@ export async function getClausesByAgent(agent: string): Promise<Clause[]> {
         name,
         responsibilityHolder[0]->{"image": image.asset->url},
         rightHolder[0]->{"image": image.asset->url},
+         responsibilityHolderM[]->{"image": image.asset->url},
+        rightHolderM[]->{"image": image.asset->url},
     }`,
     { name: agent },
   );
@@ -184,6 +186,7 @@ export async function getReportbyId(id: string): Promise<Report> {
     name, 
     content, 
     type,
+    clause->,
     "image": image.asset->url,
     reporter->{"id": _id, name, "image": image.asset->url},
     endorsers[]->{"id": _id, name, "image": image.asset->url},

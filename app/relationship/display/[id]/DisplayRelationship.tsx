@@ -109,7 +109,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
 
         {reports.length > 0 && (
           <div className={styles_r.block}>
-            <strong>Current reports:</strong>
+            <strong>Current Feedback:</strong>
           </div>
         )}
 

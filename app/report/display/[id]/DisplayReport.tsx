@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   endorseReport,
   getReportbyId,
@@ -20,6 +21,8 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
   const [reportName, setReportName] = useState("");
   const [reportContent, setReportContent] = useState("");
   const [reportType, setReportType] = useState("");
+  const [reportRealation, setReportRelation] = useState("");
+  const [relationLink, setRelationLink] = useState("");
   const [reportImage, setReportImage] = useState("/bg-placeholder.jpg");
   const [reporterImage, setReporterImage] = useState("/bg-placeholder.jpg");
   const [reporterName, setReporterName] = useState("");
@@ -36,6 +39,9 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
       setReportType(report.type);
       setReporterImage(report.reporter.image);
       setReporterName(report.reporter.name);
+      setReportRelation(report.clause.name);
+      //@ts-ignore
+      setRelationLink(report.clause._id)
 
       if (report.reporter.id === sessionId) setIsReportermatching(true);
       setEndorsers(report.endorsers);
@@ -87,6 +93,15 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
       <div className={styles.block}>
         <strong>Feedback Type</strong>
         <div>{reportType}</div>
+      </div>
+      <div className={styles.block}>
+        <strong>Feedback Relationship</strong>
+        <div>
+        <Link href={`/relationship/display/${relationLink}`} >
+          {reportRealation}
+          </Link>
+          </div>
+  
       </div>
       <div className={styles.block}>
         <strong>Feedback Content</strong>
