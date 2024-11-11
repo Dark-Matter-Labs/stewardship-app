@@ -35,7 +35,7 @@ export default async function Actants({
               key={actant.name}
               showName={showName}
               name={actant.name ? actant.name : ""}
-              imageSrc={actant.image ? actant.image + "" : "/rainbow-trout.jpg"}
+              imageSrc={actant.image ? actant.image + "" : actant.imgLink}
               agentImageSrc={agentImg ? agentImg[0].image : ""}
             />
           </button>{" "}
