@@ -12,4 +12,5 @@ export type Report = {
   type: string;
   reporter: Reporter;
   endorsers: Endorser[];
+  _createdAt: Date;
 };

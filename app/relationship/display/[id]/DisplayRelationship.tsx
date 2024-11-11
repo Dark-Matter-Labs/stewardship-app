@@ -9,7 +9,7 @@ import { useState } from "react";
 import { getRelatinoshipbyId, getReportsByClause } from "@/sanity/sanity-utils";
 import { Actant } from "@/types/Actant";
 import { Agent } from "@/types/Agent";
-import Report from "../../../component/Report";
+import RelationReport from "../../../component/RelationReport";
 
 type DisplayRelationshipProps = {
   name: string;
@@ -113,14 +113,14 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           </div>
         )}
 
-        <div className="flex-reports">
+        <div className="">
           {reports.map((report) => (
             <>
               {/* @ts-ignore */}
               <form key={report.id} action={`/report/display/${report.id}`}>
                 <button>
                   {/* @ts-ignore */}
-                  <Report // @ts-ignore
+                  <RelationReport // @ts-ignore
                     key={report.name}
                     report={report}
                   />

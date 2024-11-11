@@ -214,7 +214,7 @@ export async function getReportsByAgent(agent: string): Promise<Report[]> {
 
 export async function getReportsByClause(clause: string): Promise<Report[]> {
   return client.fetch(
-    groq`*[_type == "report" && $clause match clause->name ]  | order(_createdAt desc) {
+    groq`*[_type == "report" && $clause match clause->name ]  | order(_createdAt asc) {
         "id": _id,
         name,
         "slug": slug.current,
