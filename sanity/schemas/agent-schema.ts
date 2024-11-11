@@ -38,6 +38,11 @@ const agent = {
       type: "string",
     },
     {
+      name: "imgLink",
+      title: "Ext Image Link",
+      type: "string",
+    },
+    {
       name: "image",
       title: "Image",
       type: "image",

@@ -2,8 +2,11 @@ import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { v4 as uuidv4 } from 'uuid';
+
 import { Agent } from "@/types/Agent";
-import { getAgent } from "@/sanity/sanity-utils";
+import { client, getAgent, genRanHex } from "@/sanity/sanity-utils";
+
 
 export const options: NextAuthOptions = {
   providers: [
@@ -65,4 +68,59 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user }) {
+      const { email, name, image } = user;
+      const agentName = name + ' - Agent'
+      // @ts-ignore
+      const imgLink = image.replace("=s96-c", "");
+
+      // Check if user already exists in Sanity
+      const query = `*[_type == "agent" && email == $email][0]`;
+      const existingUser = await client.fetch(query, { email });
+
+      if (!existingUser) {
+        const agent = await client.create({
+          _type: 'agent',
+          _id: uuidv4(),
+          email,
+          name: agentName,
+          imgLink
+        },
+      );
+
+      await client.create({
+        _type: 'actant',
+        _id: uuidv4(),
+        name,
+        imgLink,
+        agents: [{
+          _type: 'reference',
+          _ref: agent._id,  // Reference the agent's ID here,
+          _key: genRanHex(12),
+        }],
+      },
+    );
+      }
+
+      return true; // Continue with the sign-in process
+    },
+
+    // async session({ session, token }) {
+    //   // Attach the Sanity user data to the session if needed
+    //   session.user.id = token.sub; // Example of setting a session value
+    //   return session;
+    // },
+
+    async jwt({ token, user }) {
+      // Optionally add user information to the JWT token
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    },
+  },
+  session: {
+    strategy: 'jwt'
+  },
 };
