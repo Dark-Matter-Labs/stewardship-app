@@ -17,9 +17,7 @@ export default async function Clauses({
     clauses = await getClauses();
   }
 
-
   return (
-  
     <>
       {clauses.map((clause) => {
         return (

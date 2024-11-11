@@ -15,6 +15,7 @@ import {
   getAllAgents,
   getAllClauses,
   getClauseID,
+  getActantID,
 } from "@/sanity/sanity-utils";
 import { Actant as ActantType } from "@/types/Actant";
 import { Agent as AgentType } from "@/types/Agent";
@@ -53,22 +54,6 @@ export default function ForceLayoutGraph(): JSX.Element {
       email: "",
       motto: "",
       image: "",
-    };
-
-    let resultAgent: AgentType = {
-      id: "",
-      name: "",
-      email: "",
-      motto: "",
-      image: "",
-    };
-
-    let resultActant: ActantType = {
-      id: "",
-      name: "",
-      slug: "",
-      image: "",
-      agents: [],
     };
 
     clauses.map((clause) => {
@@ -113,21 +98,28 @@ export default function ForceLayoutGraph(): JSX.Element {
 
     clauses.map((clause) => {
       // @ts-ignore
-      clause.rightHolder.map((rightHold) => {
-        // resultAgent = agents.find(({ id }) => id === respHold._ref)!;
-        resultActant = actants.find(({ id }) => id === rightHold._ref)!;
-
-        if (resultActant) {
-          linksCopy.push({
-            // @ts-ignore
-            source: clause.name,
-            // @ts-ignore
-            target: resultActant.name,
-            chapter: "",
-            color: "#e4adad",
-            style: "solid",
-          });
-        }
+      clause.responsibilityHolder.map((holder) => {
+        linksCopy.push({
+          // @ts-ignore
+          source: clause.name,
+          // @ts-ignore
+          target: holder.name,
+          chapter: "",
+          color: "#e4adad",
+          style: "solid",
+        });
+      });
+      // @ts-ignore
+      clause.rightHolder.map((holder) => {
+        linksCopy.push({
+          // @ts-ignore
+          source: clause.name,
+          // @ts-ignore
+          target: holder.name,
+          chapter: "",
+          color: "#e4adad",
+          style: "solid",
+        });
       });
     });
 
@@ -151,6 +143,9 @@ export default function ForceLayoutGraph(): JSX.Element {
         if (d.group == 3) {
           const id = await getClauseID(d.id);
           router.push("/relationship/display/" + id[0].id);
+        } else if (d.group == 2) {
+          const id = await getActantID(d.id);
+          router.push("/actant/display/" + id[0].id);
         }
       },
     },

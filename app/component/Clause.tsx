@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -16,7 +16,7 @@ const Clause = ({
   sign = false,
   children,
   respHolders,
-  rightHolders
+  rightHolders,
 }: {
   caption: boolean;
   sign: boolean;
@@ -29,27 +29,27 @@ const Clause = ({
       <div className="clause_background">
         {sign && (
           <div className="relationship_link">
-            {rightHolders.map(holder => 
+            {rightHolders.map((holder) => (
               <Image
-              width={45}
-              key={holder.id}
-              height={45}
-              className="clause_agent_img"
-              alt=""
-              src={holder.image}
-            />
-            )}
+                width={45}
+                key={holder.name}
+                height={45}
+                className="clause_agent_img"
+                alt=""
+                src={holder.image}
+              />
+            ))}
 
-            {respHolders.map(holder => 
+            {respHolders.map((holder) => (
               <Image
-              width={45}
-              key={holder.id}
-              height={45}
-              className="clause_agent_img"
-              alt=""
-              src={holder.image}
-            />
-            )}
+                width={45}
+                key={holder.name}
+                height={45}
+                className="clause_agent_img"
+                alt=""
+                src={holder.image}
+              />
+            ))}
           </div>
         )}
       </div>

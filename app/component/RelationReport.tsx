@@ -23,10 +23,7 @@ const Report = ({
 
   return (
     <div className="">
-      <div
-        className=""
-        
-      >
+      <div className="">
         {sign && (
           <Image
             width={45}

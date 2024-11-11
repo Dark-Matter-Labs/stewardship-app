@@ -2,11 +2,10 @@ import type { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import { Agent } from "@/types/Agent";
 import { client, getAgent, genRanHex } from "@/sanity/sanity-utils";
-
 
 export const options: NextAuthOptions = {
   providers: [
@@ -71,7 +70,7 @@ export const options: NextAuthOptions = {
   callbacks: {
     async signIn({ user }) {
       const { email, name, image } = user;
-      const agentName = name + ' - Agent'
+      const agentName = name + " - Agent";
       // @ts-ignore
       const imgLink = image.replace("=s96-c", "");
 
@@ -81,26 +80,26 @@ export const options: NextAuthOptions = {
 
       if (!existingUser) {
         const agent = await client.create({
-          _type: 'agent',
+          _type: "agent",
           _id: uuidv4(),
           email,
           name: agentName,
-          imgLink
-        },
-      );
+          imgLink,
+        });
 
-      await client.create({
-        _type: 'actant',
-        _id: uuidv4(),
-        name,
-        imgLink,
-        agents: [{
-          _type: 'reference',
-          _ref: agent._id,  // Reference the agent's ID here,
-          _key: genRanHex(12),
-        }],
-      },
-    );
+        await client.create({
+          _type: "actant",
+          _id: uuidv4(),
+          name,
+          imgLink,
+          agents: [
+            {
+              _type: "reference",
+              _ref: agent._id, // Reference the agent's ID here,
+              _key: genRanHex(12),
+            },
+          ],
+        });
       }
 
       return true; // Continue with the sign-in process
@@ -121,6 +120,6 @@ export const options: NextAuthOptions = {
     },
   },
   session: {
-    strategy: 'jwt'
+    strategy: "jwt",
   },
 };

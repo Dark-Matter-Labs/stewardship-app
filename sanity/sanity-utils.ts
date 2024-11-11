@@ -118,8 +118,8 @@ export async function getAllClauses(): Promise<Clause[]> {
     groq`*[_type == "clause"]{
         "id": _id,
         name,
-        responsibilityHolder,
-        rightHolder,
+        responsibilityHolder[]->,
+        rightHolder[]->,
         "slug": slug.current,
     }`,
   );
@@ -134,6 +134,15 @@ export async function getClauseID(name: string): Promise<Clause[]> {
   );
 }
 
+export async function getActantID(name: string): Promise<Clause[]> {
+  return client.fetch(
+    groq`*[_type == "actant" && name == $name ]{
+        "id": _id,
+    }`,
+    { name: name },
+  );
+}
+
 export async function getClausesByAgent(agent: string): Promise<Clause[]> {
   return client.fetch(
     groq`*[_type == "clause" && references(*[_type == "agent" &&  name match $name]._id) ]{
@@ -142,7 +151,7 @@ export async function getClausesByAgent(agent: string): Promise<Clause[]> {
         name,
         responsibilityHolder[0]->{"image": image.asset->url},
         rightHolder[0]->{"image": image.asset->url},
-         responsibilityHolderM[]->{"image": image.asset->url},
+        responsibilityHolderM[]->{"image": image.asset->url},
         rightHolderM[]->{"image": image.asset->url},
     }`,
     { name: agent },

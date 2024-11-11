@@ -41,7 +41,7 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
       setReporterName(report.reporter.name);
       setReportRelation(report.clause.name);
       //@ts-ignore
-      setRelationLink(report.clause._id)
+      setRelationLink(report.clause._id);
 
       if (report.reporter.id === sessionId) setIsReportermatching(true);
       setEndorsers(report.endorsers);
@@ -97,11 +97,10 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
       <div className={styles.block}>
         <strong>Feedback Relationship</strong>
         <div>
-        <Link href={`/relationship/display/${relationLink}`} >
-          {reportRealation}
+          <Link href={`/relationship/display/${relationLink}`}>
+            {reportRealation}
           </Link>
-          </div>
-  
+        </div>
       </div>
       <div className={styles.block}>
         <strong>Feedback Content</strong>
