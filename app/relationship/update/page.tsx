@@ -55,16 +55,8 @@ const page = async () => {
                 key={relationship.name}
                 caption={true}
                 sign={true}
-                resImgUrl={
-                  relationship.responsibilityHolder?.image
-                    ? relationship.responsibilityHolder.image
-                    : ""
-                }
-                rigImgUrl={
-                  relationship.rightHolder?.image
-                    ? relationship.rightHolder.image
-                    : ""
-                }
+                respHolders={[]}
+                rightHolders={[]}
               >
                 {`${relationship.name}`}
               </Clause>
