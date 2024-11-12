@@ -37,6 +37,12 @@ const clause = {
       ],
     },
     {
+      name: "createdBy",
+      title: "Created By",
+      type: "reference",
+      to: [{ type: "agent" }],
+    },
+    {
       name: "rights",
       title: "Rights",
       type: "string",

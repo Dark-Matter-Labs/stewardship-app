@@ -35,7 +35,7 @@ export async function getAllActants(): Promise<Actant[]> {
 export async function getActantsByAgent(agent: string): Promise<Actant[]> {
   return client.fetch(
     groq`*[_type == "actant" && references(*[_type == "agent" &&  name match $name]._id) ]{
-  name, "slug": slug.current, "image": image.asset->url, imgLink
+  name, "slug": slug.current, "image": image.asset->url, imgLink,  "id": _id,
 }`,
     { name: agent },
   );
@@ -106,8 +106,8 @@ export async function getClauses(): Promise<Clause[]> {
     groq`*[_type == "clause"]{
         "id": _id,
         name,
-        responsibilityHolder[]->{"image": image.asset->url},
-        rightHolder[]->{"image": image.asset->url},
+        responsibilityHolder[]->{"image": image.asset->url, imgLink},
+        rightHolder[]->{"image": image.asset->url, imgLink},
         "slug": slug.current,
     }`,
   );
@@ -145,14 +145,12 @@ export async function getActantID(name: string): Promise<Clause[]> {
 
 export async function getClausesByAgent(agent: string): Promise<Clause[]> {
   return client.fetch(
-    groq`*[_type == "clause" && references(*[_type == "agent" &&  name match $name]._id) ]{
+    groq`*[_type == "clause" && $name match createdBy->name ]{
         "id": _id,
         "slug": slug.current,
         name,
-        responsibilityHolder[0]->{"image": image.asset->url},
-        rightHolder[0]->{"image": image.asset->url},
-        responsibilityHolderM[]->{"image": image.asset->url},
-        rightHolderM[]->{"image": image.asset->url},
+        responsibilityHolder[]->{"image": image.asset->url},
+        rightHolder[]->{"image": image.asset->url},
     }`,
     { name: agent },
   );
@@ -164,8 +162,8 @@ export async function getRelatinoshipbyId(id: string): Promise<Relationship> {
         "id": _id,
         "slug": slug.current,
         name,
-        responsibilityHolder[]->{"image": image.asset->url, name},
-        rightHolder[]->{"image": image.asset->url, name},
+        responsibilityHolder[]->{"image": image.asset->url, name, imgLink},
+        rightHolder[]->{"image": image.asset->url, name, imgLink},
         rights, 
         responsibilities,
     }
@@ -385,6 +383,7 @@ export async function getActantbyId(id: string): Promise<Actant> {
         name,
         slug,  
         agents[]->,
+        imgLink,
         "image": image.asset->url,}
     `,
     { id: id },

@@ -92,6 +92,11 @@ export const options: NextAuthOptions = {
           _id: uuidv4(),
           name,
           imgLink,
+          slug: {
+            _type: "slug",
+            // @ts-ignore
+            current: name.replace(/ /g, "-"),
+          },
           agents: [
             {
               _type: "reference",

@@ -30,7 +30,6 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
   useEffect(() => {
     async function fetchData() {
       const relationship = await getRelatinoshipbyId(String(id));
-      // console.log("relationship: ", relationship);
       setRelName(relationship.name);
       setRightHolders(relationship.rightHolder);
       setResbonsibilityHolders(relationship.responsibilityHolder);
@@ -64,14 +63,25 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           {rightHolders.map((holder, index) => (
             <div key={index}>
               <div>{holder.name}</div>
-              <Image
-                width={45}
-                height={45}
-                priority
-                className={styles.actant_img}
-                alt={`actant image of ${holder.name}`}
-                src={holder.image}
-              />
+              {holder.image ? (
+                <Image
+                  width={45}
+                  height={45}
+                  priority
+                  className={styles.actant_img}
+                  alt={`actant image of ${holder.name}`}
+                  src={holder.image}
+                />
+              ) : (
+                <Image
+                  width={45}
+                  height={45}
+                  priority
+                  className={styles.actant_img}
+                  alt={`actant image of ${holder.name}`}
+                  src={holder.imgLink}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -86,14 +96,25 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           {resbonsibilityHolders.map((holder, index) => (
             <div key={index}>
               <div>{holder.name}</div>
-              <Image
-                width={45}
-                height={45}
-                priority
-                className={styles.actant_img}
-                alt={`actant image of ${holder.name}`}
-                src={holder.image}
-              />
+              {holder.image ? (
+                <Image
+                  width={45}
+                  height={45}
+                  priority
+                  className={styles.actant_img}
+                  alt={`actant image of ${holder.name}`}
+                  src={holder.image}
+                />
+              ) : (
+                <Image
+                  width={45}
+                  height={45}
+                  priority
+                  className={styles.actant_img}
+                  alt={`actant image of ${holder.name}`}
+                  src={holder.imgLink}
+                />
+              )}
               {name == holder.name && (
                 <form action={`/report/new/${id}-${name}`}>
                   <button className="button primary">Create Report</button>

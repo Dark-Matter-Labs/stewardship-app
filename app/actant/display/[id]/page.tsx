@@ -25,7 +25,12 @@ const DisplayActant = () => {
       const actant = await getActantbyId(String(id));
       // console.log("actant: ", actant);
       setActantName(actant.name);
-      setActantImage(actant.image);
+      if (actant.image) {
+        setActantImage(actant.image);
+      } else {
+        setActantImage(actant.imgLink);
+      }
+
       // @ts-ignore
       setAgents(actant.agents);
     }

@@ -4,4 +4,5 @@ export type Agent = {
   email: string;
   motto: string;
   image: string;
+  imgLink: string;
 };

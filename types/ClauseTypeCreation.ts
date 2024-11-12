@@ -1,4 +1,5 @@
 import { SanityAssetDocument, SanityImageAssetDocument } from "next-sanity";
+import { Agent } from "./Agent";
 
 type ResponsibilityHolder = {
   _type: string;
@@ -18,4 +19,5 @@ export type ClauseTypeCreation = {
   rightHolder: RightHolder[];
   rights: string;
   responsibilities: string;
+  createdBy: Object;
 };

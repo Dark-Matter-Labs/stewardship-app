@@ -130,14 +130,14 @@ const DisplayReport = ({ sessionId }: { sessionId: string }) => {
           );
         })}
       </div>
-      {!isReporterMatching && !isEndorserMatching && (
+      {!isReporterMatching && !isEndorserMatching && sessionId && (
         <form onSubmit={handleEndorseSubmit}>
           <button className="button primary">
             <span>Vouch</span>
           </button>
         </form>
       )}
-      {isEndorserMatching && (
+      {isEndorserMatching && sessionId && (
         <form onSubmit={handleUnendorseSubmit}>
           <button className="button warning">
             <span>Unvouch</span>

@@ -10,12 +10,15 @@ import {
 import { ClauseTypeCreation } from "@/types/ClauseTypeCreation";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Agent as AgentType } from "@/types/Agent";
 import { Actant as ActantType } from "@/types/Actant";
 import { Right as RightType } from "@/types/Right";
 import { Responsibility as ResponsibilityType } from "@/types/Responsibility";
 
-export default function CreateForm() {
+type CreateForm = {
+  agentId: string;
+};
+
+const CreateForm: React.FC<CreateForm> = ({ agentId }) => {
   const router = useRouter();
   //let [agents, setAgents] = useState<AgentType[]>([]);
   let [actants, setActants] = useState<ActantType[]>([]);
@@ -135,6 +138,10 @@ export default function CreateForm() {
 
       rights: rights,
       responsibilities: responsibilities,
+      createdBy: {
+        _type: "reference",
+        _ref: agentId,
+      },
       // rights: [
       //   {
       //     _type: "reference",
@@ -159,6 +166,8 @@ export default function CreateForm() {
     } catch (e) {
       console.log("error: ", e);
     }
+
+    alert("New Relationship Created!");
 
     // Redirect to root
     router.push("/");
@@ -273,4 +282,6 @@ export default function CreateForm() {
       </div>
     </>
   );
-}
+};
+
+export default CreateForm;
