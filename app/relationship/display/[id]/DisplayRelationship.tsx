@@ -51,6 +51,7 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
         title="Relationship"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="updateRelationship login">
         <div key="name" className={styles_r.block}>

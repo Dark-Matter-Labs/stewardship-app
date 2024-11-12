@@ -25,6 +25,7 @@ const DisplayReport = () => {
         title="Feedback"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="relationship">
         <h1>All Feedbacks</h1>

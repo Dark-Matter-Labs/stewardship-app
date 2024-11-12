@@ -7,11 +7,13 @@ export default function Navigation({
   left,
   right,
   myStyle,
+  session
 }: {
   title: string;
   left: string;
   right: string;
   myStyle: Object;
+  session: Object
 }) {
   let leftLink = "/";
   let rightLink = "/";
@@ -24,7 +26,14 @@ export default function Navigation({
     <div className="navigation" style={myStyle}>
       <ul>
         <li className="">
+        {left != "Profile" ?
           <Link href={leftLink}>{left}</Link>
+          :
+          session ?
+          <Link href={leftLink}>{left}</Link>
+          :
+          <></>
+        }
         </li>
         <li className=" stretch">
           <div>{title}</div>
@@ -35,9 +44,12 @@ export default function Navigation({
             action="https://stewardship-app.vercel.app/api/auth/signout"
             method="POST"
           >
-            <button id="submitButton" type="submit">
-              Sign out
-            </button>
+            {session &&
+             <button id="submitButton" type="submit">
+             Sign out
+           </button>
+            }
+           
           </form>
         </li>
       </ul>

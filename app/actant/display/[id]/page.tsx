@@ -39,6 +39,7 @@ const DisplayActant = () => {
         title="Actant"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="allactant">
         <h1>Display Actant</h1>

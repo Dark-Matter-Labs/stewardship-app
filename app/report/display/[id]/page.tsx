@@ -40,6 +40,7 @@ const Page = async () => {
         title="Feedback"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <DisplayReport sessionId={sessionId}></DisplayReport>
     </>

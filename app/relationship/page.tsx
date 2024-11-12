@@ -28,6 +28,7 @@ const Relationship = () => {
         title="Relationship"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="relationship">
         <h1>All Relationships</h1>

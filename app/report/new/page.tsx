@@ -39,6 +39,7 @@ const CreateReport = async () => {
         title="Feedback"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="addclause">
         <h1>Provide Feedback</h1>

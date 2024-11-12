@@ -50,6 +50,7 @@ const UpdateActant = () => {
         title="Actant"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="allactant ">
         <h1>Update Actant {slug}</h1>

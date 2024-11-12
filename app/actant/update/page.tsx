@@ -39,6 +39,7 @@ const page = async () => {
         title="Actant"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="allactant">
         <h1>Update Actants in the network</h1>

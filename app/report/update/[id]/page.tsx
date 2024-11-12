@@ -37,6 +37,7 @@ const UpdateReport = () => {
         title="Report"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="updateReport login ">
         <h1>Update Report</h1>

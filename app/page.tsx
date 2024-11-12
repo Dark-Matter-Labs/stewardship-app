@@ -37,12 +37,13 @@ export default async function Home() {
 
   return (
     <>
-      {session ? (
         <>
           <Navigation
             left="Profile"
             title="River Don Living Stewardship Agreement"
             right="Log Out"
+            // @ts-ignore
+            session={session}
             myStyle={{}}
           ></Navigation>
           <div className="theme_header graph-network">
@@ -50,7 +51,10 @@ export default async function Home() {
           </div>
           <main className="feed">
             <div className="greeting">
-              <p>Hello {sessionName}! </p>
+              {session &&
+                <p>Hello {sessionName}! </p>
+              }
+            
               <p>
                 This living stewardship agreement represents the relationships
                 that create the conditions to thrive for all.
@@ -118,9 +122,7 @@ export default async function Home() {
             </section>
           </main>
         </>
-      ) : (
-        <h1>session note found!</h1>
-      )}
+      )
     </>
   );
 }

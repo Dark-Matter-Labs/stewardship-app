@@ -10,6 +10,7 @@ const Relationship = async () => {
         title="Clauses"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="addclause">
         <h1>Recognise a New Relationship</h1>

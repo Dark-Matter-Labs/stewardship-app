@@ -64,6 +64,7 @@ const UsersPage = async () => {
             title="Profile"
             left="Home"
             right="Log Out"
+            session={{}}
             myStyle={{}}
           ></Navigation>
           <div className="theme_header"></div>

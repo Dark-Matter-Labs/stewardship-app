@@ -42,6 +42,7 @@ const page = async () => {
         left="Home"
         title="Feedback"
         right="Log Out"
+        session={{}}
         myStyle={{}}
       ></Navigation>
       <main className="allactant">

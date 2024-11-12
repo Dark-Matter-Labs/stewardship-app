@@ -21,6 +21,7 @@ const DisplayActants = () => {
       <Navigation
         left="Back"
         title="Actant"
+        session={{}}
         right="Log Out"
         myStyle={{}}
       ></Navigation>

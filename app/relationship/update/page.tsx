@@ -39,6 +39,7 @@ const page = async () => {
         title="Relationship"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="allrelationship">
         <h1>Update relationships in the network</h1>

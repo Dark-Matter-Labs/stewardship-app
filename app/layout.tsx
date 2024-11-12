@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "./theme-provider";
 import AuthProvider from "./context/AuthProvider";
 import { AgentProvider } from "./agent-provider";
-import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 

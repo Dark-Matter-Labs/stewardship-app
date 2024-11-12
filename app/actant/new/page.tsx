@@ -41,6 +41,7 @@ const Page = async () => {
         title="Actant"
         right="Log Out"
         myStyle={{}}
+        session={{}}
       ></Navigation>
       <main className="addactant">
         <h1>Recognise Actant</h1>

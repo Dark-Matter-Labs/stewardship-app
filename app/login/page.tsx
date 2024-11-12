@@ -52,6 +52,7 @@ function Login() {
         title="Log In"
         left=""
         right=""
+        session={{}}
         myStyle={{
           color: "black",
           backgroundColor: "white",
