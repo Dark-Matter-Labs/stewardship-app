@@ -4,8 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { v4 as uuidv4 } from "uuid";
 
-import { Agent } from "@/types/Agent";
-import { client, getAgent, genRanHex } from "@/sanity/sanity-utils";
+import { client, genRanHex } from "@/sanity/sanity-utils";
 
 export const options: NextAuthOptions = {
   providers: [

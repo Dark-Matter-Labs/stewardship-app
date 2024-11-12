@@ -1,5 +1,6 @@
 // "use client";
 import React from "react";
+import { signOut } from "next-auth/react"
 import Link from "next/link";
 
 export default function Navigation({
@@ -44,7 +45,7 @@ export default function Navigation({
             method="POST"
           >
             {session && (
-              <button id="submitButton" type="submit">
+              <button id="submitButton" type="submit" onClick={() => signOut({callbackUrl: '/'})}>
                 Sign out
               </button>
             )}
