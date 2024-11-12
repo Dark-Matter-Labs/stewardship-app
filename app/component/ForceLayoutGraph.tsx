@@ -54,6 +54,7 @@ export default function ForceLayoutGraph(): JSX.Element {
       email: "",
       motto: "",
       image: "",
+      imgLink: ""
     };
 
     clauses.map((clause) => {
