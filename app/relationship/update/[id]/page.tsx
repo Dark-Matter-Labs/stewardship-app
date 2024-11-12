@@ -38,6 +38,7 @@ const UpdateRelationship = () => {
         left="Back"
         title="Relationship"
         right="Log Out"
+        session={{}}
         myStyle={{}}
       ></Navigation>
       <main className="updateRelationship login">
