@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { VisSingleContainer, VisGraph } from "@unovis/react";
 import {
   GraphForceLayoutSettings,
@@ -130,11 +130,11 @@ export default function ForceLayoutGraph(): JSX.Element {
     setLinks(linksCopy);
   }, [actants, agents, clauses]);
 
-  // const forceLayoutSettings: GraphForceLayoutSettings = {
-  //   forceXStrength: 0.1,
-  //   forceYStrength: 0.4,
-  //   charge: -700,
-  // };
+  const forceLayoutSettings: GraphForceLayoutSettings = {
+    forceXStrength: 0.1,
+    forceYStrength: 0.4,
+    charge: -700,
+  };
 
   const layoutNodeGroup = (d: NodeDatum) => d.group;
 
@@ -156,6 +156,7 @@ export default function ForceLayoutGraph(): JSX.Element {
     <VisSingleContainer data={{ nodes, links }} height={"60vh"}>
       <VisGraph<NodeDatum, LinkDatum>
         layoutType="concentric"
+        forceLayoutSettings={useMemo(() => forceLayoutSettings, [])}
         // @ts-ignore
         layoutNodeGroup={layoutNodeGroup}
         linkLabel={useCallback((l: LinkDatum) => ({ text: l.chapter }), [])}

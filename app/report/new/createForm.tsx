@@ -94,6 +94,8 @@ export default function CreateForm({ id }: { id: string }) {
       console.log("error: ", e);
     }
 
+    alert("Feedback created successfully!")
+
     // Redirect to root
     router.push("/");
   };

@@ -21,7 +21,14 @@ export default function CreateForm({ id }: { id: string }) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (e.currentTarget.actantImage.files[0] == null) {
+      alert("please upload image");
+      return;
+    }
+
     setIsLoading(true);
+
 
     // @ts-ignore
     const agentRefs = [];
@@ -71,6 +78,8 @@ export default function CreateForm({ id }: { id: string }) {
     } catch (e) {
       console.log("error: ", e);
     }
+
+    alert("Actant created successfully!")
 
     // Redirect to root
     router.push("/");
