@@ -36,7 +36,7 @@ const DisplayActants = () => {
                   showName={true}
                   name={actant.name ? actant.name : ""}
                   imageSrc={
-                    actant.image ? actant.image + "" : "/rainbow-trout.jpg"
+                    actant.image ? actant.image + "" : actant.imgLink
                   }
                   agentImageSrc={""}
                 />
