@@ -175,7 +175,7 @@ export default function ForceLayoutGraph(): JSX.Element {
       />
     </VisSingleContainer>
     <div className="legend">
-      <div className="legend_item"><span className="dot-clause"></span><span>- Realtionship</span></div>
+      <div className="legend_item"><span className="dot-clause"></span><span>- Relationship</span></div>
       <div className="legend_item"><span className="dot-actant"></span><span>- Actant</span></div>
       <div className="legend_item"><span className="dot-agent"></span><span>- Agent</span></div>
 </div>
