@@ -5,8 +5,7 @@ import { VisSingleContainer, VisGraph } from "@unovis/react";
 import {
   GraphForceLayoutSettings,
   GraphLayoutType,
-  Graph,
-  GraphLink,
+  Graph
 } from "@unovis/ts";
 import { useRouter } from "next/navigation";
 
@@ -74,7 +73,7 @@ export default function ForceLayoutGraph(): JSX.Element {
       });
     });
 
-    agents.map((agent) => {
+    agents.toReversed().map((agent) => {
       nodesCopy.push({
         id: agent.name,
         color: "#DA8383",
@@ -133,7 +132,9 @@ export default function ForceLayoutGraph(): JSX.Element {
   const forceLayoutSettings: GraphForceLayoutSettings = {
     forceXStrength: 0.1,
     forceYStrength: 0.4,
-    charge: -700,
+    charge: -1200,
+    linkDistance: 100,
+    linkStrength: 0.45
   };
 
   const layoutNodeGroup = (d: NodeDatum) => d.group;
@@ -153,15 +154,17 @@ export default function ForceLayoutGraph(): JSX.Element {
   };
 
   return (
-    <VisSingleContainer data={{ nodes, links }} height={"60vh"}>
+    <>
+    <VisSingleContainer data={{ nodes, links }} height={"70vh"}>
       <VisGraph<NodeDatum, LinkDatum>
-        layoutType="concentric"
         forceLayoutSettings={useMemo(() => forceLayoutSettings, [])}
         // @ts-ignore
         layoutNodeGroup={layoutNodeGroup}
+        layoutType="concentric"
         linkLabel={useCallback((l: LinkDatum) => ({ text: l.chapter }), [])}
         nodeFill={useCallback((n: NodeDatum) => n.color, [])}
         nodeLabel={useCallback((n: { id: any }) => n.id, [])}
+        nodeLabelTrim={false}
         nodeSize={40}
         // @ts-ignore
         events={events}
@@ -171,5 +174,11 @@ export default function ForceLayoutGraph(): JSX.Element {
         linkArrow={true}
       />
     </VisSingleContainer>
+    <div className="legend">
+      <div className="legend_item"><span className="dot-clause"></span><span>- Realtionship</span></div>
+      <div className="legend_item"><span className="dot-actant"></span><span>- Actant</span></div>
+      <div className="legend_item"><span className="dot-agent"></span><span>- Agent</span></div>
+</div>
+    </>
   );
 }

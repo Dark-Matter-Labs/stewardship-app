@@ -9,7 +9,7 @@ import { useState } from "react";
 import { getRelatinoshipbyId, getReportsByClause } from "@/sanity/sanity-utils";
 import { Actant } from "@/types/Actant";
 import { Agent } from "@/types/Agent";
-import RelationReport from "../../../component/RelationReport";
+import Link from "next/link";
 
 type DisplayRelationshipProps = {
   name: string;
@@ -136,20 +136,37 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
         )}
 
         <div className="">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Vouched by</th>
+              <th scope="col">Date/Time</th>
+              <th scope="col">View details</th>
+            </tr>
+          </thead>
+          <tbody>
           {reports.map((report) => (
-            <>
-              {/* @ts-ignore */}
-              <form key={report.id} action={`/report/display/${report.id}`}>
-                <button>
-                  {/* @ts-ignore */}
-                  <RelationReport // @ts-ignore
-                    key={report.name}
-                    report={report}
-                  />
-                </button>
-              </form>
-            </>
+               // @ts-ignore
+                <tr key={report.id}>
+                   {/* @ts-ignore */}
+                <th scope="row">{report?.name}</th>
+                {/* @ts-ignore */}
+      <td>{report?.type}</td>
+       {/* @ts-ignore */}
+       <td>{report?.endorsers?.length > 0 ? report?.endorsers?.length : 0}</td>
+        {/* @ts-ignore */}
+      <td>{new Date(report?._createdAt).toString()}</td>
+       {/* @ts-ignore */}
+      <td><Link href={`/report/display/${report.id}`}>Open feedback</Link></td>
+
+    </tr>
+          
+               
           ))}
+          </tbody>
+          </table>
         </div>
 
         {/* pre select the clause*/}

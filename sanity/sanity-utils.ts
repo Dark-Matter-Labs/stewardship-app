@@ -21,7 +21,7 @@ export const client = createClient({
 
 export async function getAllActants(): Promise<Actant[]> {
   return client.fetch(
-    groq`*[_type == "actant"]{
+    groq`*[_type == "actant"] | order(name asc) {
         "id": _id,
         name,
         "image": image.asset->url,
@@ -174,11 +174,12 @@ export async function getRelatinoshipbyId(id: string): Promise<Relationship> {
 
 export async function getReports(): Promise<Report[]> {
   return client.fetch(
-    groq`*[_type == "report"]{
+    groq`*[_type == "report"]  | order(_createdAt desc){
         "id": _id,
         name,
         "slug": slug.current,
         type, 
+        _createdAt,
         clause->{name},
         reporter->{name, "image": image.asset->url},
         "image": image.asset->url,
@@ -399,7 +400,7 @@ export async function getAgentIdbyName(name: string): Promise<string> {
 }
 
 export async function getAllAgents(): Promise<Agent[]> {
-  return client.fetch(groq`*[_type == "agent"]{
+  return client.fetch(groq`*[_type == "agent"] | order(name asc){
     "id": _id,
     name,
   }`);

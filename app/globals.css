@@ -382,24 +382,37 @@ section {
   margin: 1.75rem 0;
   display: flex;
 }
-.clause_agent_img {
-  margin: 0 0.5rem;
+
+.actants, .agents {
+  display: flex;
+}
+
+.clause_actant_img {
   border: 1px solid black;
   border-radius: 50%;
   object-fit: cover;
   width: 30px;
   height: 30px;
+  margin: 0 -5px;
 }
 
-.clause_agent_img:last-child {
-  /* border-left: 3px solid black;
-  border-radius: none; */
-  box-shadow: -10px 0px 0px 0px #5db075;
-}
-.clause_agent_img:first-child {
-  /* border-left: 3px solid black;
-  border-radius: none; */
+.actants .clause_actant_img:last-child {
+  margin-right: 0.5rem;
   box-shadow: 10px 0px 0px 0px #5db075;
+}
+
+.clause_agent_img {
+  border: 1px solid black;
+  border-radius: 50%;
+  object-fit: cover;
+  width: 30px;
+  height: 30px;
+  margin: 0 -5px;
+}
+
+.agents .clause_agent_img:first-child {
+  margin-left: 0.5rem;
+  box-shadow: -10px 0px 0px 0px #5db075;
 }
 
 .clause_caption {
@@ -716,4 +729,83 @@ input[type="file"] {
   100% {
     transform: rotate(360deg);
   }
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+caption {
+  caption-side: bottom;
+  padding: 10px;
+  font-weight: bold;
+}
+
+thead,
+tfoot {
+  background-color: rgb(228 240 245);
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+}
+
+td:last-of-type {
+  text-align: center;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: rgb(237 238 242);
+}
+
+tfoot th {
+  text-align: right;
+}
+
+tfoot td {
+  font-weight: bold;
+}
+
+.dot-clause {
+  height: 25px;
+  width: 25px;
+  background-color: #000;
+  border-radius: 50%;
+  display: block;
+  margin-right: 4px;
+}
+
+.dot-actant {
+  height: 25px;
+  width: 25px;
+  background-color: #277da1;
+  border-radius: 50%;
+  display: block;
+  margin-right: 4px;
+}
+
+.dot-agent {
+  height: 25px;
+  width: 25px;
+  background-color: #DA8383;
+  border-radius: 50%;
+  display: block;
+  margin-right: 4px;
+}
+
+.legend {
+  margin: 40px auto;
+  max-width: fit-content;
+}
+
+.legend_item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5px;
 }

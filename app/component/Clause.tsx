@@ -29,6 +29,7 @@ const Clause = ({
       <div className="clause_background">
         {sign && (
           <div className="relationship_link">
+            <div className="actants">
             {rightHolders.map((holder) => {
               if (holder.image) {
                 return (
@@ -36,7 +37,7 @@ const Clause = ({
                     width={45}
                     key={holder.name}
                     height={45}
-                    className="clause_agent_img"
+                    className="clause_actant_img"
                     alt=""
                     src={holder.image}
                   />
@@ -47,14 +48,16 @@ const Clause = ({
                     width={45}
                     key={holder.name}
                     height={45}
-                    className="clause_agent_img"
+                    className="clause_actant_img"
                     alt=""
                     src={holder.imgLink}
                   />
                 );
               }
             })}
+            </div>
 
+            <div className="agents">
             {respHolders.map((holder) => {
               if (holder.image) {
                 return (
@@ -80,6 +83,7 @@ const Clause = ({
                 );
               }
             })}
+            </div>
           </div>
         )}
       </div>
