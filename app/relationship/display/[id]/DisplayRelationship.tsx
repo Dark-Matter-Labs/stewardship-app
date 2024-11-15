@@ -130,12 +130,12 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
         </div>
 
         {reports.length > 0 && (
+          <>
           <div className={styles_r.block}>
             <strong>Current Feedback:</strong>
           </div>
-        )}
+        
 
-        <div className="">
         <table>
           <thead>
             <tr>
@@ -167,7 +167,8 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
           ))}
           </tbody>
           </table>
-        </div>
+          </>
+    )}
 
         {/* pre select the clause*/}
         <form action="/report/new">
