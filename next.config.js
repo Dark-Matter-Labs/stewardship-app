@@ -3,7 +3,7 @@
 const nextConfig = {
   env: {
     NEXT_PUBLIC_SANITY_PROJECT_ID: "zodsj17c",
-    NEXT_PUBLIC_SANITY_DATASET: "production",
+    NEXT_PUBLIC_SANITY_DATASET: "sydney",
   },
   images: {
     remotePatterns: [
