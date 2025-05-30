@@ -40,7 +40,7 @@ export default async function Home() {
       <>
         <Navigation
           left="Profile"
-          title="River Don Living Stewardship Agreement"
+          title="Living Stewardship Agreement"
           right="Log Out"
           // @ts-ignore
           session={session}
