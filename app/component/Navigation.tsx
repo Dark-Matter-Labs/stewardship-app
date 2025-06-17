@@ -40,7 +40,7 @@ export default function Navigation({
         <li className="">
           <form
             className="singOutForm"
-            action="https://stewardship-app.vercel.app/api/auth/signout"
+            action="https://sydney-stewardship-app.vercel.app/api/auth/signout"
             method="POST"
           >
             {session && (
