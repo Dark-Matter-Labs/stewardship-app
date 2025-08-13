@@ -19,16 +19,38 @@ export const client = createClient({
   useCdn: false,
 });
 
-export async function getAllActants(): Promise<Actant[]> {
+export async function getAllSpaces(): Promise<any[]> {
   return client.fetch(
-    groq`*[_type == "actant"] | order(name asc) {
+    groq`*[_type == "space"] | order(name asc) {
+        name,
+        slug
+    }`,
+  );
+}
+
+export async function getSpace(space: string): Promise<any[]> {
+  return client.fetch(
+    groq`*[_type == "space" && slug.current == $name] {
+        "id": _id,
+        name,
+        slug
+    }`,
+    { name: space },
+  );
+}
+
+export async function getAllActants(spaceId: string): Promise<Actant[]> {
+  return client.fetch(
+    groq`*[_type == "actant" && space._ref == $id] | order(name asc) {
         "id": _id,
         name,
         "image": image.asset->url,
         agents,
+        space,
         imgLink,
         "agent_details": agents[]->
     }`,
+    { id: spaceId },
   );
 }
 
@@ -61,7 +83,7 @@ export async function getAgents(): Promise<Agent[]> {
 export async function getAgent(email: string): Promise<Agent> {
   return client.fetch(
     groq`*[_type == "agent" && email == $email][0]{
-       "id": _id,
+      "id": _id,
         name,
         email,  
         motto,
@@ -101,27 +123,30 @@ export async function getActant(slug: string): Promise<Actant> {
   );
 }
 
-export async function getClauses(): Promise<Clause[]> {
+export async function getClauses(spaceId: string): Promise<Clause[]> {
   return client.fetch(
-    groq`*[_type == "clause"]{
+    groq`*[_type == "clause" && space._ref == $id]{
         "id": _id,
         name,
         responsibilityHolder[]->{"image": image.asset->url, imgLink},
         rightHolder[]->{"image": image.asset->url, imgLink},
         "slug": slug.current,
     }`,
+    { id: spaceId },
   );
 }
 
-export async function getAllClauses(): Promise<Clause[]> {
+export async function getAllClauses(spaceId: string): Promise<Clause[]> {
   return client.fetch(
-    groq`*[_type == "clause"]{
+    groq`*[_type == "clause" && space._ref == $id]{
         "id": _id,
         name,
+        space,
         responsibilityHolder[]->,
         rightHolder[]->,
         "slug": slug.current,
     }`,
+    { id: spaceId },
   );
 }
 
@@ -172,19 +197,21 @@ export async function getRelatinoshipbyId(id: string): Promise<Relationship> {
   );
 }
 
-export async function getReports(): Promise<Report[]> {
+export async function getReports(space: string): Promise<Report[]> {
   return client.fetch(
-    groq`*[_type == "report"]  | order(_createdAt desc){
+    groq`*[_type == "report" && space._ref == $space]  | order(_createdAt desc){
         "id": _id,
         name,
         "slug": slug.current,
         type, 
+        space,
         _createdAt,
         clause->{name},
         reporter->{name, "image": image.asset->url},
         "image": image.asset->url,
         endorsers,
     }`,
+    { space: space },
   );
 }
 
@@ -204,19 +231,23 @@ export async function getReportbyId(id: string): Promise<Report> {
   );
 }
 
-export async function getReportsByAgent(agent: string): Promise<Report[]> {
+export async function getReportsByAgent(
+  space: string,
+  agent: string,
+): Promise<Report[]> {
   return client.fetch(
-    groq`*[_type == "report" && $agent match reporter->name]{
+    groq`*[_type == "report" && space._ref == $space && $agent match reporter->name]{
         "id": _id,
         name,
         "slug": slug.current,
         type, 
+        space,
         clause->{name},
         reporter->{name, "image": image.asset->url},
         "image": image.asset->url,
         endorsers,
     }`,
-    { agent: agent },
+    { agent: agent, space: space },
   );
 }
 
@@ -399,11 +430,15 @@ export async function getAgentIdbyName(name: string): Promise<string> {
   );
 }
 
-export async function getAllAgents(): Promise<Agent[]> {
-  return client.fetch(groq`*[_type == "agent"] | order(name asc){
+export async function getAllAgents(spaceId: string): Promise<Agent[]> {
+  return client.fetch(
+    groq`*[_type == "agent" && space._ref == $id] | order(name asc){
     "id": _id,
     name,
-  }`);
+    space,
+  }`,
+    { id: spaceId },
+  );
 }
 
 export async function getAllRights(): Promise<Right[]> {

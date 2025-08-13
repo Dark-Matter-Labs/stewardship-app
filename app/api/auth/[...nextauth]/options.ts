@@ -73,7 +73,7 @@ export const options: NextAuthOptions = {
       // @ts-ignore
       const imgLink = image.replace("=s96-c", "");
 
-      // Check if user already exists in Sanity
+      // Check if user already exists in Sanity in the given space
       const query = `*[_type == "agent" && email == $email][0]`;
       const existingUser = await client.fetch(query, { email });
 

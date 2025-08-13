@@ -4,6 +4,12 @@ const clause = {
   type: "document",
   fields: [
     {
+      name: "space",
+      type: "reference",
+      validation: (Rule: any) => Rule.required(),
+      to: [{ type: "space" }],
+    },
+    {
       name: "name",
       title: "Name",
       type: "string",

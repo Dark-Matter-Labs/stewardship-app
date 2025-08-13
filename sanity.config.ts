@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
+import space from "./sanity/schemas/space-schema";
 import report from "./sanity/schemas/report-schema";
 import actant from "./sanity/schemas/actant-schema";
 import agent from "./sanity/schemas/agent-schema";
@@ -24,7 +25,9 @@ export default defineConfig({
       defaultDataset: dataset,
     }),
   ],
-  schema: { types: [report, actant, agent, clause, right, responsibility] },
+  schema: {
+    types: [space, report, actant, agent, clause, right, responsibility],
+  },
   apiVersion: "2024-04-28",
   use: true,
 });

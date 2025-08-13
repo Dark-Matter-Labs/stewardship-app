@@ -2,6 +2,11 @@ import { SanityAssetDocument, SanityImageAssetDocument } from "next-sanity";
 
 export type ReportTypeCreation = {
   _type: string;
+  space: {
+    _type: string;
+    _ref: string;
+  };
+  _id?: string;
   name: string;
   slug: {
     _type: string;

@@ -3,25 +3,32 @@ import Report from "./Report";
 
 export default async function Reports({
   caption,
+  spaceId,
+  spaceURL,
   sign,
   agent,
 }: {
   caption: boolean;
+  spaceId: string;
+  spaceURL: string;
   sign: boolean;
   agent: string;
 }) {
   let reports = null;
   if (agent) {
-    reports = await getReportsByAgent(agent);
+    reports = await getReportsByAgent(spaceId, agent);
   } else {
-    reports = await getReports();
+    reports = await getReports(spaceId);
   }
 
   return (
     <>
       {reports.map((report) => (
         <>
-          <form key={report.id} action={`/report/display/${report.id}`}>
+          <form
+            key={report.id}
+            action={`${spaceURL}/report/display/${report.id}`}
+          >
             <button>
               <Report
                 key={report.name}
