@@ -4,15 +4,6 @@ import { useRouter } from "next/navigation";
 import Navigation from "../../component/Navigation";
 import { getAgents } from "@/sanity/sanity-utils";
 
-async function fetchAgents() {
-  const agents = await getAgents();
-
-  agents.map((agent) => {
-    console.log(agent.name);
-  });
-  return agents;
-}
-
 function Login() {
   const router = useRouter();
   const [account, setAccount] = React.useState("");

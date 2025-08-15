@@ -22,7 +22,7 @@ export default function CreateForm({
 
   useEffect(() => {
     async function fetchData() {
-      let listOfClauses = await getClauses();
+      let listOfClauses = await getClauses(spaceId);
       setClauses(listOfClauses);
     }
     fetchData();
