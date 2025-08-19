@@ -9,6 +9,9 @@ import clause from "./sanity/schemas/clause-schema";
 import right from "./sanity/schemas/right-schema";
 import responsibility from "./sanity/schemas/responsibility-schema";
 
+// Import the custom desk structure
+import { Structure } from "./sanity/desk-structure"; 
+
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 
@@ -18,9 +21,12 @@ export default defineConfig({
   projectId,
   dataset,
   plugins: [
-    structureTool(),
+    structureTool({
+      // Use the custom desk structure here
+      structure: Structure, // Reference your custom structure
+    }),
     visionTool({
-      // Note: These are both optional
+      // Optional configuration
       defaultApiVersion: "2024-04-19",
       defaultDataset: dataset,
     }),
