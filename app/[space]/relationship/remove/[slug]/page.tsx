@@ -15,16 +15,18 @@ const Page = () => {
 
   //prepare document id
 
-  // call update api, providing document id and new name
-  removeRelationship(slug)
-    .then(() => {
-      alert("removing " + slug);
-      router.push("/" + space);
-    })
-    .catch(({ statusCode, statusMessage }) => {
-      alert("status code: " + statusCode + " message: " + statusMessage);
-      router.push("/" + space);
-    });
+  // get document id by slug, then call removeRelationship
+  getRelationshipIdbySlug(String(slug)).then(function (id) {
+    removeRelationship(id)
+      .then(() => {
+        alert("removing " + slug);
+        router.push("/" + space);
+      })
+      .catch(({ statusCode, statusMessage }) => {
+        alert("status code: " + statusCode + " message: " + statusMessage);
+        router.push("/" + space);
+      });
+  });
 
   return <div>remove: {slug}</div>;
 };
