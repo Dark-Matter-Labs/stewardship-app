@@ -32,7 +32,7 @@ export default function CreateForm({
 
   useEffect(() => {
     async function fetchData() {
-      let listOfClauses = await getClauses();
+      let listOfClauses = await getClauses(spaceId);
       setClauses(listOfClauses);
       let agentId = await getAgentIdByName(sessionName);
       setId(agentId);
@@ -40,7 +40,7 @@ export default function CreateForm({
     }
     fetchData();
     console.log("updated");
-  }, [relId, sessionName]);
+  }, [relId, sessionName, spaceId]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,7 +82,10 @@ export default function CreateForm({
     const report: ReportTypeCreation = {
       _type: "report",
       name: name,
-      space: spaceId,
+      space: {
+        _type: "reference",
+        _ref: spaceId,
+      },
       slug: {
         _type: "slug",
         current: slug,
