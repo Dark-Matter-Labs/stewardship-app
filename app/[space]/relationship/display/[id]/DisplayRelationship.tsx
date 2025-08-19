@@ -26,7 +26,16 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
   );
   const [rights, setRights] = useState("");
   const [responsibilities, setResponsibilities] = useState("");
-  const [reports, setReports] = useState([]);
+  type Report = {
+    id: string;
+    name?: string;
+    type?: string;
+    endorsers?: any[];
+    _createdAt?: string;
+    [key: string]: any;
+  };
+
+  const [reports, setReports] = useState<Report[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -157,8 +166,8 @@ const DisplayRelationship: React.FC<DisplayRelationshipProps> = ({ name }) => {
                     <td>{report?.type}</td>
                     {/* @ts-ignore */}
                     <td>
-                      {report?.endorsers?.length > 0
-                        ? report?.endorsers?.length
+                      {Array.isArray(report?.endorsers) && report.endorsers.length > 0
+                        ? report.endorsers.length
                         : 0}
                     </td>
                     {/* @ts-ignore */}
