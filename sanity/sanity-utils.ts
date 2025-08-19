@@ -30,12 +30,12 @@ export async function getAllSpaces(): Promise<any[]> {
 
 export async function getSpace(space: string): Promise<any[]> {
   return client.fetch(
-    groq`*[_type == "space" && slug.current == $name] {
+    groq`*[_type == "space" && slug.current == $slug] {
         "id": _id,
         name,
         slug
     }`,
-    { name: space },
+    { slug: space },
   );
 }
 

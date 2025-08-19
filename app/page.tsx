@@ -7,7 +7,6 @@ let sessionEmail = "email@email.com";
 
 export default async function Home() {
   const spaces = await getAllSpaces();
-  console.log("spaces:::::::::::::::::", spaces);
 
   return (
     <>

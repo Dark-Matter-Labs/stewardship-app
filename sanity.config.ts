@@ -23,7 +23,7 @@ export default defineConfig({
   plugins: [
     structureTool({
       // Use the custom desk structure here
-      structure: Structure, // Reference your custom structure
+      //structure: Structure, // Reference your custom structure
     }),
     visionTool({
       // Optional configuration
