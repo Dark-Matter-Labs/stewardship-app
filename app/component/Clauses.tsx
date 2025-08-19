@@ -5,23 +5,30 @@ export default async function Clauses({
   caption,
   sign,
   agent,
+  space,
+  spaceId,
 }: {
   caption: boolean;
   sign: boolean;
   agent: string;
+  space: string;
+  spaceId: string;
 }) {
   let clauses = null;
   if (agent) {
     clauses = await getClausesByAgent(agent);
   } else {
-    clauses = await getClauses();
+    clauses = await getClauses(spaceId);
   }
 
   return (
     <>
       {clauses.map((clause) => {
         return (
-          <form key={clause.id} action={`/relationship/display/${clause.id}`}>
+          <form
+            key={clause.id}
+            action={`/${space}/relationship/display/${clause.id}`}
+          >
             <button>
               <Clause
                 key={clause.name}

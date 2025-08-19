@@ -5,22 +5,22 @@ import Link from "next/link";
 export default function Navigation({
   title,
   left,
-  right,
   myStyle,
   session,
+  space,
 }: {
   title: string;
   left: string;
   right: string;
   myStyle: Object;
   session: Object;
+  space: string | string[];
 }) {
-  let leftLink = "/";
-  let rightLink = "/";
+  let leftLink = "/" + space;
   if (left == "Home") {
-    leftLink = "/";
+    leftLink = "/" + space;
   } else if (left == "Profile") {
-    leftLink = "/profile";
+    leftLink = "/" + space + "/profile";
   }
   return (
     <div className="navigation" style={myStyle}>
@@ -40,7 +40,7 @@ export default function Navigation({
         <li className="">
           <form
             className="singOutForm"
-            action="https://stewardship-app.vercel.app/api/auth/signout"
+            action="/api/auth/signout"
             method="POST"
           >
             {session && (

@@ -2,11 +2,7 @@
 
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { VisSingleContainer, VisGraph } from "@unovis/react";
-import {
-  GraphForceLayoutSettings,
-  GraphLayoutType,
-  Graph
-} from "@unovis/ts";
+import { GraphForceLayoutSettings, GraphLayoutType, Graph } from "@unovis/ts";
 import { useRouter } from "next/navigation";
 
 import {
@@ -20,7 +16,13 @@ import { Actant as ActantType } from "@/types/Actant";
 import { Agent as AgentType } from "@/types/Agent";
 import { NodeDatum, LinkDatum } from "../data";
 
-export default function ForceLayoutGraph(): JSX.Element {
+export default function ForceLayoutGraph({
+  spaceId,
+  space,
+}: {
+  spaceId: string;
+  space: string;
+}): JSX.Element {
   const router = useRouter();
   let [actants, setActants] = useState<ActantType[]>([]);
   let [agents, setAgents] = useState<AgentType[]>([]);
@@ -30,16 +32,17 @@ export default function ForceLayoutGraph(): JSX.Element {
 
   useEffect(() => {
     async function fetchData() {
-      let listOfActants = await getAllActants();
+      let listOfActants = await getAllActants(spaceId);
       setActants(listOfActants);
 
-      let listOfAgents = await getAllAgents();
+      let listOfAgents = await getAllAgents(spaceId);
       setAgents(listOfAgents);
 
-      let listOfClauses = await getAllClauses();
+      let listOfClauses = await getAllClauses(spaceId);
       // @ts-ignore
       setClauses(listOfClauses);
     }
+
     fetchData();
   }, []);
 
@@ -53,7 +56,7 @@ export default function ForceLayoutGraph(): JSX.Element {
       email: "",
       motto: "",
       image: "",
-      imgLink: ""
+      imgLink: "",
     };
 
     clauses.map((clause) => {
@@ -134,7 +137,7 @@ export default function ForceLayoutGraph(): JSX.Element {
     forceYStrength: 0.4,
     charge: -1200,
     linkDistance: 100,
-    linkStrength: 0.45
+    linkStrength: 0.45,
   };
 
   const layoutNodeGroup = (d: NodeDatum) => d.group;
@@ -144,10 +147,10 @@ export default function ForceLayoutGraph(): JSX.Element {
       click: async (d: NodeDatum) => {
         if (d.group == 3) {
           const id = await getClauseID(d.id);
-          router.push("/relationship/display/" + id[0].id);
+          router.push("/" + space + "/relationship/display/" + id[0].id);
         } else if (d.group == 2) {
           const id = await getActantID(d.id);
-          router.push("/actant/display/" + id[0].id);
+          router.push("/" + space + "/actant/display/" + id[0].id);
         }
       },
     },
@@ -155,30 +158,39 @@ export default function ForceLayoutGraph(): JSX.Element {
 
   return (
     <>
-    <VisSingleContainer data={{ nodes, links }} height={"70vh"}>
-      <VisGraph<NodeDatum, LinkDatum>
-        forceLayoutSettings={useMemo(() => forceLayoutSettings, [])}
-        // @ts-ignore
-        layoutNodeGroup={layoutNodeGroup}
-        layoutType="concentric"
-        linkLabel={useCallback((l: LinkDatum) => ({ text: l.chapter }), [])}
-        nodeFill={useCallback((n: NodeDatum) => n.color, [])}
-        nodeLabel={useCallback((n: { id: any }) => n.id, [])}
-        nodeLabelTrim={false}
-        nodeSize={40}
-        // @ts-ignore
-        events={events}
-        linkStroke={useCallback((l: LinkDatum) => l.color, [])}
-        // @ts-ignore
-        linkStyle={useCallback((l: LinkDatum) => l.style, [])}
-        linkArrow={true}
-      />
-    </VisSingleContainer>
-    <div className="legend">
-      <div className="legend_item"><span className="dot-clause"></span><span>- Relationship</span></div>
-      <div className="legend_item"><span className="dot-actant"></span><span>- Actant</span></div>
-      <div className="legend_item"><span className="dot-agent"></span><span>- Agent</span></div>
-</div>
+      <VisSingleContainer data={{ nodes, links }} height={"70vh"}>
+        <VisGraph<NodeDatum, LinkDatum>
+          forceLayoutSettings={useMemo(() => forceLayoutSettings, [])}
+          // @ts-ignore
+          layoutNodeGroup={layoutNodeGroup}
+          layoutType="concentric"
+          linkLabel={useCallback((l: LinkDatum) => ({ text: l.chapter }), [])}
+          nodeFill={useCallback((n: NodeDatum) => n.color, [])}
+          nodeLabel={useCallback((n: { id: any }) => n.id, [])}
+          nodeLabelTrim={false}
+          nodeSize={40}
+          // @ts-ignore
+          events={events}
+          linkStroke={useCallback((l: LinkDatum) => l.color, [])}
+          // @ts-ignore
+          linkStyle={useCallback((l: LinkDatum) => l.style, [])}
+          linkArrow={true}
+        />
+      </VisSingleContainer>
+      <div className="legend">
+        <div className="legend_item">
+          <span className="dot-clause"></span>
+          <span>- Relationship</span>
+        </div>
+        <div className="legend_item">
+          <span className="dot-actant"></span>
+          <span>- Actant</span>
+        </div>
+        <div className="legend_item">
+          <span className="dot-agent"></span>
+          <span>- Agent</span>
+        </div>
+      </div>
     </>
   );
 }

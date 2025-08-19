@@ -9,9 +9,13 @@ import { Actant as ActantType } from "@/types/Actant";
 export default async function Actants({
   showName,
   agent,
+  spaceId,
+  space,
 }: {
   showName: boolean;
   agent: string;
+  spaceId: string;
+  space: string;
 }) {
   let actants = null;
   let agentImg = null;
@@ -22,14 +26,14 @@ export default async function Actants({
     agentImg = await getAgentImageByName(agent);
   } else {
     // console.log("in all actants page: ");
-    actants = await getAllActants();
+    actants = await getAllActants(spaceId);
     // console.log(actants);
   }
 
   return (
     <>
       {actants.map((actant: ActantType) => (
-        <form key={actant.id} action={`/actant/display/${actant.id}`}>
+        <form key={actant.id} action={`/${space}/actant/display/${actant.id}`}>
           <button key={actant.id}>
             <Actant
               key={actant.name}

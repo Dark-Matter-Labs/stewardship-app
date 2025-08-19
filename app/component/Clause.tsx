@@ -30,59 +30,59 @@ const Clause = ({
         {sign && (
           <div className="relationship_link">
             <div className="actants">
-            {rightHolders.map((holder) => {
-              if (holder.image) {
-                return (
-                  <Image
-                    width={45}
-                    key={holder.name}
-                    height={45}
-                    className="clause_actant_img"
-                    alt=""
-                    src={holder.image}
-                  />
-                );
-              } else {
-                return (
-                  <Image
-                    width={45}
-                    key={holder.name}
-                    height={45}
-                    className="clause_actant_img"
-                    alt=""
-                    src={holder.imgLink}
-                  />
-                );
-              }
-            })}
+              {rightHolders.map((holder) => {
+                if (holder.image) {
+                  return (
+                    <Image
+                      width={45}
+                      key={holder.name}
+                      height={45}
+                      className="clause_actant_img"
+                      alt=""
+                      src={holder.image}
+                    />
+                  );
+                } else {
+                  return (
+                    <Image
+                      width={45}
+                      key={holder.name}
+                      height={45}
+                      className="clause_actant_img"
+                      alt=""
+                      src={holder.imgLink}
+                    />
+                  );
+                }
+              })}
             </div>
 
             <div className="agents">
-            {respHolders.map((holder) => {
-              if (holder.image) {
-                return (
-                  <Image
-                    width={45}
-                    key={holder.name}
-                    height={45}
-                    className="clause_agent_img"
-                    alt=""
-                    src={holder.image}
-                  />
-                );
-              } else {
-                return (
-                  <Image
-                    width={45}
-                    key={holder.name}
-                    height={45}
-                    className="clause_agent_img"
-                    alt=""
-                    src={holder.imgLink}
-                  />
-                );
-              }
-            })}
+              {respHolders.map((holder) => {
+                if (holder.image) {
+                  return (
+                    <Image
+                      width={45}
+                      key={holder.name}
+                      height={45}
+                      className="clause_agent_img"
+                      alt=""
+                      src={holder.image}
+                    />
+                  );
+                } else {
+                  return (
+                    <Image
+                      width={45}
+                      key={holder.name}
+                      height={45}
+                      className="clause_agent_img"
+                      alt=""
+                      src={holder.imgLink}
+                    />
+                  );
+                }
+              })}
             </div>
           </div>
         )}

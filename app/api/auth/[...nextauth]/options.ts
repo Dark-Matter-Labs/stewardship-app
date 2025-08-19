@@ -1,10 +1,11 @@
 import type { NextAuthOptions } from "next-auth";
+import { cookies } from 'next/headers';
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { v4 as uuidv4 } from "uuid";
 
-import { client, genRanHex } from "@/sanity/sanity-utils";
+import { client, genRanHex, getSpace } from "@/sanity/sanity-utils";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -68,12 +69,19 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user }) {
+      const cookieStore = cookies();
+      const originPath = cookieStore.get('loginOriginPath')?.value || '/';
+      const originSegment = cookieStore.get('loginOriginSegment')?.value || 'home';
+
+      const spaceDetails = await getSpace(originSegment);
+      
+
       const { email, name, image } = user;
       const agentName = name + " - Agent";
       // @ts-ignore
       const imgLink = image.replace("=s96-c", "");
 
-      // Check if user already exists in Sanity
+      // Check if user already exists in Sanity in the given space
       const query = `*[_type == "agent" && email == $email][0]`;
       const existingUser = await client.fetch(query, { email });
 
@@ -83,6 +91,10 @@ export const options: NextAuthOptions = {
           _id: uuidv4(),
           email,
           name: agentName,
+          space: {
+            _type: "reference",
+            _ref: spaceDetails[0].id, // Reference the space ID here
+          },
           imgLink,
         });
 
@@ -90,6 +102,10 @@ export const options: NextAuthOptions = {
           _type: "actant",
           _id: uuidv4(),
           name,
+          space: {
+            _type: "reference",
+            _ref: spaceDetails[0].id, // Reference the space ID here
+          },
           imgLink,
           slug: {
             _type: "slug",

@@ -15,6 +15,12 @@ type RightHolder = {
 export type ClauseTypeCreation = {
   _type: string;
   name: string;
+  slug: object;
+  space: {
+    _type: string;
+    _ref: string;
+  };
+  // rightHolder: {
   responsibilityHolder: ResponsibilityHolder[];
   rightHolder: RightHolder[];
   rights: string;
