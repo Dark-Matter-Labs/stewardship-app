@@ -14,7 +14,7 @@ export default function Navigation({
   right: string;
   myStyle: Object;
   session: Object;
-  space: string;
+  space: string | string[];
 }) {
   let leftLink = "/" + space;
   if (left == "Home") {

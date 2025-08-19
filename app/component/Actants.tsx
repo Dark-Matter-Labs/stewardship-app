@@ -33,7 +33,7 @@ export default async function Actants({
   return (
     <>
       {actants.map((actant: ActantType) => (
-        <form key={actant.id} action={`${space}/actant/display/${actant.id}`}>
+        <form key={actant.id} action={`/${space}/actant/display/${actant.id}`}>
           <button key={actant.id}>
             <Actant
               key={actant.name}

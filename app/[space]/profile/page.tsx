@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { getServerSession } from "next-auth/next";
 import { options } from "../../api/auth/[...nextauth]/options";
-import { getAgent } from "@/sanity/sanity-utils";
+import { getAgent, getSpace } from "@/sanity/sanity-utils";
 import { Agent } from "@/types/Agent";
 import Reports from "../../component/Reports";
 import Clauses from "../../component/Clauses";
@@ -16,6 +16,7 @@ let sessionMotto = "";
 
 const UsersPage = async ({ params }: any) => {
   const space = params.space;
+  const spaceDetails = await getSpace(space);
   //load session data
   const session = await getServerSession(options);
 
@@ -98,7 +99,7 @@ const UsersPage = async ({ params }: any) => {
                           showName={true}
                           agent={sessionName}
                           space={space}
-                          spaceId={space}
+                          spaceId={spaceDetails[0]._id}
                         />
                       </div>
                     </div>
@@ -111,6 +112,7 @@ const UsersPage = async ({ params }: any) => {
                         sign={true}
                         agent={sessionName}
                         space={space}
+                        spaceId={spaceDetails[0]._id}
                       ></Clauses>
                     </div>
                   </TabPanel>
