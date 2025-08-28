@@ -4,7 +4,7 @@ import { Report } from "@/types/Report";
 import { Relationship } from "@/types/Relationship";
 import { Responsibility } from "@/types/Responsibility";
 import { Right } from "@/types/Right";
-import { createClient, groq, UploadBody } from "next-sanity";
+import { createClient, groq } from "next-sanity";
 import { Clause } from "@/types/Clause";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
@@ -25,6 +25,8 @@ export async function getAllSpaces(): Promise<any[]> {
         name,
         slug
     }`,
+    {},
+    { next : { revalidate : 3600 }},
   );
 }
 

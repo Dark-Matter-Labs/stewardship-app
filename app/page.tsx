@@ -1,9 +1,6 @@
 import Link from "next/link";
 
-import { getAllSpaces, getAgent } from "@/sanity/sanity-utils";
-
-let sessionName = "name";
-let sessionEmail = "email@email.com";
+import { getAllSpaces } from "@/sanity/sanity-utils";
 
 export default async function Home() {
   const spaces = await getAllSpaces();
