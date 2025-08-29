@@ -125,6 +125,14 @@ export const options: NextAuthOptions = {
       return true; // Continue with the sign-in process
     },
 
+    async redirect({ url, baseUrl }) {
+    // Allows relative callback URLs
+    if (url.startsWith("/")) return `${baseUrl}${url}`
+    // Allows callback URLs on the same origin
+    else if (new URL(url).origin === baseUrl) return url
+    return baseUrl
+  },
+
     // async session({ session, token }) {
     //   // Attach the Sanity user data to the session if needed
     //   session.user.id = token.sub; // Example of setting a session value
