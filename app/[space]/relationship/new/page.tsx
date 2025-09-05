@@ -21,7 +21,11 @@ const Relationship = async ({ params }: any) => {
     sessionEmail = session.user?.email + "";
 
     // match user data to agent data
-    agent = await getAgent(sessionEmail);
+    const foundAgent = await getAgent(sessionEmail);
+    if (!foundAgent) {
+      throw new Error("Agent not found for the given email.");
+    }
+    agent = foundAgent;
     agentId = agent.id;
   }
   return (

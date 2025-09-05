@@ -41,7 +41,7 @@ const UsersPage = async ({ params }: any) => {
     console.log("name: " + sessionName);
 
     // match agent data
-    const agent: Agent = await getAgent(sessionEmail);
+    const agent: Agent | null = await getAgent(sessionEmail);
 
     if (agent?.email === sessionEmail) {
       sessionEmail = agent.email;

@@ -22,7 +22,7 @@ const page = async ({ params }: any) => {
     sessionEmail = session.user?.email + "";
 
     // match agent data
-    const agent: Agent = await getAgent(sessionEmail);
+    const agent: Agent | null = await getAgent(sessionEmail);
     // //replace user name with coresponding agent name
     if (agent?.name != undefined) {
       sessionName = agent.name;
