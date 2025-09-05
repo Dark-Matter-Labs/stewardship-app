@@ -55,7 +55,7 @@ export default function LoginPage() {
       
       {callbackUrl !== '/' && (
         <p style={{ fontSize: "0.9em", color: "#666", marginBottom: "1rem" }}>
-          You'll be redirected to: <code>{callbackUrl}</code>
+          You will ll be redirected to: <code>{callbackUrl}</code>
         </p>
       )}
       
