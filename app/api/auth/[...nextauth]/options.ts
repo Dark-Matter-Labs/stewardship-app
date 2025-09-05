@@ -5,6 +5,18 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { v4 as uuidv4 } from "uuid";
 
+// Extend NextAuth session user type to include 'id'
+declare module "next-auth" {
+  interface Session {
+    user: {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      id?: string;
+    };
+  }
+}
+
 import { client, genRanHex, getSpace } from "@/sanity/sanity-utils";
 
 export const options: NextAuthOptions = {
@@ -37,9 +49,6 @@ export const options: NextAuthOptions = {
     },
     async signIn(message) {
       console.log("User signed in:", message);
-    },
-    async error(message) {
-      console.error("NextAuth error:", message);
     },
   },
   callbacks: {
@@ -131,7 +140,7 @@ export const options: NextAuthOptions = {
 
     async session({ session, token }) {
       // Attach the Sanity user data to the session if needed
-      if (token?.sub) {
+      if (token?.sub && session.user) {
         session.user.id = token.sub;
       }
       return session;
