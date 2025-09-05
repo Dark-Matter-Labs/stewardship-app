@@ -36,11 +36,11 @@ export default async function Home({ params }: HomeProps) {
     // match user data to agent data
     agent = await getAgent(sessionEmail);
 
-    if (agent?.email === sessionEmail) {
+    if (agent && agent.email === sessionEmail) {
       sessionEmail = agent.email;
 
       //replace user name with coresponding agent name
-      if (agent?.name != undefined) {
+      if (agent.name != undefined) {
         sessionName = agent.name;
       }
     }

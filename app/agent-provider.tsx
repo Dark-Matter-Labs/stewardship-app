@@ -15,31 +15,48 @@ import { getAgent } from "@/sanity/sanity-utils";
 const AgentContext = createContext<{
   agent: Agent | null;
   setAgent: Dispatch<SetStateAction<Agent | null>>;
+  isLoading: boolean;
+  error: string | null;
 }>({
   agent: null,
   setAgent: () => null,
+  isLoading: false,
+  error: null,
 });
 
 export const AgentProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [agent, setAgent] = useState<Agent | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const userEmail = session?.user?.email;
-    if (!userEmail) {
+    if (!userEmail || status === "loading") {
       return;
     }
 
-    const fn = async () => {
-      const sanityAgent = await getAgent(userEmail);
-      setAgent(sanityAgent);
+    const fetchAgent = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const sanityAgent = await getAgent(userEmail);
+        setAgent(sanityAgent);
+      } catch (err) {
+        console.error("Error fetching agent:", err);
+        setError("Failed to load agent data");
+        setAgent(null);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    fn();
-  }, [session]);
+    fetchAgent();
+  }, [session, status]);
 
   return (
-    <AgentContext.Provider value={{ agent, setAgent }}>
+    <AgentContext.Provider value={{ agent, setAgent, isLoading, error }}>
       {children}
     </AgentContext.Provider>
   );

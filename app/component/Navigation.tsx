@@ -1,6 +1,7 @@
-// "use client";
+"use client";
 import React from "react";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Navigation({
   title,
@@ -16,19 +17,28 @@ export default function Navigation({
   session: Object;
   space: string | string[];
 }) {
+  const { data: clientSession, status } = useSession();
+  const currentSession = clientSession || session;
+  
   let leftLink = "/" + space;
   if (left == "Home") {
     leftLink = "/" + space;
   } else if (left == "Profile") {
     leftLink = "/" + space + "/profile";
   }
+
+  const handleSignOut = () => {
+    // Redirect to dedicated sign out page
+    window.location.href = "/signout";
+  };
+
   return (
     <div className="navigation" style={myStyle}>
       <ul>
         <li className="">
           {left != "Profile" ? (
             <Link href={leftLink}>{left}</Link>
-          ) : session ? (
+          ) : currentSession ? (
             <Link href={leftLink}>{left}</Link>
           ) : (
             <></>
@@ -38,17 +48,22 @@ export default function Navigation({
           <div>{title}</div>
         </li>
         <li className="">
-          <form
-            className="singOutForm"
-            action="/api/auth/signout"
-            method="POST"
-          >
-            {session && (
-              <button id="submitButton" type="submit">
-                Sign out
-              </button>
-            )}
-          </form>
+          {currentSession && (
+            <button 
+              id="submitButton" 
+              onClick={handleSignOut}
+              className="signOutButton"
+              style={{ 
+                background: "none", 
+                border: "none", 
+                cursor: "pointer",
+                color: "inherit",
+                fontSize: "inherit"
+              }}
+            >
+              Sign out
+            </button>
+          )}
         </li>
       </ul>
     </div>

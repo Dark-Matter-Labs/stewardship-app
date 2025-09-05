@@ -11,6 +11,10 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 const token = process.env.NEXT_PUBLIC_SANITY_CRUD_EDITOR;
 
+if (!projectId || !dataset) {
+  throw new Error("Missing Sanity configuration. Please check your environment variables.");
+}
+
 export const client = createClient({
   projectId,
   dataset,
@@ -20,25 +24,35 @@ export const client = createClient({
 });
 
 export async function getAllSpaces(): Promise<any[]> {
-  return client.fetch(
-    groq`*[_type == "space"] | order(name asc) {
-        name,
-        slug
-    }`,
-    {},
-    { next : { revalidate : 3600 }},
-  );
+  try {
+    return await client.fetch(
+      groq`*[_type == "space"] | order(name asc) {
+          name,
+          slug
+      }`,
+      {},
+      { next : { revalidate : 3600 }},
+    );
+  } catch (error) {
+    console.error("Error fetching spaces:", error);
+    return [];
+  }
 }
 
 export async function getSpace(space: string): Promise<any[]> {
-  return client.fetch(
-    groq`*[_type == "space" && slug.current == $slug] {
-        "id": _id,
-        name,
-        slug
-    }`,
-    { slug: space },
-  );
+  try {
+    return await client.fetch(
+      groq`*[_type == "space" && slug.current == $slug] {
+          "id": _id,
+          name,
+          slug
+      }`,
+      { slug: space },
+    );
+  } catch (error) {
+    console.error("Error fetching space:", error);
+    return [];
+  }
 }
 
 export async function getAllActants(spaceId: string): Promise<Actant[]> {
@@ -82,17 +96,22 @@ export async function getAgents(): Promise<Agent[]> {
   );
 }
 
-export async function getAgent(email: string): Promise<Agent> {
-  return client.fetch(
-    groq`*[_type == "agent" && email == $email][0]{
-      "id": _id,
-        name,
-        email,  
-        motto,
-        "image": image.asset->url,
-    }`,
-    { email: email },
-  );
+export async function getAgent(email: string): Promise<Agent | null> {
+  try {
+    return await client.fetch(
+      groq`*[_type == "agent" && email == $email][0]{
+        "id": _id,
+          name,
+          email,  
+          motto,
+          "image": image.asset->url,
+      }`,
+      { email: email },
+    );
+  } catch (error) {
+    console.error("Error fetching agent:", error);
+    return null;
+  }
 }
 
 export async function getAgentImageByName(name: string): Promise<Agent[]> {
@@ -271,18 +290,33 @@ export async function getReportsByClause(clause: string): Promise<Report[]> {
 }
 
 export async function createActant(actant: unknown) {
-  const result = client.create(actant as unknown as any);
-  return result;
+  try {
+    const result = await client.create(actant as unknown as any);
+    return result;
+  } catch (error) {
+    console.error("Error creating actant:", error);
+    throw error;
+  }
 }
 
 export async function createClause(clause: unknown) {
-  const result = client.create(clause as unknown as any);
-  return result;
+  try {
+    const result = await client.create(clause as unknown as any);
+    return result;
+  } catch (error) {
+    console.error("Error creating clause:", error);
+    throw error;
+  }
 }
 
 export async function createReport(report: unknown) {
-  const result = client.create(report as unknown as any);
-  return result;
+  try {
+    const result = await client.create(report as unknown as any);
+    return result;
+  } catch (error) {
+    console.error("Error creating report:", error);
+    throw error;
+  }
 }
 
 export async function updateActant(id: string, name: string) {

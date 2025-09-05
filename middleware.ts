@@ -6,9 +6,10 @@ import { getToken } from 'next-auth/jwt';
 export async function middleware(request: any) {
   const pathname = request.nextUrl.pathname;
   
-  // Check if path needs authentication
-  const protectedPaths = ['/test', '/protected',];
-  const isProtectedPath = protectedPaths.some(path => pathname.startsWith(path));
+  // Check if path needs authentication based on matcher patterns
+  const isProtectedPath = pathname.includes('/report/new') || 
+                         pathname.includes('/actant/new') || 
+                         pathname.includes('/relationship/new');
   
   if (isProtectedPath) {
     const token = await getToken({ req: request });
@@ -20,7 +21,7 @@ export async function middleware(request: any) {
     
       
       // Create sign-in URL with callback
-      const signInUrl = new URL('/api/auth/signin', request.url);
+      const signInUrl = new URL('/login', request.url);
       signInUrl.searchParams.set('callbackUrl', pathname);
       
       const response = NextResponse.redirect(signInUrl);
