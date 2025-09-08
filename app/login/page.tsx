@@ -67,9 +67,6 @@ export default function LoginPage() {
       
       <div style={{ marginTop: "2rem" }}>
         <h3>Sign in with:</h3>
-        <p style={{ fontSize: "0.8em", color: "#666", marginBottom: "1rem" }}>
-          Note: OAuth providers require proper environment variables to be configured
-        </p>
         <button
           onClick={() => handleProviderSignIn("github")}
           disabled={isLoading}
