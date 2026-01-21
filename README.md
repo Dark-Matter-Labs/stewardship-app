@@ -27,6 +27,22 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## License
+
+Copyright (C) 2024 Dark Matter Labs
+
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0). This license allows you to:
+
+- Use, modify, and distribute the software
+- Host the application yourself
+- Contribute back to the project
+
+**Important:** If you host this software as a service (SaaS), the AGPL-3.0 requires you to make the source code available to your users.
+
+**Commercial Licensing:** For organizations that require a commercial license (allowing use without source code sharing requirements), please contact Dark Matter Labs to discuss commercial licensing options.
+
+See the [LICENSE](LICENSE) file for full details.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
